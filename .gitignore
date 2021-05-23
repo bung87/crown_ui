@@ -25,3 +25,7 @@ dnimcache/
 .DS_Store
 *.out
 testresults
+app.html
+app.js
+manifest.json
+build/
