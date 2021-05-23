@@ -1,19 +1,19 @@
 title: Bungos
 subtitle:
 description:
-keywords:
+# keywords:
 author: Bung
 language: zh-cn
 timezone:
-logo:
-  text: Bung
+# logo:
+#   text: Bung
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://bung87.github.io
 root: /
 permalink: :year/:month/:day/:title/
-permalink_defaults:
+# permalink_defaults:
 
 # Directory
 source_dir: source
@@ -36,16 +36,16 @@ post_asset_folder: false
 relative_link: false
 future: true
 
-prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'coy'
-  line_number: true    # default false
-  # custom_css: 'path/to/your/custom.css'     # optional
+# prism_plugin:
+#   mode: 'preprocess'    # realtime/preprocess
+#   theme: 'coy'
+#   line_number: true    # default false
+#   # custom_css: 'path/to/your/custom.css'     # optional
 highlight:
   enable: false
   line_number: true
   auto_detect: false
-  tab_replace:
+  # tab_replace:
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
