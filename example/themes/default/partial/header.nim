@@ -1,5 +1,5 @@
 import karax / [karaxdsl, vdom]
-proc render*(n: VNode = nil): VNode =
+proc PureHeader*(n: VNode = nil): VNode =
   buildHtml(header(class = "site-header")):
     nav(class = "pure-menu pure-menu-horizontal pure-menu-scrollable"):
       tdiv(class = "nav-content"):
@@ -13,4 +13,4 @@ proc render*(n: VNode = nil): VNode =
       tdiv(class = "menu-fade")
 
 when isMainModule:
-  echo render()
+  echo PureHeader()

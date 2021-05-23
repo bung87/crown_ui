@@ -20,4 +20,5 @@ requires "dotenv >= 1.1.0"
 task watch,"watch":
   exec "karun -r -w --css:example/themes/default/css.html example/themes/default/layout.nim"
 task preprocess,"preprocess":
+  rmFile "manifest.json"
   exec "web_preprocessor -s example/themes/default/assets -d build/assets"
