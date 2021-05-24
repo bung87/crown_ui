@@ -26,6 +26,7 @@ dnimcache/
 *.out
 testresults
 app.html
+*.js
 app.js
 manifest.json
 build/

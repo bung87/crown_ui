@@ -6,12 +6,15 @@
   # footer
 
 import karax / [karaxdsl, vdom]
+import os, json
+import crown_ui / utils
+
 when defined(js):
   include karax / prelude
 import partial / [header, footer]
-proc render*(n: VNode = nil): VNode =
+proc render*(config: JsonNode; n: VNode = nil): VNode =
   result = buildHtml(tdiv):
-    PureHeader()
+    PureHeader(config)
     tdiv(class = "content"):
       tdiv(class = "pure-g"):
         tdiv(class = "pure-u-18-24"):
@@ -21,10 +24,15 @@ proc render*(n: VNode = nil): VNode =
           p:
             text "All talks will be streamed and recorded for later viewing. Watching the talks live will allow you to ask questions and participate in the discussions with other viewers and the speakers."
         tdiv(class = "pure-u-6-24")
-    PureFooter()
+    PureFooter(config)
 
 when isMainModule:
+  const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
+  echo exampleDir
+
+  const configPath = exampleDir / "config.yml"
+  let config = parseConfig(configPath)
   when defined(js):
-    setRenderer proc(data: RouterData): VNode = render()
+    setRenderer proc(data: RouterData): VNode = render(config)
   else:
-    echo render()
+    echo render(config)

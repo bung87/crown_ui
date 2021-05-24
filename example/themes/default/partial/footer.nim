@@ -1,5 +1,6 @@
 import karax / [karaxdsl, vdom]
-proc PureFooter*(n: VNode = nil): VNode =
+import json
+proc PureFooter*(config: JsonNode; n: VNode = nil): VNode =
   buildHtml():
     footer:
       section(class = "content"):
