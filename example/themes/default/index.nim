@@ -1,7 +1,10 @@
 import karax / [karaxdsl, vdom]
 
 const places = @["boston", "cleveland", "los angeles", "new orleans"]
-
+ # h4(id = "participating-as-an-audience"):
+ #             text "Participating as an audience"
+ #           p:
+#             text "All talks will be streamed and recorded for later viewing. Watching the talks live will allow you to ask questions and participate in the discussions with other viewers and the speakers."
 proc render*(): string =
   let vnode = buildHtml(tdiv(class = "mt-3")):
     h1: text "My Web Page"
