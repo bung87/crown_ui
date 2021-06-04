@@ -6,16 +6,18 @@ description   = "ui system and static site generator"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-bin           = @["crown_ui"]
-
+namedBin = {"crown_ui/generator": "crown_ui"}.toTable()
+ #"crown_ui/generator"
 
 # Dependencies
 
-requires "nim >= 1.5.1"
+requires "nim >= 1.4.6"
 requires "https://github.com/karaxnim/karax#master"
 requires "yaml"
 requires "https://github.com/bung87/web_preprocessor"
+requires "https://github.com/bung87/nmark"
 requires "dotenv >= 1.1.0"
+requires "cligen"
 
 import strformat,sequtils
 task watch,"watch":

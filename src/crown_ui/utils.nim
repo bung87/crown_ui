@@ -3,7 +3,7 @@ import json
 import packages/docutils/highlite
 import packages/docutils/rstgen
 import strutils
-include nmark #, nmark / [mdToAst,astToHtml, def]
+include nmark
 include nmark / insertMarker
 import htmlgen
 

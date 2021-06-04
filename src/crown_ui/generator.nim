@@ -49,3 +49,9 @@ proc getPostData*(filepath: string): PostData =
     tags.add e.getStr("")
   let child = verbatim(markdown2html(restContent))
   result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child)
+
+proc fun(foo = 1, bar = 2.0, baz = "hi", verb = false, paths: seq[string]): int =
+  ## An API call doc comment
+  result = 1 # Of course, real code would have real work here
+when isMainModule:
+  import cligen; dispatch(fun)
