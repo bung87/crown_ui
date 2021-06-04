@@ -18,6 +18,7 @@ requires "https://github.com/bung87/web_preprocessor"
 requires "https://github.com/bung87/nmark"
 requires "dotenv >= 1.1.0"
 requires "cligen"
+requires "moustachu"
 
 import strformat,sequtils
 task watch,"watch":
