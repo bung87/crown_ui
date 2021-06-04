@@ -20,7 +20,6 @@ requires "dotenv >= 1.1.0"
 import strformat,sequtils
 task watch,"watch":
   let file = commandLineParams.filterIt( it in ["post","page","index","page","tag","category","archive"])[0]
-  echo file
   exec fmt"karun -r -s -w --css=example/themes/default/css.html example/themes/default/{file}.nim"
 task preprocess,"preprocess":
   rmFile "manifest.json"
