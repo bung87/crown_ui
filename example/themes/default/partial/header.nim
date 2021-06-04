@@ -20,5 +20,3 @@ proc PureHeader*(title: string; menu: seq[Link]; n: VNode = nil): VNode =
                 text item.title
       tdiv(class = "menu-fade")
 
-when isMainModule:
-  echo PureHeader()
