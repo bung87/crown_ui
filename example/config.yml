@@ -78,12 +78,12 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: minos
 menu:
-  归档: /archives
-  标签: /categories
-  关于: /about
+  Archives: /archives
+  Categories: /categories
+  About: /about
   # resume: /resume
-  项目: /projects
-  作品: /works
+  Projects: /projects
+  Works: /works
 
 search:
     type: insight

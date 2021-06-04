@@ -3,6 +3,7 @@ import karax / [vdom]
 import ./ utils
 import yaml, json
 import regex
+import tables
 
 type PostData = tuple
   title: string
@@ -11,6 +12,15 @@ type PostData = tuple
   cates: seq[string]
   tags: seq[string]
   child: VNode
+
+type Link* = object
+  href*: string
+  title*: string
+
+proc getMenu*(config: JsonNode): seq[Link] =
+  let menuNode = config["menu"].getFields
+  for k, v in menuNode.pairs:
+    result.add Link(href: v.getStr(), title: k)
 
 proc getPostData*(filepath: string): PostData =
   let content = readFile(filepath)

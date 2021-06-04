@@ -1,6 +1,8 @@
 import karax / [karaxdsl, vdom]
 import json
-proc PureHeader*(title: string; n: VNode = nil): VNode =
+import crown_ui / [generator]
+
+proc PureHeader*(title: string; menu: seq[Link]; n: VNode = nil): VNode =
   buildHtml(header(class = "site-header")):
     nav(class = "pure-menu pure-menu-horizontal pure-menu-scrollable"):
       tdiv(class = "nav-content"):
@@ -11,6 +13,11 @@ proc PureHeader*(title: string; n: VNode = nil): VNode =
           li(class = "pure-menu-item"):
             a(href = "/blog.html", class = "pure-menu-link"):
               text title
+        ul(class = "pure-menu-list fl"):
+          for item in menu:
+            li(class = "pure-menu-item"):
+              a(href = item.href, class = "pure-menu-link"):
+                text item.title
       tdiv(class = "menu-fade")
 
 when isMainModule:

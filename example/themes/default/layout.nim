@@ -8,7 +8,7 @@
 import karax / [karaxdsl, vdom]
 import os, json
 # from karax/ karax import setRenderer
-import crown_ui / utils
+import crown_ui / [utils, generator]
 
 import partial / [header, footer]
 const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
@@ -19,7 +19,7 @@ let config = parseConfig(configPath)
 
 proc PureLayout*(n: VNode = nil): VNode =
   result = buildHtml(tdiv):
-    PureHeader(title = config["title"].getStr())
+    PureHeader(title = config["title"].getStr(), menu = getMenu(config))
     tdiv(class = "content"):
       tdiv(class = "pure-g"):
         tdiv(class = "pure-u-18-24"):
