@@ -80,9 +80,9 @@
     --placeholder-opacity: 0.8;
     /* Code */
     --code-color: var(--text-color);
-    --code-background-color: #FAFAFA;
-    --code-border: var(--element-border) solid;
-    --code-border-color: #E1E1E1;
+    --code-background-color: #2b2e3b;
+    /* --code-border: var(--element-border) solid;
+    --code-border-color: #E1E1E1; */
     --code-border-radius: var(--border-radius);
     --code-block-color: var(--code-color);
     --code-block-background-color: var(--code-background-color);
