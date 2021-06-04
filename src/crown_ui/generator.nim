@@ -4,6 +4,7 @@ import ./ utils
 import yaml, json
 import regex
 import tables
+import os
 
 type PostData = tuple
   title: string
@@ -50,8 +51,26 @@ proc getPostData*(filepath: string): PostData =
   let child = verbatim(markdown2html(restContent))
   result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child)
 
-proc fun(foo = 1, bar = 2.0, baz = "hi", verb = false, paths: seq[string]): int =
-  ## An API call doc comment
+proc build(cwd = getCurrentDir(), theme = "default"): int =
+  ## generate static site
   result = 1 # Of course, real code would have real work here
+
+type Template = enum
+  post, page
+
+proc generate(tpl: seq[Template]): int =
+  ## generate new post or page
+  let theTpl = $tpl[0]
+  discard
+
 when isMainModule:
-  import cligen; dispatch(fun)
+  import cligen; dispatchMulti([
+    build,
+    help = {"cwd": "current working directory", "theme": "theme"}
+    ],
+    [
+    generate,
+    cmdName = "new",
+    help = {"tpl": "template"}
+    ]
+    )
