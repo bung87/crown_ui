@@ -1,0 +1,183 @@
+:root {
+    --primary-background: #fff;
+    --secondary-background: ghostwhite;
+    --third-background: #e8e8e8;
+    --border: #dde;
+    --text: #222;
+    --anchor: #07b;
+    --anchor-focus: #607c9f;
+    --input-focus: #1fa0eb;
+    --strong: #3c3c3c;
+    --hint: #9A9A9A;
+    --keyword: #5e8f60;
+    --identifier: #222;
+    --comment: #484a86;
+    --operator: #155da4;
+    --punctuation: black;
+    --other: black;
+    --escapeSequence: #c4891b;
+    --number: #252dbe;
+    --literal: #a4255b;
+    --raw-data: #a4255b;
+}
+
+[data-theme="dark"] {
+    --primary-background: #171921;
+    --secondary-background: #1e202a;
+    --third-background: #2b2e3b;
+    --border: #0e1014;
+    --text: #fff;
+    --anchor: #8be9fd;
+    --anchor-focus: #8be9fd;
+    --input-focus: #8be9fd;
+    --strong: #bd93f9;
+    --hint: #7A7C85;
+    --keyword: #ff79c6;
+    --identifier: #f8f8f2;
+    --comment: #6272a4;
+    --operator: #ff79c6;
+    --punctuation: #f8f8f2;
+    --other: #f8f8f2;
+    --escapeSequence: #bd93f9;
+    --number: #bd93f9;
+    --literal: #f1fa8c;
+    --raw-data: #8be9fd;
+}
+
+
+/* line numbers */
+pre.code, code {
+    background-color: #eeeeee; }
+  
+  pre.code .comment, code .comment {
+    color: #5c6576; }
+  
+  pre.code .keyword, code .keyword {
+    color: #3B0D06;
+    font-weight: bold; }
+  
+  pre.code .literal.string, code .literal.string {
+    color: #0c5404; }
+  
+  pre.code .name.builtin, code .name.builtin {
+    color: #352b84; }
+  
+  pre.code .deleted, code .deleted {
+    background-color: #DEB0A1; }
+  
+  pre.code .inserted, code .inserted {
+    background-color: #A3D289; }
+  
+  span.classifier {
+    font-style: oblique; }
+  
+  span.classifier-delimiter {
+    font-weight: bold; }
+  
+  span.problematic {
+    color: #b30000; }
+  
+  span.section-subtitle {
+    /* font-size relative to parent (h1..h6 element) */
+    font-size: 80%; }
+  
+  span.DecNumber {
+    color: var(--number); }
+  
+  span.BinNumber {
+    color: var(--number); }
+  
+  span.HexNumber {
+    color: var(--number); }
+  
+  span.OctNumber {
+    color: var(--number); }
+  
+  span.FloatNumber {
+    color: var(--number); }
+  
+  span.Identifier {
+    color: var(--identifier); }
+  
+  span.Keyword {
+    font-weight: 600;
+    color: var(--keyword); }
+  
+  span.StringLit {
+    color: var(--literal); }
+  
+  span.LongStringLit {
+    color: var(--literal); }
+  
+  span.CharLit {
+    color: var(--literal); }
+  
+  span.EscapeSequence {
+    color: var(--escapeSequence); }
+  
+  span.Operator {
+    color: var(--operator); }
+  
+  span.Punctuation {
+    color: var(--punctuation); }
+  
+  span.Comment, span.LongComment {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--comment); }
+  
+  span.RegularExpression {
+    color: darkviolet; }
+  
+  span.TagStart {
+    color: darkviolet; }
+  
+  span.TagEnd {
+    color: darkviolet; }
+  
+  span.Key {
+    color: #252dbe; }
+  
+  span.Value {
+    color: #252dbe; }
+  
+  span.RawData {
+    color: var(--raw-data); }
+  
+  span.Assembler {
+    color: #252dbe; }
+  
+  span.Preprocessor {
+    color: #252dbe; }
+  
+  span.Directive {
+    color: #252dbe; }
+  
+  span.option {
+    font-weight: bold;
+    font-family: "Source Code Pro", Monaco, Menlo, Consolas, "Courier New", monospace;
+    color: var(--option);
+  }
+  
+  span.program {
+    font-weight: bold;
+    color: var(--program);
+    text-decoration: underline;
+    text-decoration-color: var(--hint);
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.15em;
+  }
+  
+  span.Command, span.Rule, span.Hyperlink, span.Label, span.Reference,
+  span.Other {
+    color: var(--other); }
+  
+  /* Pop type, const, proc, and iterator defs in nim def blocks */
+  dt pre > span.Identifier, dt pre > span.Operator {
+    color: var(--identifier);
+    font-weight: 700; }
+  
+  dt pre > span.Keyword ~ span.Identifier, dt pre > span.Identifier ~ span.Identifier,
+  dt pre > span.Operator ~ span.Identifier, dt pre > span.Other ~ span.Identifier {
+    color: var(--identifier);
+    font-weight: inherit; }
