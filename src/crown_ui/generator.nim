@@ -4,7 +4,8 @@ import ./ utils
 import yaml, json
 import regex
 import tables
-import os, strutils
+import os, strutils, times
+import ./ datetime_utils
 
 type PostData = tuple
   title: string
@@ -125,7 +126,12 @@ when isMainModule:
 
     const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
     const scaffoldsDir = exampleDir / "scaffolds"
-    let postPath = scaffoldsDir / "post.md"
-    let data = TplData(title: "a", date: "2020")
-    echo scaffold2source(postPath, data)
+    const configPath = exampleDir / "config.yml"
+    let config = parseConfig(configPath)
+    let dateFormat = config{"date_format"}.getStr("YYYY-MM-DD")
+    if isMomentFormat(dateFormat):
+      let date = now().format(toNimFormat(dateFormat))
+      let postPath = scaffoldsDir / "post.md"
+      let data = TplData(title: "a", date: date)
+      echo scaffold2source(postPath, data)
 
