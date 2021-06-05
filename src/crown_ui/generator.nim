@@ -101,13 +101,31 @@ proc scaffold2source*(path: string, data: TplData): string =
         r = replace(r, "{{" & splited.meta[b] & "}}", v)
   result = "---" & r & "---" & splited.content
 
-proc generate(tpl: seq[string]): int =
+proc generatePriv(config: JsonNode, tpl: string, title: string, cwd: string = getCurrentDir()): string =
+  # let config = parseConfig(cwd / "config.yml")
+  let dateFormat = config{"date_format"}.getStr("YYYY-MM-DD")
+  let scaffoldsDir = cwd / "scaffolds"
+  if isMomentFormat(dateFormat):
+    let date = now().format(toNimFormat(dateFormat))
+    let postPath = scaffoldsDir / tpl & ".md"
+    let data = TplData(title: title, date: date)
+    result = scaffold2source(postPath, data)
+
+proc generatePriv(tpl: string, title: string, cwd: string = getCurrentDir()): string =
+  let config = parseConfig(cwd / "config.yml")
+  result = generatePriv(config, tpl, title, cwd)
+
+proc generate(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
   ## generate new post or page
   doAssert tpl.len > 0
   doAssert tpl[0] in ["post", "page"]
   let theTpl = tpl[0]
   let title = tpl[1]
-  discard
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "source" / "drafts"
+  let content = generatePriv(theTpl, title, cwd = expandTilde(cwd))
+  writeFile(privDest / title & ".md", content)
 
 when isMainModule:
   when defined(release):
@@ -125,13 +143,5 @@ when isMainModule:
   else:
 
     const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
-    const scaffoldsDir = exampleDir / "scaffolds"
-    const configPath = exampleDir / "config.yml"
-    let config = parseConfig(configPath)
-    let dateFormat = config{"date_format"}.getStr("YYYY-MM-DD")
-    if isMomentFormat(dateFormat):
-      let date = now().format(toNimFormat(dateFormat))
-      let postPath = scaffoldsDir / "post.md"
-      let data = TplData(title: "a", date: date)
-      echo scaffold2source(postPath, data)
+    discard generate(cwd = exampleDir, tpl = @["post", "tt"])
 
