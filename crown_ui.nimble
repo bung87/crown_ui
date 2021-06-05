@@ -7,7 +7,6 @@ license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
 namedBin = {"crown_ui/generator": "crown_ui"}.toTable()
- #"crown_ui/generator"
 
 # Dependencies
 
@@ -18,7 +17,7 @@ requires "https://github.com/bung87/web_preprocessor"
 requires "https://github.com/bung87/nmark"
 requires "dotenv >= 1.1.0"
 requires "cligen"
-requires "moustachu"
+requires "npeg"
 
 import strformat,sequtils
 task watch,"watch":

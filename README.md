@@ -9,7 +9,7 @@ clone this repository, run `nimble install stage` , if you already have `stage` 
 ### Development server  
 `nimble watch [post,page,index,page,tag,category,archive]` specify the page for development  
 
-### Precomile assets  
+### Precompile assets  
 for styles,images  
 
 `nimble preprocess`
