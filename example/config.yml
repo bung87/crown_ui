@@ -34,6 +34,7 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
+# Display future posts?
 future: true
 
 # prism_plugin:
@@ -93,5 +94,6 @@ deploy:
   type: git
   repo: https://github.com/bung87/bung87.github.io.git
   # branch: [branch]
-footer_links:
-  鄂ICP备13013472号-1: http://beian.miit.gov.cn/
+theme_config:
+  source_link:
+    Github: ""

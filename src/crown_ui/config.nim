@@ -68,11 +68,13 @@ type
   ConfigObj = object of BaseConfigObj
     menu*: seq[Link]
     footer_links*: seq[Link]
+    theme_config*: JsonNode
 
 proc parseConfig*(configPath: string): Config {.noinit.} =
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
   result = cast[Config](baseConfig)
+  result.theme_config = configJson{"theme_config"}
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
     result.menu.add Link(href: v.getStr(), title: k)

@@ -1,6 +1,9 @@
 import karax / [karaxdsl, vdom]
-import json
-proc PureFooter*(n: VNode = nil): VNode =
+import json, tables, sequtils
+import crown_ui/config
+
+
+proc PureFooter*(config: Config): VNode =
   buildHtml():
     footer:
       section(class = "content"):
@@ -11,11 +14,10 @@ proc PureFooter*(n: VNode = nil): VNode =
               a(href = "https://nim-lang.org/"):
                 text "Nim"
               text " (Nim is a statically typed compiled systems programming language.) "
+              let (k, v) = toSeq(config.theme_config{"source_link"}.getFields.pairs)[0]
               text " and source code is available on "
-              a(href = "#"):
-                text "GitHub"
+              a(href = v.getStr()):
+                text k
               text " and contributions are welcome."
 
-when isMainModule:
-  echo PureFooter()
 

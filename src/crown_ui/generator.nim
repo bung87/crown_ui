@@ -20,7 +20,7 @@ const libThemeName = when defined(windows):
     "libtheme.so"
 
 type
-  RenderPost = proc(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
+  RenderPost = proc(config: Config; id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
     child: VNode = nil): VNode {.gcsafe, stdcall.}
   PostData = tuple
     title: string
@@ -116,7 +116,7 @@ proc generatePriv(tpl: string; title: string; cwd: string = getCurrentDir()): st
   let config = parseYamlConfig(cwd / "config.yml")
   result = generatePriv(config, tpl, title, cwd)
 
-proc generate(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
+proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
   ## generate new post or page
   doAssert tpl.len > 0
   doAssert tpl[0] in ["post", "page"]
@@ -124,7 +124,7 @@ proc generate(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts
   let title = tpl[1]
   var privDest = dest
   if not dest.isRelativeTo(cwd):
-    privDest = cwd / "source" / "drafts"
+    privDest = cwd / (if config.source_dir.len > 0: config.source_dir else: "source") / "drafts"
   let content = generatePriv(theTpl, title, cwd = expandTilde(cwd))
   writeFile(privDest / title & ".md", content)
 
@@ -132,13 +132,13 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
-  let sources = cwd / "source" / "posts" / "*.md"
+  let sources = cwd / (if config.source_dir.len > 0: config.source_dir else: "source") / "posts" / "*.md"
   let render = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert render != nil
   for f in walkFiles(sources):
     var (_, name, _) = splitFile(f)
     let data = getPostData(f)
-    let post = render(data.id, data.title, data.date, data.cates, data.tags, data.child)
+    let post = render(config, data.id, data.title, data.date, data.cates, data.tags, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     let outfile = privDest / name / "index.html"
