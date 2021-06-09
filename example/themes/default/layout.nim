@@ -6,8 +6,7 @@
   # footer
 
 import karax / [karaxdsl, vdom]
-import os, json
-# from karax/ karax import setRenderer
+
 import crown_ui / [config, utils]
 
 import partial / [header, footer]

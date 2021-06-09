@@ -11,6 +11,7 @@ import ./config
 import ./html_utils
 import osproc
 import chronicles
+import ./format_utils
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -182,5 +183,7 @@ when isMainModule:
 
     const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
     # discard generate(cwd = exampleDir, tpl = @["post", "tt"])
-    discard build(exampleDir)
+    # discard build(exampleDir)
+
+    echo parseColonLeadFormat(":year/:month/:day/:title/")
 
