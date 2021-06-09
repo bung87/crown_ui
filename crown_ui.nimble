@@ -18,6 +18,7 @@ requires "nmark >= 0.1.9"
 requires "dotenv >= 1.1.0"
 requires "cligen"
 requires "npeg"
+requires "chronicles"
 
 import strformat,sequtils
 task watch,"watch":

@@ -1,7 +1,7 @@
 import karax / [karaxdsl, vdom]
 import ./layout
 
-proc PurePost*(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
+proc renderPost*(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   let post = buildHtml(tdiv(data-theme = "dark")):
     h4:
@@ -11,7 +11,7 @@ proc PurePost*(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: s
         span(class = "far fa-calendar-alt", aria-hidden = "true")
         text date
     child
-  PureLayout(post)
+  renderLayout(post)
 
 when isMainModule:
   import os
@@ -21,4 +21,4 @@ when isMainModule:
   const postDir = sourceDir / "posts"
   const filePath = postDir / "test_post1.md"
   let data = getPostData(filePath)
-  setRenderer proc(): VNode = PurePost(data.id, data.title, data.date, data.cates, data.tags, data.child)
+  setRenderer proc(): VNode = renderPost(data.id, data.title, data.date, data.cates, data.tags, data.child)

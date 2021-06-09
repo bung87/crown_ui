@@ -18,7 +18,7 @@ proc parseYaml*(s: string): seq[JsonNode] =
   var ys = parser.parse(s)
   result = constructJson(ys)
 
-proc parseConfig*(path: string): JsonNode =
+proc parseYamlConfig*(path: string): JsonNode =
   let s = readFile path
   let res = parseYaml(s)
   result = if res.len > 0: res[0] else: newJObject()

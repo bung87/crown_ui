@@ -13,7 +13,7 @@ import crown_ui / [utils]
 import partial / [header, footer]
 const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
 
-proc PureLayout*(n: VNode = nil): VNode =
+proc renderLayout*(n: VNode = nil): VNode =
   # const configPath = exampleDir / "config.yml"
   # let config = parseConfig(configPath)
 
@@ -29,5 +29,5 @@ proc PureLayout*(n: VNode = nil): VNode =
     PureFooter()
 
 when isMainModule:
-  setRenderer proc(): VNode = PureLayout()
+  setRenderer proc(): VNode = renderLayout()
 
