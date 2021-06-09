@@ -1,6 +1,6 @@
 import strutils
 
-type PermalinkCompKind = enum
+type PermalinkCompKind* = enum
   raw = "raw"
   year = ":year"
   month = ":month"
@@ -18,9 +18,9 @@ type PermalinkCompKind = enum
   hash = ":hash"
 
 type PermalinkComp = object
-  case kind: PermalinkCompKind
+  case kind*: PermalinkCompKind
   of raw:
-    value: string
+    value*: string
   else:
     discard
 

@@ -92,11 +92,3 @@ proc markdown2html*(lines: string): string =
 
   return result
 
-type Link* = object
-  href*: string
-  title*: string
-
-proc getMenu*(config: JsonNode): seq[Link] =
-  let menuNode = config["menu"].getFields
-  for k, v in menuNode.pairs:
-    result.add Link(href: v.getStr(), title: k)

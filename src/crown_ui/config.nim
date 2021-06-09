@@ -4,6 +4,9 @@ import json
 import jsony
 import tables
 
+type Link* = object
+  href*: string
+  title*: string
 type
   IndexGenerator = object
     path*: string
