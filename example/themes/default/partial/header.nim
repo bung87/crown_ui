@@ -1,8 +1,8 @@
 import karax / [karaxdsl, vdom]
 import json
-import crown_ui / [generator]
+import crown_ui / [utils]
 
-proc PureHeader*(title: string; menu: seq[Link]; n: VNode = nil): VNode =
+proc PureHeader*(title: string = ""; menu: seq[Link] = @[]; n: VNode = nil): VNode =
   buildHtml(header(class = "site-header")):
     nav(class = "pure-menu pure-menu-horizontal pure-menu-scrollable"):
       tdiv(class = "nav-content"):

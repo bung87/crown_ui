@@ -2,7 +2,7 @@ import karax / [karaxdsl, vdom]
 import ./layout
 
 proc PurePost*(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
-    child: VNode = nil): VNode =
+    child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   let post = buildHtml(tdiv(data-theme = "dark")):
     h4:
       text title

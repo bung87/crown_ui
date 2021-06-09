@@ -15,14 +15,6 @@ type PostData = tuple
   tags: seq[string]
   child: VNode
 
-type Link* = object
-  href*: string
-  title*: string
-
-proc getMenu*(config: JsonNode): seq[Link] =
-  let menuNode = config["menu"].getFields
-  for k, v in menuNode.pairs:
-    result.add Link(href: v.getStr(), title: k)
 
 type SplitMdResult = tuple
   meta: string
@@ -101,6 +93,7 @@ proc scaffold2source*(path: string, data: TplData): string =
         r = replace(r, "{{" & splited.meta[b] & "}}", v)
   result = "---" & r & "---" & splited.content
 
+
 proc generatePriv(config: JsonNode, tpl: string, title: string, cwd: string = getCurrentDir()): string =
   # let config = parseConfig(cwd / "config.yml")
   let dateFormat = config{"date_format"}.getStr("YYYY-MM-DD")
@@ -127,6 +120,36 @@ proc generate(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts
   let content = generatePriv(theTpl, title, cwd = expandTilde(cwd))
   writeFile(privDest / title & ".md", content)
 
+type
+  PurePost = proc(id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
+    child: VNode = nil): VNode {.gcsafe, stdcall.}
+import dynlib
+
+proc generatePosts(cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "build"
+  let sources = cwd / "source" / "posts" / "*.md"
+  const libName = when defined(windows):
+    "theme.dll"
+  elif defined(macosx):
+    "libtheme.dylib"
+  else:
+    "libtheme.so"
+  let themePath = cwd / "themes" / "default" / libName
+  let theme = loadLib(themePath)
+  doAssert theme != nil
+  for f in walkFiles(sources):
+    var (_, name, _) = splitFile(f)
+    let data = getPostData(f)
+    let render = cast[PurePost](theme.symAddr("PurePost"))
+    doAssert render != nil
+    let post = render(data.id, data.title, data.date, data.cates, data.tags, data.child)
+    if not dirExists(privDest / name):
+      createDir(privDest / name)
+    writeFile(privDest / name / "index.html", $post)
+  unloadLib(theme)
+
 when isMainModule:
   when defined(release):
     import cligen
@@ -143,5 +166,6 @@ when isMainModule:
   else:
 
     const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
-    discard generate(cwd = exampleDir, tpl = @["post", "tt"])
+    # discard generate(cwd = exampleDir, tpl = @["post", "tt"])
+    generatePosts(exampleDir)
 
