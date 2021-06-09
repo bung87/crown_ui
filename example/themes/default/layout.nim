@@ -11,7 +11,6 @@ import os, json
 import crown_ui / [config, utils]
 
 import partial / [header, footer]
-const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
 
 proc renderLayout*(config: Config; n: VNode = nil): VNode =
   result = buildHtml(tdiv):
@@ -20,10 +19,11 @@ proc renderLayout*(config: Config; n: VNode = nil): VNode =
       tdiv(class = "pure-g"):
         tdiv(class = "pure-u-18-24"):
           if n != nil: n else: discard
-
         tdiv(class = "pure-u-6-24")
     PureFooter(config)
 
 when isMainModule:
-  setRenderer proc(): VNode = renderLayout()
+  const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
+  let conf = parseConfig(exampleDir / "config.yml")
+  setRenderer proc(): VNode = renderLayout(conf)
 
