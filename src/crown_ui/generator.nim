@@ -163,7 +163,7 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   doAssert render != nil
   let index_generator = config.index_generator
   let rootUrl = parseUri(config.url)
-  let prefix = rootUrl / index_generator.path
+  let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
   let perPage = index_generator.per_page
   var posts = newSeq[PostData]()
   for f in walkFiles(sources):
@@ -180,15 +180,14 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   var i = 0
   while i < pages:
     let pagePosts = posts[i * perPage ..< min(postsLen ,(i + 1) * perPage)]
-    # for data in pagePosts:
     let postLink = getPermalinkOf(data, config)
-    let name = ""
+    let name = $(i + 1)
     let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
     let post = render(config, data.id, data.title, data.date, data.cates, data.tags,verbatim(textContent))
-    if not dirExists(privDest / name):
-      createDir(privDest / name)
-    let outfile = privDest / name / "index.html"
-    info "Generate page", page= i + 1, file = f.relativePath(cwd), to = outfile.relativePath(cwd)
+    if not dirExists(privDest / index_generator.pagination_dir / name):
+      createDir(privDest / index_generator.pagination_dir / name)
+    let outfile = privDest / index_generator.pagination_dir / name / "index.html"
+    info "Generate page", page= i + 1, to = outfile.relativePath(cwd)
     let description = xmltree.escape(config.description)
     let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
         siteName = config.title, description = description)
