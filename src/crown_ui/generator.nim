@@ -1,22 +1,16 @@
 
+import std/[os, json, strutils, times, sequtils, osproc, dynlib, tables]
+import fusion / [htmlparser, htmlparser/xmltree]
+import unicode except strip, escape
 import karax / [vdom]
 import ./ utils
-import yaml, json
-import regex
-import tables
-import os, strutils, times
+import yaml, regex
 import ./ datetime_utils
-import dynlib
 import ./config
 import ./html_utils
-import osproc
 import chronicles
 import ./format_utils
 import ./types
-import fusion / [htmlparser, htmlparser/xmltree]
-import unicode except strip, escape
-import sequtils
-import json
 import ./io_utils
 
 const libThemeName = when defined(windows):
