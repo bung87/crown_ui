@@ -16,6 +16,8 @@ import ./types
 import fusion / [htmlparser, htmlparser/xmltree]
 import unicode except strip, escape
 import sequtils
+import json
+import ./io_utils
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -172,17 +174,40 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
         siteName = config.title, description = description)
     writeFile(outfile, content)
 
+proc compileTheme(cwd, themeFile: string) =
+  info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
+  doAssert execCmdEx("nim c -d:release --app:lib " & themeFile).exitCode == 0
+  info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
+
 proc build(cwd = getCurrentDir()): int =
   ## generate static site
   result = 1
   let config = parseConfig(cwd / "config.yml")
+  let metaPath = cwd / "crown_ui.json"
   let theme = if config.theme.len > 0: config.theme else: "default"
   # compile theme
-  let themeFile = cwd / "themes" / theme / "theme.nim"
-  info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  doAssert execCmdEx("nim c -d:release --app:lib " & themeFile).exitCode == 0
-  let themePath = cwd / "themes" / theme / libThemeName
-  info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
+  let themeDir = cwd / "themes" / theme
+  echo themeDir
+  let themeFile = themeDir / "theme.nim"
+  let themePath = themeDir / libThemeName
+  var needCompileTheme = false
+  var dirver: string
+  if fileExists(metaPath):
+    let meta = json.parseFile(metaPath).to(CrownMeta)
+    if meta.theme.name != theme:
+      needCompileTheme = true
+    else:
+      dirver = computeDirVersion(themeDir & "/*.nim")
+      if dirver != meta.theme.hash:
+        needCompileTheme = true
+  else:
+    needCompileTheme = true
+  info "Theme", status = "version", need_compile = needCompileTheme
+  if needCompileTheme:
+    if dirver.len == 0:
+      dirver = computeDirVersion(themeDir & "/*.nim")
+    writeFile(metaPath, $ %* CrownMeta(theme: ThemeMeta(name: theme, hash: dirver)))
+    compileTheme(cwd, themeFile)
   let libTheme = loadLib(themePath)
   doAssert libTheme != nil
   generatePosts(config, libTheme, cwd)

@@ -8,3 +8,9 @@ type PostData* = tuple
   child: VNode
   filepath: string
   relpath: string
+
+type ThemeMeta* = object
+  name*: string
+  hash*: string
+type CrownMeta* = object
+  theme*: ThemeMeta
