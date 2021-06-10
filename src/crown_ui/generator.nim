@@ -12,6 +12,7 @@ import ./html_utils
 import osproc
 import chronicles
 import ./format_utils
+import ./types
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -23,13 +24,7 @@ const libThemeName = when defined(windows):
 type
   RenderPost = proc(config: Config; id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
     child: VNode = nil): VNode {.gcsafe, stdcall.}
-  PostData = tuple
-    title: string
-    id: string
-    date: string
-    cates: seq[string]
-    tags: seq[string]
-    child: VNode
+
   SplitMdResult = tuple
     meta: string
     content: string
@@ -137,8 +132,9 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   let render = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert render != nil
   for f in walkFiles(sources):
-    var (_, name, _) = splitFile(f)
+    # var (_, name, _) = splitFile(f)
     let data = getPostData(f)
+    let name = getPermalinkOf(data, config.permalink)
     let post = render(config, data.id, data.title, data.date, data.cates, data.tags, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)
@@ -183,7 +179,6 @@ when isMainModule:
 
     const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
     # discard generate(cwd = exampleDir, tpl = @["post", "tt"])
-    # discard build(exampleDir)
+    discard build(exampleDir)
 
-    echo parseColonLeadFormat(":year/:month/:day/:title/")
 
