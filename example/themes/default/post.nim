@@ -1,18 +1,26 @@
 import karax / [karaxdsl, vdom]
 import ./layout
 import crown_ui/config
+import crown_ui/types
+import crown_ui/format_utils
 
-proc renderPost*(config: Config; id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
+proc renderPostPartial*(conf: Config; data: PostData;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
-  let post = buildHtml(tdiv(data-theme = "dark")):
+  doAssert conf != nil
+  result = buildHtml(tdiv(data-theme = "dark")):
     h4:
-      text title
+      a(href = getPermalinkOf(data, conf)):
+        text data.title
     tdiv(class = "post-meta"):
       span:
         span(class = "far fa-calendar-alt", aria-hidden = "true")
-        text date
+        text data.date
     child
-  renderLayout(config, post)
+
+proc renderPost*(config: Config; data: PostData;
+    child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
+  let post = renderPostPartial(config, data, child)
+  result = renderLayout(config, post)
 
 when isMainModule:
   import os
@@ -23,4 +31,4 @@ when isMainModule:
   const postDir = sourceDir / "posts"
   const filePath = postDir / "test_post1.md"
   let data = getPostData(filePath, postDir)
-  setRenderer proc(): VNode = renderPost(conf, data.id, data.title, data.date, data.cates, data.tags, data.child)
+  setRenderer proc(): VNode = renderPost(conf, data, data.child)

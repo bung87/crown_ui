@@ -3,6 +3,7 @@ import os
 import json
 import jsony
 import tables
+import macros
 import ./datetime_utils
 
 type Link* = object
@@ -13,6 +14,7 @@ type
     path*: string
     per_page*: int
     order_by*: string
+    pagination_dir*: string
   Highlight = object
     enable*: bool
     line_number*: bool
@@ -57,10 +59,10 @@ type
     skip_render*: string
     future*: bool        # Display future posts?
 
-    # Pagination
-    ## Set per_page to 0 to disable pagination
-    per_page*: int
-    pagination_dir*: string
+    # # Pagination
+    # ## Set per_page to 0 to disable pagination
+    # per_page*: int
+    # pagination_dir*: string
 
     theme*: string
     deploy*: Deploy
@@ -75,18 +77,36 @@ type
     menuLinks*: seq[Link]
     # footer_links*: seq[Link]
 
+func getFields(child: NimNode): seq[NimNode] =
+  let impl = child.getType[^1].getImpl
+  for identDef in impl[^1][^1]:
+    result.add identDef[0..^3]
+  if not impl[^1][1][0].eqIdent("RootObj"):
+    result.add getFields(impl[^1][1][0])
+
+macro assign*(child: ref object, parent: ref object): untyped =
+  let fields = getFields(parent)
+  result = newStmtList()
+  for field in fields:
+    let field = field.baseName
+    result.add quote do:
+      `child`.`field` = `parent`.`field`
+
+
 proc parseConfig*(configPath: string): Config =
+  result = Config()
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
-  result = cast[Config](baseConfig)
+  # copyMem(cast[pointer](result),cast[pointer](baseConfig),sizeof(baseConfig))
+  # result = cast[Config](baseConfig)
+  assign(result, baseConfig)
   result.menuLinks = newSeq[Link]()
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
     result.menuLinks.add Link(href: v.getStr(), title: k)
-  # echo result.menu
   return result
 
-proc dateTimeFormat*(config:Config):string = 
+proc dateTimeFormat*(config: Config): string =
   result = toNimFormat(config.date_format & " " & config.time_format)
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
