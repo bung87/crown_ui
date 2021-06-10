@@ -1,4 +1,7 @@
 import karax / [vdom]
+import ./config
+import times
+
 type PostData* = tuple
   title: string
   id: string
@@ -8,6 +11,9 @@ type PostData* = tuple
   child: VNode
   filepath: string
   relpath: string
+
+proc datetime*(self:PostData;config:Config):DateTime = 
+  result = parse(self.date, config.dateTimeFormat)
 
 type ThemeMeta* = object
   name*: string

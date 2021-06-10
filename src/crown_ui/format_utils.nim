@@ -56,12 +56,13 @@ proc parseColonLeadFormat*(perm: string): seq[PermalinkComp] =
     except:
       result.add PermalinkComp(kind: raw, value: c)
 
-proc getPermalinkOf*(post: PostData; format: string; config: Config): string =
+proc getPermalinkOf*(post: PostData;  config: Config): string =
+  let format = config.permalink
   let comps = parseColonLeadFormat(format)
   var candi = newSeq[string]()
   let localNow = now().local()
-  let dateFormat = toNimFormat(config.date_format & " " & config.time_format)
-  let date = if post.date.len > 0: parse(post.date, dateFormat) else: localNow
+  
+  let date = if post.date.len > 0: parse(post.date, config.dateTimeFormat) else: localNow
   for c in comps:
     case c.kind
     of PermalinkCompKind.raw:

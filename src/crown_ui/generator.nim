@@ -12,6 +12,7 @@ import chronicles
 import ./format_utils
 import ./types
 import ./io_utils
+import uri
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -152,6 +153,49 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
         siteName = config.title, description = description)
     writeFile(outfile, content)
 
+proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "build"
+  let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
+  let sources = cwd / sourceDir / "*.md"
+  let render = cast[RenderPost](libTheme.symAddr("renderIndex"))
+  doAssert render != nil
+  let index_generator = config.index_generator
+  let rootUrl = parseUri(config.url)
+  let prefix = rootUrl / index_generator.path
+  let perPage = index_generator.per_page
+  var posts = newSeq[PostData]()
+  for f in walkFiles(sources):
+    posts.add getPostData(f, cwd / sourceDir)
+    
+  proc cmpPostDate(x, y: PostData): int =
+    cmp(x.datetime(config).toUnix,y.datetime(config).toUnix)
+
+  sort(posts, cmpPostDate, SortOrder.Descending)
+  let perPage = 4
+  let postsLen = posts.len
+  var m = postsLen mod perPage
+  let pages = if m != 0 :  postsLen div perPage + 1 else:postsLen div perPage
+  var i = 0
+  while i < pages:
+    let pagePosts = posts[i * perPage ..< min(postsLen ,(i + 1) * perPage)]
+    # for data in pagePosts:
+    let postLink = getPermalinkOf(data, config)
+    let name = ""
+    let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+    let post = render(config, data.id, data.title, data.date, data.cates, data.tags,verbatim(textContent))
+    if not dirExists(privDest / name):
+      createDir(privDest / name)
+    let outfile = privDest / name / "index.html"
+    info "Generate page", page= i + 1, file = f.relativePath(cwd), to = outfile.relativePath(cwd)
+    let description = xmltree.escape(config.description)
+    let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
+        siteName = config.title, description = description)
+    writeFile(outfile, content)
+    inc i
+
+
 proc compileTheme(cwd, themeFile: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   doAssert execCmdEx("nim c -d:release --app:lib " & themeFile).exitCode == 0
@@ -165,7 +209,6 @@ proc build(cwd = getCurrentDir()): int =
   let theme = if config.theme.len > 0: config.theme else: "default"
   # compile theme
   let themeDir = cwd / "themes" / theme
-  echo themeDir
   let themeFile = themeDir / "theme.nim"
   let themePath = themeDir / libThemeName
   var needCompileTheme = false

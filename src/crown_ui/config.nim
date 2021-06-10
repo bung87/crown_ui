@@ -3,6 +3,7 @@ import os
 import json
 import jsony
 import tables
+import ./datetime_utils
 
 type Link* = object
   href*: string
@@ -85,6 +86,8 @@ proc parseConfig*(configPath: string): Config =
   # echo result.menu
   return result
 
+proc dateTimeFormat*(config:Config):string = 
+  result = toNimFormat(config.date_format & " " & config.time_format)
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
 
