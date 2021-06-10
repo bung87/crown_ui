@@ -6,3 +6,5 @@ type PostData* = tuple
   cates: seq[string]
   tags: seq[string]
   child: VNode
+  filepath: string
+  relpath: string

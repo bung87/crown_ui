@@ -22,5 +22,5 @@ when isMainModule:
   const sourceDir = exampleDir / "source"
   const postDir = sourceDir / "posts"
   const filePath = postDir / "test_post1.md"
-  let data = getPostData(filePath)
+  let data = getPostData(filePath, postDir)
   setRenderer proc(): VNode = renderPost(conf, data.id, data.title, data.date, data.cates, data.tags, data.child)

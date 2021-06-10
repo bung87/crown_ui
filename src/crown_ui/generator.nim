@@ -41,7 +41,8 @@ proc splitmd*(content: string): SplitMdResult =
   result.content = content[m.boundaries.b + 1 .. ^1]
   result.meta = m.group(0, content)[0]
 
-proc getPostData*(filepath: string): PostData =
+proc getPostData*(filepath: string; base: string): PostData =
+  doAssert isAbsolute(base)
   let content = readFile(filepath)
   let splited = splitmd(content)
   var meta: JsonNode = newJObject()
@@ -58,7 +59,8 @@ proc getPostData*(filepath: string): PostData =
   for e in meta{"tags"}.getElems:
     tags.add e.getStr("")
   let child = verbatim(markdown2html(splited.content))
-  result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child)
+  result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child, filepath: filepath,
+      relpath: filepath.relativePath(base))
 
 proc parseUntil(s: string; until: string; start = 0): int =
   var i = start
@@ -128,13 +130,13 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
-  let sources = cwd / (if config.source_dir.len > 0: config.source_dir else: "source") / "posts" / "*.md"
+  let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
+  let sources = cwd / sourceDir / "*.md"
   let render = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert render != nil
   for f in walkFiles(sources):
-    # var (_, name, _) = splitFile(f)
-    let data = getPostData(f)
-    let name = getPermalinkOf(data, config.permalink)
+    let data = getPostData(f, cwd / sourceDir)
+    let name = getPermalinkOf(data, config.permalink, config)
     let post = render(config, data.id, data.title, data.date, data.cates, data.tags, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)

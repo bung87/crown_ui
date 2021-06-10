@@ -1,6 +1,9 @@
 import strutils
 import ./types
 import times
+import ./datetime_utils
+import ./config
+import os
 
 # https://hexo.io/docs/permalinks
 type PermalinkCompKind* {.pure.} = enum
@@ -27,8 +30,7 @@ type PermalinkComp = object
   else:
     discard
 
-proc parseColonLeadFormat*(format: string): seq[PermalinkComp] =
-  let perm = ":year/:month/:day/:title/"
+proc parseColonLeadFormat*(perm: string): seq[PermalinkComp] =
   let permLen = perm.len
   var i = 0
   var candi = newSeq[string]()
@@ -54,36 +56,39 @@ proc parseColonLeadFormat*(format: string): seq[PermalinkComp] =
     except:
       result.add PermalinkComp(kind: raw, value: c)
 
-proc getPermalinkOf*(post: PostData; format: string): string =
+proc getPermalinkOf*(post: PostData; format: string; config: Config): string =
   let comps = parseColonLeadFormat(format)
   var candi = newSeq[string]()
   let localNow = now().local()
+  let dateFormat = toNimFormat(config.date_format & " " & config.time_format)
+  let date = if post.date.len > 0: parse(post.date, dateFormat) else: localNow
   for c in comps:
     case c.kind
     of PermalinkCompKind.raw:
       candi.add c.value
     of PermalinkCompKind.year:
-      candi.add $(localNow.year)
+      candi.add $(date.year)
     of PermalinkCompKind.month:
-      candi.add align($(localNow.month.int), 2, '0')
+      candi.add align($(date.month.int), 2, '0')
     of PermalinkCompKind.i_month:
-      candi.add $(localNow.month.int)
+      candi.add $(date.month.int)
     of PermalinkCompKind.day:
-      candi.add align($(localNow.monthday), 2, '0')
+      candi.add align($(date.monthday), 2, '0')
     of PermalinkCompKind.i_day:
-      candi.add $(localNow.monthday)
+      candi.add $(date.monthday)
     of PermalinkCompKind.hour:
-      candi.add align($(localNow.hour), 2, '0')
+      candi.add align($(date.hour), 2, '0')
     of PermalinkCompKind.minute:
-      candi.add align($(localNow.minute), 2, '0')
+      candi.add align($(date.minute), 2, '0')
     of PermalinkCompKind.second:
-      candi.add align($(localNow.second), 2, '0')
+      candi.add align($(date.second), 2, '0')
     of PermalinkCompKind.title:
       # Filename (relative to “source/_posts/“ folder)
-      discard
+      candi.add post.relpath.changeFileExt("")
     of PermalinkCompKind.name:
       # filename
-      discard
+      var (_, name, _) = splitFile(post.relpath)
+      candi.add name
     of PermalinkCompKind.post_title:
       candi.add post.title
     of PermalinkCompKind.category:

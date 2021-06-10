@@ -67,23 +67,23 @@ type
 
     category_map*: string
     tag_map*: string
+    theme_config*: JsonNode
+    menu*: JsonNode
   Config* = ref ConfigObj
   ConfigObj = object of BaseConfigObj
-    menu*: seq[Link]
-    footer_links*: seq[Link]
-    theme_config*: JsonNode
+    menuLinks*: seq[Link]
+    # footer_links*: seq[Link]
 
-proc parseConfig*(configPath: string): Config {.noinit.} =
+proc parseConfig*(configPath: string): Config =
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
   result = cast[Config](baseConfig)
-  result.theme_config = configJson{"theme_config"}
+  result.menuLinks = newSeq[Link]()
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
-    result.menu.add Link(href: v.getStr(), title: k)
-  let footerNode = configJson{"footer_links"}.getFields
-  for k, v in footerNode.pairs:
-    result.menu.add Link(href: v.getStr(), title: k)
+    result.menuLinks.add Link(href: v.getStr(), title: k)
+  # echo result.menu
+  return result
 
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"

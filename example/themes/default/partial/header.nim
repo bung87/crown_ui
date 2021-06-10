@@ -13,7 +13,7 @@ proc PureHeader*(config: Config; ): VNode =
             a(href = "/blog.html", class = "pure-menu-link"):
               text config.title
         ul(class = "pure-menu-list fl"):
-          for item in config.menu:
+          for item in config.menuLinks:
             li(class = "pure-menu-item"):
               a(href = item.href, class = "pure-menu-link"):
                 text item.title

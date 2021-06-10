@@ -14,10 +14,12 @@ proc PureFooter*(config: Config): VNode =
               a(href = "https://nim-lang.org/"):
                 text "Nim"
               text " (Nim is a statically typed compiled systems programming language.) "
-              let (k, v) = toSeq(config.theme_config{"source_link"}.getFields.pairs)[0]
-              text " and source code is available on "
-              a(href = v.getStr()):
-                text k
-              text " and contributions are welcome."
+              let s = toSeq(config.theme_config{"source_link"}.getFields.pairs)
+              if s.len > 0:
+                let (k, v) = s[0]
+                text " and source code is available on "
+                a(href = v.getStr("")):
+                  text k
+                text " and contributions are welcome."
 
 
