@@ -13,6 +13,9 @@ import osproc
 import chronicles
 import ./format_utils
 import ./types
+import fusion / [htmlparser, htmlparser/xmltree]
+import unicode except strip, escape
+import sequtils
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -20,6 +23,8 @@ const libThemeName = when defined(windows):
     "libtheme.dylib"
   else:
     "libtheme.so"
+
+const MaxDescriptionLen = 200
 
 type
   RenderPost = proc(config: Config; id = ""; title = ""; date = ""; cates: seq[string] = @[]; tags: seq[string] = @[];
@@ -126,6 +131,22 @@ proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "s
   let content = generatePriv(theTpl, title, cwd = expandTilde(cwd))
   writeFile(privDest / title & ".md", content)
 
+proc myInnerText*(n: XmlNode): string =
+  ## Gets the inner text of `n`:
+  proc worker(res: var string; n: XmlNode) =
+    case n.kind
+    of xnText, xnEntity:
+      res.add(n.text)
+    of xnElement:
+      if n.tag notin ["pre", "code"]:
+        for sub in n:
+          worker(res, sub)
+    else:
+      discard
+
+  result = ""
+  worker(result, n)
+
 proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -142,7 +163,11 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
       createDir(privDest / name)
     let outfile = privDest / name / "index.html"
     info "Generate post", file = f.relativePath(cwd), to = outfile.relativePath(cwd)
-    let description = ""
+    var textContent = myInnerText(parseHtml($data.child)).replace('\n', ' ').strip()
+    var runes = if textContent.len > 0: textContent.toRunes() else: data.title.toRunes()
+    let runeLen = runes.len
+    let b = min(MaxDescriptionLen, runeLen)
+    let description = if textContent.len > 0: xmltree.escape($runes[0 ..< b]) else: xmltree.escape($runes[0 ..< b])
     let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
         siteName = config.title, description = description)
     writeFile(outfile, content)
