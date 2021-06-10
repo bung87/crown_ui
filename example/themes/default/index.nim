@@ -1,12 +1,14 @@
 import karax / [karaxdsl, vdom]
+import ./layout
+import crown_ui/config
 
 const places = @["boston", "cleveland", "los angeles", "new orleans"]
- # h4(id = "participating-as-an-audience"):
- #             text "Participating as an audience"
- #           p:
+  # h4(id = "participating-as-an-audience"):
+  #             text "Participating as an audience"
+  #           p:
 #             text "All talks will be streamed and recorded for later viewing. Watching the talks live will allow you to ask questions and participate in the discussions with other viewers and the speakers."
-proc render*(): string =
-  let vnode = buildHtml(tdiv(class = "mt-3")):
+proc renderIndex*(config: Config; ): Vnode {.cdecl, exportc, dynlib.} =
+  buildHtml(tdiv(class = "mt-3")):
     h1: text "My Web Page"
     p: text "Hello world"
     ul:
@@ -18,6 +20,4 @@ proc render*(): string =
 
       dt: text "Can I use Karax for server side HTML rendering?"
       dd: text "Yes"
-  result = $vnode
 
-echo render()

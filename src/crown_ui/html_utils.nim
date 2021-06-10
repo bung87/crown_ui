@@ -1,5 +1,8 @@
 
 import strformat
+import karax / [vdom]
+import fusion / [htmlparser, htmlparser/xmltree]
+import unicode
 
 proc renderHtml*(body: string, pageTitle: string, title: string, url: string, siteName: string, description: string,
     image: string = "", pubTime: string = "", modTime: string = "", author: string = "", locale: string = ""): string =
@@ -29,3 +32,34 @@ proc renderHtml*(body: string, pageTitle: string, title: string, url: string, si
 </head>"""
 
   result = general & metaImage & pubTime & modTime & restHead & "<body>" & body & "</body></html>"
+
+proc innerText*(n: XmlNode, skip: seq[string] = @[]): string =
+  ## Gets the inner text of `n`:
+  let skipLen = skip.len
+  proc worker(res: var string; n: XmlNode) =
+    case n.kind
+    of xnText, xnEntity:
+      res.add(n.text)
+    of xnElement:
+      if skipLen > 0:
+        if n.tag notin skip:
+          for sub in n:
+            worker(res, sub)
+      else:
+        for sub in n:
+          worker(res, sub)
+    else:
+      discard
+
+  result = ""
+  worker(result, n)
+
+proc innerText*(n: Vnode; limit: int, skip: seq[string] = @[]): string =
+  ## limit: limit runes length
+  ## skip: skip html tags
+  var textContent = innerText(parseHtml($n), skip)
+  var runes = textContent.toRunes()
+  let runeLen = runes.len
+  let b = min(limit, runeLen)
+  result = $runes[0 ..< b]
+

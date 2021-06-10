@@ -42,8 +42,10 @@ proc splitmd*(content: string): SplitMdResult =
   result.content = content[m.boundaries.b + 1 .. ^1]
   result.meta = m.group(0, content)[0]
 
-proc getPostData*(filepath: string; base: string): PostData =
-  doAssert isAbsolute(base)
+proc getPostData*(filepath: string; sourceDir: string): PostData =
+  ## filepath: post md file path
+  ## sourceDir: sourceDir absolute path
+  doAssert isAbsolute(sourceDir)
   let content = readFile(filepath)
   let splited = splitmd(content)
   var meta: JsonNode = newJObject()
@@ -61,7 +63,7 @@ proc getPostData*(filepath: string; base: string): PostData =
     tags.add e.getStr("")
   let child = verbatim(markdown2html(splited.content))
   result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child, filepath: filepath,
-      relpath: filepath.relativePath(base))
+      relpath: filepath.relativePath(sourceDir))
 
 proc parseUntil(s: string; until: string; start = 0): int =
   var i = start
@@ -127,21 +129,6 @@ proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "s
   let content = generatePriv(theTpl, title, cwd = expandTilde(cwd))
   writeFile(privDest / title & ".md", content)
 
-proc myInnerText*(n: XmlNode): string =
-  ## Gets the inner text of `n`:
-  proc worker(res: var string; n: XmlNode) =
-    case n.kind
-    of xnText, xnEntity:
-      res.add(n.text)
-    of xnElement:
-      if n.tag notin ["pre", "code"]:
-        for sub in n:
-          worker(res, sub)
-    else:
-      discard
-
-  result = ""
-  worker(result, n)
 
 proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
   var privDest = dest
@@ -159,11 +146,8 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
       createDir(privDest / name)
     let outfile = privDest / name / "index.html"
     info "Generate post", file = f.relativePath(cwd), to = outfile.relativePath(cwd)
-    var textContent = myInnerText(parseHtml($data.child)).replace('\n', ' ').strip()
-    var runes = if textContent.len > 0: textContent.toRunes() else: data.title.toRunes()
-    let runeLen = runes.len
-    let b = min(MaxDescriptionLen, runeLen)
-    let description = if textContent.len > 0: xmltree.escape($runes[0 ..< b]) else: xmltree.escape($runes[0 ..< b])
+    let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
+    let description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
         siteName = config.title, description = description)
     writeFile(outfile, content)
