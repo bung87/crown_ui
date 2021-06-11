@@ -10,7 +10,7 @@ on:
     #   - 'example/**/*'
 
 env:
-  NIM_VERSION: 'devel'
+  NIM_VERSION: 'devel --latest'
 
 jobs:
   deploy-pages:
