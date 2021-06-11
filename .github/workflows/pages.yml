@@ -40,7 +40,7 @@ jobs:
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
         with:
-           nim-version: ${{ matrix.nim_version }}
+           nim-version: ${{ matrix.nim-version }}
       - name: Install dependencies
         run: |
           choosenim versions --installed
