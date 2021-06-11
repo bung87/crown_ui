@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - 'devel'
-    paths:
-      - 'src/**/*'
-      - 'example/**/*'
+    # paths:
+    #   - 'src/**/*'
+    #   - 'example/**/*'
 
 env:
   NIM_VERSION: 'devel'
