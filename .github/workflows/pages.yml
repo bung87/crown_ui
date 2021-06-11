@@ -1,0 +1,36 @@
+---
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - 'devel'
+    paths:
+      - 'src/*'
+
+env:
+  NIM_VERSION: 'devel'
+
+jobs:
+  deploy-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Nim
+        uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ env.NIM_VERSION }}
+      - name: Install dependencies
+        run: nimble install -d -Y
+      - name: Build
+        run: nimble build
+      - name: Build site
+        run: |
+          ./crown_ui --cwd ./example
+          nimble buildStatic
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./example/build
+          publish_branch: ghpages # since not use Jekyll choose another branch

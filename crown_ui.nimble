@@ -19,6 +19,7 @@ requires "dotenv >= 1.1.0"
 requires "cligen"
 requires "npeg"
 requires "chronicles"
+requires "fusion"
 requires "scorper >= 1.0.15"
 
 import strformat,sequtils
