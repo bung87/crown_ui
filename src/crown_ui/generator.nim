@@ -27,7 +27,7 @@ type
   RenderPost = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
   RenderPostPartial = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
   RenderIndex = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
-
+  RenderArchive = proc(config: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, stdcall.}
   SplitMdResult = tuple
     meta: string
     content: string
@@ -132,36 +132,34 @@ proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "s
   writeFile(privDest / title & ".md", content)
 
 
-proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build";
-    cssHtml = "") =
+proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
+    dest = getCurrentDir() / "build";cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
-  let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
-  let sources = cwd / sourceDir / "*.md"
+
   let renderPost = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert renderPost != nil
-  for f in walkFiles(sources):
-    let data = getPostData(f, cwd / sourceDir)
+  for data in posts:
+    # let data = getPostData(f, cwd / sourceDir)
     let name = getPermalinkOf(data, config)
     let post = renderPost(config, data, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     let outfile = privDest / name / "index.html"
-    info "Generate post", file = f.relativePath(cwd), to = outfile.relativePath(cwd)
+    info "Generate post", file = data.relpath, to = outfile.relativePath(cwd)
     let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     let description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
         siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
 
-proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build";
-    cssHtml = "") =
+proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
+    dest = getCurrentDir() / "build";cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
-  let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
-  let sources = cwd / sourceDir / "*.md"
+
   let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
   doAssert renderIndex != nil
   let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
@@ -170,13 +168,7 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   let rootUrl = parseUri(config.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
   let outDir = privDest / index_generator.pagination_dir
-  var posts = newSeq[PostData]()
-  for f in walkFiles(sources):
-    posts.add getPostData(f, cwd / sourceDir)
 
-  proc cmpPostDate(x, y: PostData): int =
-    cmp(x.datetime(config).toTime.toUnix, y.datetime(config).toTime.toUnix)
-  sort(posts, cmpPostDate, SortOrder.Descending)
   let perPage = index_generator.per_page
   let postsLen = posts.len
   var m = postsLen mod perPage
@@ -202,10 +194,61 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
     writeFile(outfile, content)
     inc i
 
+proc generateArchive(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
+    dest = getCurrentDir() / "build";cssHtml = "") =
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "build"
 
-proc compileTheme(cwd, themeFile: string) =
+  let renderArchive = cast[RenderArchive](libTheme.symAddr("renderArchive"))
+  doAssert renderArchive != nil
+  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
+  doAssert renderPostPartial != nil
+  let index_generator = config.index_generator
+  let rootUrl = parseUri(config.url)
+  let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
+  let outDir = privDest / config.archive_dir / index_generator.pagination_dir
+
+  let perPage = index_generator.per_page
+  let postsLen = posts.len
+  var m = postsLen mod perPage
+  let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
+  var i = 0
+  var archives: Table[int, seq[VNode]]
+  while i < pages:
+    let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
+    let name = if i == 0: "" else: $(i + 1)
+    let privOutDir = if i == 0: privDest / config.archive_dir else: outDir
+    # var posts = newSeq[VNode]()
+    for data in pagePosts:
+      let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+      let year = data.datetime(config).year
+      let node = renderPostPartial(config, data, verbatim(textContent))
+      if archives.hasKey(year):
+        archives[year].add node
+      else:
+        archives[year] = @[node]
+
+    let index = renderArchive(config, archives)
+    archives.clear
+    if not dirExists(privOutDir / name):
+      createDir(privOutDir / name)
+    let outfile = privOutDir / name / "index.html"
+    info "Generate archive", page = i + 1, to = outfile.relativePath(cwd)
+    let description = xmltree.escape(config.description)
+    let content = renderHtml($index, pageTitle = config.title, title = config.title, url = $(prefix / name),
+        siteName = config.title, description = description, cssHtml = cssHtml)
+    writeFile(outfile, content)
+    inc i
+
+proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  doAssert execCmdEx("nim c " & (when defined(release): "-d:release" else: "") & " --app:lib " & themeFile).exitCode == 0
+  let cmd = "nim c " & (when defined(release): "-d:release" else: "") & " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
+  let r = execCmdEx(cmd)
+  if r.exitCode != 0:
+    info "Theme", status = "Compile Error", msg = r.output, file = themeFile.relativePath(cwd)
+    removeFile(themePath)
+    quit(1)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
 
 proc build(cwd = getCurrentDir()): int =
@@ -230,19 +273,33 @@ proc build(cwd = getCurrentDir()): int =
         needCompileTheme = true
   else:
     needCompileTheme = true
+  echo themePath
+  if not fileExists(themePath):
+    needCompileTheme = true
   info "Theme", status = "version", need_compile = needCompileTheme
   if needCompileTheme:
     if dirver.len == 0:
       dirver = computeDirVersion(themeDir & "/*.nim")
     writeFile(metaPath, $ %* CrownMeta(theme: ThemeMeta(name: theme, hash: dirver)))
-    compileTheme(cwd, themeFile)
+    compileTheme(cwd, themeFile, themePath)
   let libTheme = loadLib(themePath)
   doAssert libTheme != nil
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
-  generatePosts(config, libTheme, cwd = cwd, cssHtml = cssHtml)
-  generateIndex(config, libTheme, cwd = cwd, cssHtml = cssHtml)
+  let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
+  let sources = cwd / sourceDir / "*.md"
+  var posts = newSeq[PostData]()
+  for f in walkFiles(sources):
+    posts.add getPostData(f, cwd / sourceDir)
+
+  proc cmpPostDate(x, y: PostData): int =
+    cmp(x.datetime(config).toTime.toUnix, y.datetime(config).toTime.toUnix)
+  sort(posts, cmpPostDate, SortOrder.Descending)
+
+  generatePosts(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generateIndex(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generateArchive(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   unloadLib(libTheme)
   result = 0
 
