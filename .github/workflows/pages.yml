@@ -42,8 +42,6 @@ jobs:
 
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
-        with:
-          nim-version: ${{ env.NIM_VERSION }}
       - name: Install dependencies
         run: nimble install -d -Y
       - name: Build
