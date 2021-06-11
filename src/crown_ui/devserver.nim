@@ -1,7 +1,7 @@
 import scorper
 import std / [os, exitprocs]
 when isMainModule:
-  let r = newRouter[streamserver.AsyncCallback]()
+  let r = newRouter[ScorperCallback]()
   # Relys on `StaticDir` environment variable
   putEnv("StaticDir", "example"/"build")
   r.addRoute(serveStatic, "get", "/*$")

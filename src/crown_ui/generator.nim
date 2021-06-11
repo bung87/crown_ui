@@ -185,15 +185,16 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   while i < pages:
     let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
     # let postLink = getPermalinkOf(data, config)
-    let name = $(i + 1)
+    let name = if i == 0: "" else: $(i + 1)
+    let privOutDir = if i == 0: privDest else: outDir
     var posts = newSeq[VNode]()
     for data in pagePosts:
       let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
       posts.add renderPostPartial(config, data, verbatim(textContent))
     let index = renderIndex(config, posts)
-    if not dirExists(outDir / name):
-      createDir(outDir / name)
-    let outfile = outDir / name / "index.html"
+    if not dirExists(privOutDir / name):
+      createDir(privOutDir / name)
+    let outfile = privOutDir / name / "index.html"
     info "Generate page", page = i + 1, to = outfile.relativePath(cwd)
     let description = xmltree.escape(config.description)
     let content = renderHtml($index, pageTitle = config.title, title = config.title, url = $(prefix / name),
