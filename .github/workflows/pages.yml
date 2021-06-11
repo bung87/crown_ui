@@ -42,7 +42,9 @@ jobs:
         with:
            nim-version: ${{ matrix.nim_version }}
       - name: Install dependencies
-        run: nimble install -d -Y
+        run: |
+          choosenim versions --installed
+          nimble install -d -Y
       - name: Build
         run: nimble build
       - name: Build site
