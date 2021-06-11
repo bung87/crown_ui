@@ -98,4 +98,4 @@ deploy:
   # branch: [branch]
 theme_config:
   source_link:
-    Github: ""
+    Github: "https://github.com/bung87/crown_ui"

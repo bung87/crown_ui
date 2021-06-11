@@ -35,7 +35,7 @@ proc renderIndex*(config: Config; posts: seq[VNode]): Vnode {.cdecl, exportc, dy
             h3(class = "intro-feature-title"):
               text "Blazing Fast"
             p(class = "intro-feature-desc"):
-              text "Incredible generating speed powered by Node.js. Hundreds of files take only seconds to build."
+              text "Incredible generating speed powered by Nim. Hundreds of files take only seconds to build."
         li(class = "intro-feature-wrap pure-u-1-2"):
           tdiv(class = "intro-feature"):
             tdiv(class = "intro-feature-icon"):

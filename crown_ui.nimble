@@ -22,6 +22,18 @@ requires "chronicles"
 requires "fusion"
 requires "scorper >= 1.0.15"
 
+task ghpage,"gh page":
+  cd "example/build" 
+  exec "git init"
+  exec "echo 'crown_ui.bungos.me' > CNAME "
+  exec "git add ."
+  exec "git config user.name \"bung87\""
+  exec "git config user.email \"crc32@qq.com\""
+  exec "git commit -m \"docs(docs): update gh-pages\""
+  let url = "\"https://bung87@github.com/bung87/crown_ui.git\""
+  exec "git push --force --quiet " & url & " master:ghpages"
+
+
 import strformat,sequtils
 task watch,"watch":
   let file = commandLineParams.filterIt( it in ["post","page","index","page","tag","category","archive"])[0]
