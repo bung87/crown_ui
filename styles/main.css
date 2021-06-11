@@ -1,0 +1,4046 @@
+@charset "UTF-8";
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*!
+normalize.css v^3.0 | MIT License | git.io/normalize
+Copyright (c) Nicolas Gallagher and Jonathan Neal
+*/
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 19, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+/* line 32, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 46, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure article,
+.pure aside,
+.pure details,
+.pure figcaption,
+.pure figure,
+.pure footer,
+.pure header,
+.pure hgroup,
+.pure main,
+.pure menu,
+.pure nav,
+.pure section,
+.pure summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 67, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure audio,
+.pure canvas,
+.pure progress,
+.pure video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 82, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+/* line 92, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure [hidden],
+.pure template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 104, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure a {
+  background-color: transparent; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 112, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure a:active,
+.pure a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 124, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 132, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure b,
+.pure strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 141, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 150, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 159, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 168, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 176, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure sub,
+.pure sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 184, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure sup {
+  top: -0.5em; }
+
+/* line 188, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+/* line 199, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 207, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 218, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 226, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 236, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure pre {
+  overflow: auto; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+/* line 244, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure code,
+.pure kbd,
+.pure pre,
+.pure samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+/* line 267, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button,
+.pure input,
+.pure optgroup,
+.pure select,
+.pure textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 284, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 295, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button,
+.pure select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 308, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button,
+.pure input[type="button"],
+.pure input[type="reset"],
+.pure input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 322, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button[disabled],
+.pure input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 331, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure button::-moz-focus-inner,
+.pure input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 342, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure input {
+  line-height: normal; }
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+/* line 354, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure input[type="checkbox"],
+.pure input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 368, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure input[type="number"]::-webkit-inner-spin-button,
+.pure input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 379, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 394, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure input[type="search"]::-webkit-search-cancel-button,
+.pure input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 403, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 414, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 425, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 434, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 445, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 450, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure td,
+.pure th {
+  padding: 0; }
+
+/*csslint important:false*/
+/* ==========================================================================
+   Pure Base Extras
+   ========================================================================== */
+/**
+ * Extra rules that Pure adds on top of Normalize.css
+ */
+/**
+ * Always hide an element when it has the `hidden` HTML attribute.
+ */
+/* line 469, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure .hidden,
+.pure [hidden] {
+  display: none !important; }
+
+/**
+ * Add this class to an image to make it fit within it's fluid parent wrapper while maintaining
+ * aspect ratio.
+ */
+/* line 479, example/themes/default/assets/styles/pure/base/_base-context.scss */
+.pure .pure-img {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*!
+normalize.css v^3.0 | MIT License | git.io/normalize
+Copyright (c) Nicolas Gallagher and Jonathan Neal
+*/
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 19, example/themes/default/assets/styles/pure/base/_base.scss */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+/* line 29, example/themes/default/assets/styles/pure/base/_base.scss */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 43, example/themes/default/assets/styles/pure/base/_base.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 64, example/themes/default/assets/styles/pure/base/_base.scss */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 77, example/themes/default/assets/styles/pure/base/_base.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+/* line 87, example/themes/default/assets/styles/pure/base/_base.scss */
+[hidden],
+template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 99, example/themes/default/assets/styles/pure/base/_base.scss */
+a {
+  background-color: transparent; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 107, example/themes/default/assets/styles/pure/base/_base.scss */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 119, example/themes/default/assets/styles/pure/base/_base.scss */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 127, example/themes/default/assets/styles/pure/base/_base.scss */
+b,
+strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 136, example/themes/default/assets/styles/pure/base/_base.scss */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 145, example/themes/default/assets/styles/pure/base/_base.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 154, example/themes/default/assets/styles/pure/base/_base.scss */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 163, example/themes/default/assets/styles/pure/base/_base.scss */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 171, example/themes/default/assets/styles/pure/base/_base.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 179, example/themes/default/assets/styles/pure/base/_base.scss */
+sup {
+  top: -0.5em; }
+
+/* line 183, example/themes/default/assets/styles/pure/base/_base.scss */
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+/* line 194, example/themes/default/assets/styles/pure/base/_base.scss */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 202, example/themes/default/assets/styles/pure/base/_base.scss */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 213, example/themes/default/assets/styles/pure/base/_base.scss */
+figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 221, example/themes/default/assets/styles/pure/base/_base.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 231, example/themes/default/assets/styles/pure/base/_base.scss */
+pre {
+  overflow: auto; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+/* line 239, example/themes/default/assets/styles/pure/base/_base.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+/* line 262, example/themes/default/assets/styles/pure/base/_base.scss */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 276, example/themes/default/assets/styles/pure/base/_base.scss */
+button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 287, example/themes/default/assets/styles/pure/base/_base.scss */
+button,
+select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 300, example/themes/default/assets/styles/pure/base/_base.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 312, example/themes/default/assets/styles/pure/base/_base.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 321, example/themes/default/assets/styles/pure/base/_base.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 332, example/themes/default/assets/styles/pure/base/_base.scss */
+input {
+  line-height: normal; }
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+/* line 344, example/themes/default/assets/styles/pure/base/_base.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 356, example/themes/default/assets/styles/pure/base/_base.scss */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 367, example/themes/default/assets/styles/pure/base/_base.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 380, example/themes/default/assets/styles/pure/base/_base.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 389, example/themes/default/assets/styles/pure/base/_base.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 400, example/themes/default/assets/styles/pure/base/_base.scss */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 409, example/themes/default/assets/styles/pure/base/_base.scss */
+textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 418, example/themes/default/assets/styles/pure/base/_base.scss */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 429, example/themes/default/assets/styles/pure/base/_base.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 434, example/themes/default/assets/styles/pure/base/_base.scss */
+td,
+th {
+  padding: 0; }
+
+/*csslint important:false*/
+/* ==========================================================================
+   Pure Base Extras
+   ========================================================================== */
+/**
+ * Extra rules that Pure adds on top of Normalize.css
+ */
+/**
+ * Always hide an element when it has the `hidden` HTML attribute.
+ */
+/* line 453, example/themes/default/assets/styles/pure/base/_base.scss */
+.hidden,
+[hidden] {
+  display: none !important; }
+
+/**
+ * Add this class to an image to make it fit within it's fluid parent wrapper while maintaining
+ * aspect ratio.
+ */
+/* line 462, example/themes/default/assets/styles/pure/base/_base.scss */
+.pure-img {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* line 7, example/themes/default/assets/styles/pure/buttons/_buttons-core.scss */
+.pure-button {
+  /* Structure */
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* Firefox: Get rid of the inner focus border */
+/* line 27, example/themes/default/assets/styles/pure/buttons/_buttons-core.scss */
+.pure-button::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* line 7, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button {
+  /* Structure */
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* Firefox: Get rid of the inner focus border */
+/* line 27, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+/*csslint outline-none:false*/
+/* line 34, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  color: #444;
+  /* rgba not supported (IE 8) */
+  color: rgba(0, 0, 0, 0.8);
+  /* rgba supported */
+  border: 1px solid #999;
+  /*IE 6/7/8*/
+  border: none rgba(0, 0, 0, 0);
+  /*IE9 + everything else*/
+  background-color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 2px; }
+
+/* line 47, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button-hover,
+.pure-button:hover,
+.pure-button:focus {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.1)));
+  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1));
+  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1)); }
+
+/* line 57, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button:focus {
+  outline: 0; }
+
+/* line 60, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button-active,
+.pure-button:active {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.2) inset;
+  border-color: #000\9; }
+
+/* line 66, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button[disabled],
+.pure-button-disabled,
+.pure-button-disabled:hover,
+.pure-button-disabled:focus,
+.pure-button-disabled:active {
+  border: none;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  filter: alpha(opacity=40);
+  -khtml-opacity: 0.40;
+  -moz-opacity: 0.40;
+  opacity: 0.40;
+  cursor: not-allowed;
+  box-shadow: none; }
+
+/* line 82, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button-hidden {
+  display: none; }
+
+/* Firefox: Get rid of the inner focus border */
+/* line 87, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+/* line 92, example/themes/default/assets/styles/pure/buttons/_buttons.scss */
+.pure-button-primary,
+.pure-button-selected,
+a.pure-button-primary,
+a.pure-button-selected {
+  background-color: #0078e7;
+  color: #fff; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*csslint regex-selectors:false, known-properties:false, duplicate-properties:false*/
+/* line 9, example/themes/default/assets/styles/pure/grids/_grids-core.scss */
+.pure-g {
+  letter-spacing: -0.31em;
+  /* Webkit: collapse white-space between units */
+  *letter-spacing: normal;
+  /* reset IE < 8 */
+  *word-spacing: -0.43em;
+  /* IE < 8: collapse white-space between units */
+  text-rendering: optimizespeed;
+  /* Webkit: fixes text-rendering: optimizeLegibility */
+  /*
+    Sets the font stack to fonts known to work properly with the above letter
+    and word spacings. See: https://github.com/yahoo/pure/issues/41/
+
+    The following font stack makes Pure Grids work on all known environments.
+
+    * FreeSans: Ships with many Linux distros, including Ubuntu
+
+    * Arimo: Ships with Chrome OS. Arimo has to be defined before Helvetica and
+      Arial to get picked up by the browser, even though neither is available
+      in Chrome OS.
+
+    * Droid Sans: Ships with all versions of Android.
+
+    * Helvetica, Arial, sans-serif: Common font stack on OS X and Windows.
+    */
+  font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+  /*
+    Use flexbox when possible to avoid `letter-spacing` side-effects.
+
+    NOTE: Firefox (as of 25) does not currently support flex-wrap, so the
+    `-moz-` prefix version is omitted.
+    */
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  /* IE10 uses display: flexbox */
+  display: -ms-flexbox;
+  -ms-flex-flow: row wrap;
+  /* Prevents distributing space between rows */
+  -ms-align-content: flex-start;
+  -webkit-align-content: flex-start;
+  align-content: flex-start; }
+
+/* Opera as of 12 on Windows needs word-spacing.
+   The ".opera-only" selector is used to prevent actual prefocus styling
+   and is not required in markup.
+*/
+/* line 57, example/themes/default/assets/styles/pure/grids/_grids-core.scss */
+.opera-only :-o-prefocus,
+.pure-g {
+  word-spacing: -0.43em; }
+
+/* line 62, example/themes/default/assets/styles/pure/grids/_grids-core.scss */
+.pure-u {
+  display: inline-block;
+  *display: inline;
+  /* IE < 8: fake inline-block */
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto; }
+
+/*
+Resets the font family back to the OS/browser's default sans-serif font,
+this the same font stack that Normalize.css sets for the `body`.
+*/
+/* line 76, example/themes/default/assets/styles/pure/grids/_grids-core.scss */
+.pure-g [class*="pure-u"] {
+  font-family: sans-serif; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* line 7, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1,
+.pure-u-1-1,
+.pure-u-1-2,
+.pure-u-1-3,
+.pure-u-2-3,
+.pure-u-1-4,
+.pure-u-3-4,
+.pure-u-1-5,
+.pure-u-2-5,
+.pure-u-3-5,
+.pure-u-4-5,
+.pure-u-5-5,
+.pure-u-1-6,
+.pure-u-5-6,
+.pure-u-1-8,
+.pure-u-3-8,
+.pure-u-5-8,
+.pure-u-7-8,
+.pure-u-1-12,
+.pure-u-5-12,
+.pure-u-7-12,
+.pure-u-11-12,
+.pure-u-1-24,
+.pure-u-2-24,
+.pure-u-3-24,
+.pure-u-4-24,
+.pure-u-5-24,
+.pure-u-6-24,
+.pure-u-7-24,
+.pure-u-8-24,
+.pure-u-9-24,
+.pure-u-10-24,
+.pure-u-11-24,
+.pure-u-12-24,
+.pure-u-13-24,
+.pure-u-14-24,
+.pure-u-15-24,
+.pure-u-16-24,
+.pure-u-17-24,
+.pure-u-18-24,
+.pure-u-19-24,
+.pure-u-20-24,
+.pure-u-21-24,
+.pure-u-22-24,
+.pure-u-23-24,
+.pure-u-24-24 {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto; }
+
+/* line 62, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-24 {
+  width: 4.1667%;
+  *width: 4.1357%; }
+
+/* line 67, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-12,
+.pure-u-2-24 {
+  width: 8.3333%;
+  *width: 8.3023%; }
+
+/* line 73, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-8,
+.pure-u-3-24 {
+  width: 12.5000%;
+  *width: 12.4690%; }
+
+/* line 79, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-6,
+.pure-u-4-24 {
+  width: 16.6667%;
+  *width: 16.6357%; }
+
+/* line 85, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-5 {
+  width: 20%;
+  *width: 19.9690%; }
+
+/* line 90, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-5-24 {
+  width: 20.8333%;
+  *width: 20.8023%; }
+
+/* line 95, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-4,
+.pure-u-6-24 {
+  width: 25%;
+  *width: 24.9690%; }
+
+/* line 101, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-7-24 {
+  width: 29.1667%;
+  *width: 29.1357%; }
+
+/* line 106, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-3,
+.pure-u-8-24 {
+  width: 33.3333%;
+  *width: 33.3023%; }
+
+/* line 112, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-3-8,
+.pure-u-9-24 {
+  width: 37.5000%;
+  *width: 37.4690%; }
+
+/* line 118, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-2-5 {
+  width: 40%;
+  *width: 39.9690%; }
+
+/* line 123, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-5-12,
+.pure-u-10-24 {
+  width: 41.6667%;
+  *width: 41.6357%; }
+
+/* line 129, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-11-24 {
+  width: 45.8333%;
+  *width: 45.8023%; }
+
+/* line 134, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1-2,
+.pure-u-12-24 {
+  width: 50%;
+  *width: 49.9690%; }
+
+/* line 140, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-13-24 {
+  width: 54.1667%;
+  *width: 54.1357%; }
+
+/* line 145, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-7-12,
+.pure-u-14-24 {
+  width: 58.3333%;
+  *width: 58.3023%; }
+
+/* line 151, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-3-5 {
+  width: 60%;
+  *width: 59.9690%; }
+
+/* line 156, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-5-8,
+.pure-u-15-24 {
+  width: 62.5000%;
+  *width: 62.4690%; }
+
+/* line 162, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-2-3,
+.pure-u-16-24 {
+  width: 66.6667%;
+  *width: 66.6357%; }
+
+/* line 168, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-17-24 {
+  width: 70.8333%;
+  *width: 70.8023%; }
+
+/* line 173, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-3-4,
+.pure-u-18-24 {
+  width: 75%;
+  *width: 74.9690%; }
+
+/* line 179, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-19-24 {
+  width: 79.1667%;
+  *width: 79.1357%; }
+
+/* line 184, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-4-5 {
+  width: 80%;
+  *width: 79.9690%; }
+
+/* line 189, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-5-6,
+.pure-u-20-24 {
+  width: 83.3333%;
+  *width: 83.3023%; }
+
+/* line 195, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-7-8,
+.pure-u-21-24 {
+  width: 87.5000%;
+  *width: 87.4690%; }
+
+/* line 201, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-11-12,
+.pure-u-22-24 {
+  width: 91.6667%;
+  *width: 91.6357%; }
+
+/* line 207, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-23-24 {
+  width: 95.8333%;
+  *width: 95.8023%; }
+
+/* line 212, example/themes/default/assets/styles/pure/grids/_grids-units.scss */
+.pure-u-1,
+.pure-u-1-1,
+.pure-u-5-5,
+.pure-u-24-24 {
+  width: 100%; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*csslint regex-selectors:false, known-properties:false, duplicate-properties:false*/
+/* line 9, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-g {
+  letter-spacing: -0.31em;
+  /* Webkit: collapse white-space between units */
+  *letter-spacing: normal;
+  /* reset IE < 8 */
+  *word-spacing: -0.43em;
+  /* IE < 8: collapse white-space between units */
+  text-rendering: optimizespeed;
+  /* Webkit: fixes text-rendering: optimizeLegibility */
+  /*
+    Sets the font stack to fonts known to work properly with the above letter
+    and word spacings. See: https://github.com/yahoo/pure/issues/41/
+
+    The following font stack makes Pure Grids work on all known environments.
+
+    * FreeSans: Ships with many Linux distros, including Ubuntu
+
+    * Arimo: Ships with Chrome OS. Arimo has to be defined before Helvetica and
+      Arial to get picked up by the browser, even though neither is available
+      in Chrome OS.
+
+    * Droid Sans: Ships with all versions of Android.
+
+    * Helvetica, Arial, sans-serif: Common font stack on OS X and Windows.
+    */
+  font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+  /*
+    Use flexbox when possible to avoid `letter-spacing` side-effects.
+
+    NOTE: Firefox (as of 25) does not currently support flex-wrap, so the
+    `-moz-` prefix version is omitted.
+    */
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  /* IE10 uses display: flexbox */
+  display: -ms-flexbox;
+  -ms-flex-flow: row wrap;
+  /* Prevents distributing space between rows */
+  -ms-align-content: flex-start;
+  -webkit-align-content: flex-start;
+  align-content: flex-start; }
+
+/* Opera as of 12 on Windows needs word-spacing.
+   The ".opera-only" selector is used to prevent actual prefocus styling
+   and is not required in markup.
+*/
+/* line 57, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.opera-only :-o-prefocus,
+.pure-g {
+  word-spacing: -0.43em; }
+
+/* line 62, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u {
+  display: inline-block;
+  *display: inline;
+  /* IE < 8: fake inline-block */
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto; }
+
+/*
+Resets the font family back to the OS/browser's default sans-serif font,
+this the same font stack that Normalize.css sets for the `body`.
+*/
+/* line 76, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-g [class*="pure-u"] {
+  font-family: sans-serif; }
+
+/* line 80, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1,
+.pure-u-1-1,
+.pure-u-1-2,
+.pure-u-1-3,
+.pure-u-2-3,
+.pure-u-1-4,
+.pure-u-3-4,
+.pure-u-1-5,
+.pure-u-2-5,
+.pure-u-3-5,
+.pure-u-4-5,
+.pure-u-5-5,
+.pure-u-1-6,
+.pure-u-5-6,
+.pure-u-1-8,
+.pure-u-3-8,
+.pure-u-5-8,
+.pure-u-7-8,
+.pure-u-1-12,
+.pure-u-5-12,
+.pure-u-7-12,
+.pure-u-11-12,
+.pure-u-1-24,
+.pure-u-2-24,
+.pure-u-3-24,
+.pure-u-4-24,
+.pure-u-5-24,
+.pure-u-6-24,
+.pure-u-7-24,
+.pure-u-8-24,
+.pure-u-9-24,
+.pure-u-10-24,
+.pure-u-11-24,
+.pure-u-12-24,
+.pure-u-13-24,
+.pure-u-14-24,
+.pure-u-15-24,
+.pure-u-16-24,
+.pure-u-17-24,
+.pure-u-18-24,
+.pure-u-19-24,
+.pure-u-20-24,
+.pure-u-21-24,
+.pure-u-22-24,
+.pure-u-23-24,
+.pure-u-24-24 {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto; }
+
+/* line 135, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-24 {
+  width: 4.1667%;
+  *width: 4.1357%; }
+
+/* line 140, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-12,
+.pure-u-2-24 {
+  width: 8.3333%;
+  *width: 8.3023%; }
+
+/* line 146, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-8,
+.pure-u-3-24 {
+  width: 12.5000%;
+  *width: 12.4690%; }
+
+/* line 152, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-6,
+.pure-u-4-24 {
+  width: 16.6667%;
+  *width: 16.6357%; }
+
+/* line 158, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-5 {
+  width: 20%;
+  *width: 19.9690%; }
+
+/* line 163, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-5-24 {
+  width: 20.8333%;
+  *width: 20.8023%; }
+
+/* line 168, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-4,
+.pure-u-6-24 {
+  width: 25%;
+  *width: 24.9690%; }
+
+/* line 174, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-7-24 {
+  width: 29.1667%;
+  *width: 29.1357%; }
+
+/* line 179, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-3,
+.pure-u-8-24 {
+  width: 33.3333%;
+  *width: 33.3023%; }
+
+/* line 185, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-3-8,
+.pure-u-9-24 {
+  width: 37.5000%;
+  *width: 37.4690%; }
+
+/* line 191, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-2-5 {
+  width: 40%;
+  *width: 39.9690%; }
+
+/* line 196, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-5-12,
+.pure-u-10-24 {
+  width: 41.6667%;
+  *width: 41.6357%; }
+
+/* line 202, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-11-24 {
+  width: 45.8333%;
+  *width: 45.8023%; }
+
+/* line 207, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1-2,
+.pure-u-12-24 {
+  width: 50%;
+  *width: 49.9690%; }
+
+/* line 213, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-13-24 {
+  width: 54.1667%;
+  *width: 54.1357%; }
+
+/* line 218, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-7-12,
+.pure-u-14-24 {
+  width: 58.3333%;
+  *width: 58.3023%; }
+
+/* line 224, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-3-5 {
+  width: 60%;
+  *width: 59.9690%; }
+
+/* line 229, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-5-8,
+.pure-u-15-24 {
+  width: 62.5000%;
+  *width: 62.4690%; }
+
+/* line 235, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-2-3,
+.pure-u-16-24 {
+  width: 66.6667%;
+  *width: 66.6357%; }
+
+/* line 241, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-17-24 {
+  width: 70.8333%;
+  *width: 70.8023%; }
+
+/* line 246, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-3-4,
+.pure-u-18-24 {
+  width: 75%;
+  *width: 74.9690%; }
+
+/* line 252, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-19-24 {
+  width: 79.1667%;
+  *width: 79.1357%; }
+
+/* line 257, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-4-5 {
+  width: 80%;
+  *width: 79.9690%; }
+
+/* line 262, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-5-6,
+.pure-u-20-24 {
+  width: 83.3333%;
+  *width: 83.3023%; }
+
+/* line 268, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-7-8,
+.pure-u-21-24 {
+  width: 87.5000%;
+  *width: 87.4690%; }
+
+/* line 274, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-11-12,
+.pure-u-22-24 {
+  width: 91.6667%;
+  *width: 91.6357%; }
+
+/* line 280, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-23-24 {
+  width: 95.8333%;
+  *width: 95.8023%; }
+
+/* line 285, example/themes/default/assets/styles/pure/grids/_grids.scss */
+.pure-u-1,
+.pure-u-1-1,
+.pure-u-5-5,
+.pure-u-24-24 {
+  width: 100%; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+@media screen and (min-width: 35.5em) {
+  /* line 8, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1,
+  .pure-u-sm-1-1,
+  .pure-u-sm-1-2,
+  .pure-u-sm-1-3,
+  .pure-u-sm-2-3,
+  .pure-u-sm-1-4,
+  .pure-u-sm-3-4,
+  .pure-u-sm-1-5,
+  .pure-u-sm-2-5,
+  .pure-u-sm-3-5,
+  .pure-u-sm-4-5,
+  .pure-u-sm-5-5,
+  .pure-u-sm-1-6,
+  .pure-u-sm-5-6,
+  .pure-u-sm-1-8,
+  .pure-u-sm-3-8,
+  .pure-u-sm-5-8,
+  .pure-u-sm-7-8,
+  .pure-u-sm-1-12,
+  .pure-u-sm-5-12,
+  .pure-u-sm-7-12,
+  .pure-u-sm-11-12,
+  .pure-u-sm-1-24,
+  .pure-u-sm-2-24,
+  .pure-u-sm-3-24,
+  .pure-u-sm-4-24,
+  .pure-u-sm-5-24,
+  .pure-u-sm-6-24,
+  .pure-u-sm-7-24,
+  .pure-u-sm-8-24,
+  .pure-u-sm-9-24,
+  .pure-u-sm-10-24,
+  .pure-u-sm-11-24,
+  .pure-u-sm-12-24,
+  .pure-u-sm-13-24,
+  .pure-u-sm-14-24,
+  .pure-u-sm-15-24,
+  .pure-u-sm-16-24,
+  .pure-u-sm-17-24,
+  .pure-u-sm-18-24,
+  .pure-u-sm-19-24,
+  .pure-u-sm-20-24,
+  .pure-u-sm-21-24,
+  .pure-u-sm-22-24,
+  .pure-u-sm-23-24,
+  .pure-u-sm-24-24 {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto; }
+  /* line 63, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-24 {
+    width: 4.1667%;
+    *width: 4.1357%; }
+  /* line 68, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-12,
+  .pure-u-sm-2-24 {
+    width: 8.3333%;
+    *width: 8.3023%; }
+  /* line 74, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-8,
+  .pure-u-sm-3-24 {
+    width: 12.5000%;
+    *width: 12.4690%; }
+  /* line 80, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-6,
+  .pure-u-sm-4-24 {
+    width: 16.6667%;
+    *width: 16.6357%; }
+  /* line 86, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-5 {
+    width: 20%;
+    *width: 19.9690%; }
+  /* line 91, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-5-24 {
+    width: 20.8333%;
+    *width: 20.8023%; }
+  /* line 96, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-4,
+  .pure-u-sm-6-24 {
+    width: 25%;
+    *width: 24.9690%; }
+  /* line 102, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-7-24 {
+    width: 29.1667%;
+    *width: 29.1357%; }
+  /* line 107, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-3,
+  .pure-u-sm-8-24 {
+    width: 33.3333%;
+    *width: 33.3023%; }
+  /* line 113, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-3-8,
+  .pure-u-sm-9-24 {
+    width: 37.5000%;
+    *width: 37.4690%; }
+  /* line 119, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-2-5 {
+    width: 40%;
+    *width: 39.9690%; }
+  /* line 124, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-5-12,
+  .pure-u-sm-10-24 {
+    width: 41.6667%;
+    *width: 41.6357%; }
+  /* line 130, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-11-24 {
+    width: 45.8333%;
+    *width: 45.8023%; }
+  /* line 135, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1-2,
+  .pure-u-sm-12-24 {
+    width: 50%;
+    *width: 49.9690%; }
+  /* line 141, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-13-24 {
+    width: 54.1667%;
+    *width: 54.1357%; }
+  /* line 146, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-7-12,
+  .pure-u-sm-14-24 {
+    width: 58.3333%;
+    *width: 58.3023%; }
+  /* line 152, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-3-5 {
+    width: 60%;
+    *width: 59.9690%; }
+  /* line 157, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-5-8,
+  .pure-u-sm-15-24 {
+    width: 62.5000%;
+    *width: 62.4690%; }
+  /* line 163, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-2-3,
+  .pure-u-sm-16-24 {
+    width: 66.6667%;
+    *width: 66.6357%; }
+  /* line 169, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-17-24 {
+    width: 70.8333%;
+    *width: 70.8023%; }
+  /* line 174, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-3-4,
+  .pure-u-sm-18-24 {
+    width: 75%;
+    *width: 74.9690%; }
+  /* line 180, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-19-24 {
+    width: 79.1667%;
+    *width: 79.1357%; }
+  /* line 185, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-4-5 {
+    width: 80%;
+    *width: 79.9690%; }
+  /* line 190, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-5-6,
+  .pure-u-sm-20-24 {
+    width: 83.3333%;
+    *width: 83.3023%; }
+  /* line 196, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-7-8,
+  .pure-u-sm-21-24 {
+    width: 87.5000%;
+    *width: 87.4690%; }
+  /* line 202, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-11-12,
+  .pure-u-sm-22-24 {
+    width: 91.6667%;
+    *width: 91.6357%; }
+  /* line 208, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-23-24 {
+    width: 95.8333%;
+    *width: 95.8023%; }
+  /* line 213, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-sm-1,
+  .pure-u-sm-1-1,
+  .pure-u-sm-5-5,
+  .pure-u-sm-24-24 {
+    width: 100%; } }
+
+@media screen and (min-width: 48em) {
+  /* line 222, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1,
+  .pure-u-md-1-1,
+  .pure-u-md-1-2,
+  .pure-u-md-1-3,
+  .pure-u-md-2-3,
+  .pure-u-md-1-4,
+  .pure-u-md-3-4,
+  .pure-u-md-1-5,
+  .pure-u-md-2-5,
+  .pure-u-md-3-5,
+  .pure-u-md-4-5,
+  .pure-u-md-5-5,
+  .pure-u-md-1-6,
+  .pure-u-md-5-6,
+  .pure-u-md-1-8,
+  .pure-u-md-3-8,
+  .pure-u-md-5-8,
+  .pure-u-md-7-8,
+  .pure-u-md-1-12,
+  .pure-u-md-5-12,
+  .pure-u-md-7-12,
+  .pure-u-md-11-12,
+  .pure-u-md-1-24,
+  .pure-u-md-2-24,
+  .pure-u-md-3-24,
+  .pure-u-md-4-24,
+  .pure-u-md-5-24,
+  .pure-u-md-6-24,
+  .pure-u-md-7-24,
+  .pure-u-md-8-24,
+  .pure-u-md-9-24,
+  .pure-u-md-10-24,
+  .pure-u-md-11-24,
+  .pure-u-md-12-24,
+  .pure-u-md-13-24,
+  .pure-u-md-14-24,
+  .pure-u-md-15-24,
+  .pure-u-md-16-24,
+  .pure-u-md-17-24,
+  .pure-u-md-18-24,
+  .pure-u-md-19-24,
+  .pure-u-md-20-24,
+  .pure-u-md-21-24,
+  .pure-u-md-22-24,
+  .pure-u-md-23-24,
+  .pure-u-md-24-24 {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto; }
+  /* line 277, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-24 {
+    width: 4.1667%;
+    *width: 4.1357%; }
+  /* line 282, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-12,
+  .pure-u-md-2-24 {
+    width: 8.3333%;
+    *width: 8.3023%; }
+  /* line 288, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-8,
+  .pure-u-md-3-24 {
+    width: 12.5000%;
+    *width: 12.4690%; }
+  /* line 294, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-6,
+  .pure-u-md-4-24 {
+    width: 16.6667%;
+    *width: 16.6357%; }
+  /* line 300, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-5 {
+    width: 20%;
+    *width: 19.9690%; }
+  /* line 305, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-5-24 {
+    width: 20.8333%;
+    *width: 20.8023%; }
+  /* line 310, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-4,
+  .pure-u-md-6-24 {
+    width: 25%;
+    *width: 24.9690%; }
+  /* line 316, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-7-24 {
+    width: 29.1667%;
+    *width: 29.1357%; }
+  /* line 321, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-3,
+  .pure-u-md-8-24 {
+    width: 33.3333%;
+    *width: 33.3023%; }
+  /* line 327, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-3-8,
+  .pure-u-md-9-24 {
+    width: 37.5000%;
+    *width: 37.4690%; }
+  /* line 333, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-2-5 {
+    width: 40%;
+    *width: 39.9690%; }
+  /* line 338, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-5-12,
+  .pure-u-md-10-24 {
+    width: 41.6667%;
+    *width: 41.6357%; }
+  /* line 344, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-11-24 {
+    width: 45.8333%;
+    *width: 45.8023%; }
+  /* line 349, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1-2,
+  .pure-u-md-12-24 {
+    width: 50%;
+    *width: 49.9690%; }
+  /* line 355, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-13-24 {
+    width: 54.1667%;
+    *width: 54.1357%; }
+  /* line 360, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-7-12,
+  .pure-u-md-14-24 {
+    width: 58.3333%;
+    *width: 58.3023%; }
+  /* line 366, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-3-5 {
+    width: 60%;
+    *width: 59.9690%; }
+  /* line 371, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-5-8,
+  .pure-u-md-15-24 {
+    width: 62.5000%;
+    *width: 62.4690%; }
+  /* line 377, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-2-3,
+  .pure-u-md-16-24 {
+    width: 66.6667%;
+    *width: 66.6357%; }
+  /* line 383, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-17-24 {
+    width: 70.8333%;
+    *width: 70.8023%; }
+  /* line 388, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-3-4,
+  .pure-u-md-18-24 {
+    width: 75%;
+    *width: 74.9690%; }
+  /* line 394, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-19-24 {
+    width: 79.1667%;
+    *width: 79.1357%; }
+  /* line 399, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-4-5 {
+    width: 80%;
+    *width: 79.9690%; }
+  /* line 404, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-5-6,
+  .pure-u-md-20-24 {
+    width: 83.3333%;
+    *width: 83.3023%; }
+  /* line 410, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-7-8,
+  .pure-u-md-21-24 {
+    width: 87.5000%;
+    *width: 87.4690%; }
+  /* line 416, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-11-12,
+  .pure-u-md-22-24 {
+    width: 91.6667%;
+    *width: 91.6357%; }
+  /* line 422, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-23-24 {
+    width: 95.8333%;
+    *width: 95.8023%; }
+  /* line 427, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-md-1,
+  .pure-u-md-1-1,
+  .pure-u-md-5-5,
+  .pure-u-md-24-24 {
+    width: 100%; } }
+
+@media screen and (min-width: 64em) {
+  /* line 436, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1,
+  .pure-u-lg-1-1,
+  .pure-u-lg-1-2,
+  .pure-u-lg-1-3,
+  .pure-u-lg-2-3,
+  .pure-u-lg-1-4,
+  .pure-u-lg-3-4,
+  .pure-u-lg-1-5,
+  .pure-u-lg-2-5,
+  .pure-u-lg-3-5,
+  .pure-u-lg-4-5,
+  .pure-u-lg-5-5,
+  .pure-u-lg-1-6,
+  .pure-u-lg-5-6,
+  .pure-u-lg-1-8,
+  .pure-u-lg-3-8,
+  .pure-u-lg-5-8,
+  .pure-u-lg-7-8,
+  .pure-u-lg-1-12,
+  .pure-u-lg-5-12,
+  .pure-u-lg-7-12,
+  .pure-u-lg-11-12,
+  .pure-u-lg-1-24,
+  .pure-u-lg-2-24,
+  .pure-u-lg-3-24,
+  .pure-u-lg-4-24,
+  .pure-u-lg-5-24,
+  .pure-u-lg-6-24,
+  .pure-u-lg-7-24,
+  .pure-u-lg-8-24,
+  .pure-u-lg-9-24,
+  .pure-u-lg-10-24,
+  .pure-u-lg-11-24,
+  .pure-u-lg-12-24,
+  .pure-u-lg-13-24,
+  .pure-u-lg-14-24,
+  .pure-u-lg-15-24,
+  .pure-u-lg-16-24,
+  .pure-u-lg-17-24,
+  .pure-u-lg-18-24,
+  .pure-u-lg-19-24,
+  .pure-u-lg-20-24,
+  .pure-u-lg-21-24,
+  .pure-u-lg-22-24,
+  .pure-u-lg-23-24,
+  .pure-u-lg-24-24 {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto; }
+  /* line 491, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-24 {
+    width: 4.1667%;
+    *width: 4.1357%; }
+  /* line 496, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-12,
+  .pure-u-lg-2-24 {
+    width: 8.3333%;
+    *width: 8.3023%; }
+  /* line 502, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-8,
+  .pure-u-lg-3-24 {
+    width: 12.5000%;
+    *width: 12.4690%; }
+  /* line 508, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-6,
+  .pure-u-lg-4-24 {
+    width: 16.6667%;
+    *width: 16.6357%; }
+  /* line 514, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-5 {
+    width: 20%;
+    *width: 19.9690%; }
+  /* line 519, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-5-24 {
+    width: 20.8333%;
+    *width: 20.8023%; }
+  /* line 524, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-4,
+  .pure-u-lg-6-24 {
+    width: 25%;
+    *width: 24.9690%; }
+  /* line 530, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-7-24 {
+    width: 29.1667%;
+    *width: 29.1357%; }
+  /* line 535, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-3,
+  .pure-u-lg-8-24 {
+    width: 33.3333%;
+    *width: 33.3023%; }
+  /* line 541, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-3-8,
+  .pure-u-lg-9-24 {
+    width: 37.5000%;
+    *width: 37.4690%; }
+  /* line 547, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-2-5 {
+    width: 40%;
+    *width: 39.9690%; }
+  /* line 552, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-5-12,
+  .pure-u-lg-10-24 {
+    width: 41.6667%;
+    *width: 41.6357%; }
+  /* line 558, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-11-24 {
+    width: 45.8333%;
+    *width: 45.8023%; }
+  /* line 563, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1-2,
+  .pure-u-lg-12-24 {
+    width: 50%;
+    *width: 49.9690%; }
+  /* line 569, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-13-24 {
+    width: 54.1667%;
+    *width: 54.1357%; }
+  /* line 574, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-7-12,
+  .pure-u-lg-14-24 {
+    width: 58.3333%;
+    *width: 58.3023%; }
+  /* line 580, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-3-5 {
+    width: 60%;
+    *width: 59.9690%; }
+  /* line 585, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-5-8,
+  .pure-u-lg-15-24 {
+    width: 62.5000%;
+    *width: 62.4690%; }
+  /* line 591, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-2-3,
+  .pure-u-lg-16-24 {
+    width: 66.6667%;
+    *width: 66.6357%; }
+  /* line 597, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-17-24 {
+    width: 70.8333%;
+    *width: 70.8023%; }
+  /* line 602, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-3-4,
+  .pure-u-lg-18-24 {
+    width: 75%;
+    *width: 74.9690%; }
+  /* line 608, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-19-24 {
+    width: 79.1667%;
+    *width: 79.1357%; }
+  /* line 613, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-4-5 {
+    width: 80%;
+    *width: 79.9690%; }
+  /* line 618, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-5-6,
+  .pure-u-lg-20-24 {
+    width: 83.3333%;
+    *width: 83.3023%; }
+  /* line 624, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-7-8,
+  .pure-u-lg-21-24 {
+    width: 87.5000%;
+    *width: 87.4690%; }
+  /* line 630, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-11-12,
+  .pure-u-lg-22-24 {
+    width: 91.6667%;
+    *width: 91.6357%; }
+  /* line 636, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-23-24 {
+    width: 95.8333%;
+    *width: 95.8023%; }
+  /* line 641, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-lg-1,
+  .pure-u-lg-1-1,
+  .pure-u-lg-5-5,
+  .pure-u-lg-24-24 {
+    width: 100%; } }
+
+@media screen and (min-width: 80em) {
+  /* line 650, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1,
+  .pure-u-xl-1-1,
+  .pure-u-xl-1-2,
+  .pure-u-xl-1-3,
+  .pure-u-xl-2-3,
+  .pure-u-xl-1-4,
+  .pure-u-xl-3-4,
+  .pure-u-xl-1-5,
+  .pure-u-xl-2-5,
+  .pure-u-xl-3-5,
+  .pure-u-xl-4-5,
+  .pure-u-xl-5-5,
+  .pure-u-xl-1-6,
+  .pure-u-xl-5-6,
+  .pure-u-xl-1-8,
+  .pure-u-xl-3-8,
+  .pure-u-xl-5-8,
+  .pure-u-xl-7-8,
+  .pure-u-xl-1-12,
+  .pure-u-xl-5-12,
+  .pure-u-xl-7-12,
+  .pure-u-xl-11-12,
+  .pure-u-xl-1-24,
+  .pure-u-xl-2-24,
+  .pure-u-xl-3-24,
+  .pure-u-xl-4-24,
+  .pure-u-xl-5-24,
+  .pure-u-xl-6-24,
+  .pure-u-xl-7-24,
+  .pure-u-xl-8-24,
+  .pure-u-xl-9-24,
+  .pure-u-xl-10-24,
+  .pure-u-xl-11-24,
+  .pure-u-xl-12-24,
+  .pure-u-xl-13-24,
+  .pure-u-xl-14-24,
+  .pure-u-xl-15-24,
+  .pure-u-xl-16-24,
+  .pure-u-xl-17-24,
+  .pure-u-xl-18-24,
+  .pure-u-xl-19-24,
+  .pure-u-xl-20-24,
+  .pure-u-xl-21-24,
+  .pure-u-xl-22-24,
+  .pure-u-xl-23-24,
+  .pure-u-xl-24-24 {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto; }
+  /* line 705, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-24 {
+    width: 4.1667%;
+    *width: 4.1357%; }
+  /* line 710, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-12,
+  .pure-u-xl-2-24 {
+    width: 8.3333%;
+    *width: 8.3023%; }
+  /* line 716, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-8,
+  .pure-u-xl-3-24 {
+    width: 12.5000%;
+    *width: 12.4690%; }
+  /* line 722, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-6,
+  .pure-u-xl-4-24 {
+    width: 16.6667%;
+    *width: 16.6357%; }
+  /* line 728, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-5 {
+    width: 20%;
+    *width: 19.9690%; }
+  /* line 733, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-5-24 {
+    width: 20.8333%;
+    *width: 20.8023%; }
+  /* line 738, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-4,
+  .pure-u-xl-6-24 {
+    width: 25%;
+    *width: 24.9690%; }
+  /* line 744, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-7-24 {
+    width: 29.1667%;
+    *width: 29.1357%; }
+  /* line 749, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-3,
+  .pure-u-xl-8-24 {
+    width: 33.3333%;
+    *width: 33.3023%; }
+  /* line 755, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-3-8,
+  .pure-u-xl-9-24 {
+    width: 37.5000%;
+    *width: 37.4690%; }
+  /* line 761, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-2-5 {
+    width: 40%;
+    *width: 39.9690%; }
+  /* line 766, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-5-12,
+  .pure-u-xl-10-24 {
+    width: 41.6667%;
+    *width: 41.6357%; }
+  /* line 772, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-11-24 {
+    width: 45.8333%;
+    *width: 45.8023%; }
+  /* line 777, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1-2,
+  .pure-u-xl-12-24 {
+    width: 50%;
+    *width: 49.9690%; }
+  /* line 783, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-13-24 {
+    width: 54.1667%;
+    *width: 54.1357%; }
+  /* line 788, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-7-12,
+  .pure-u-xl-14-24 {
+    width: 58.3333%;
+    *width: 58.3023%; }
+  /* line 794, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-3-5 {
+    width: 60%;
+    *width: 59.9690%; }
+  /* line 799, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-5-8,
+  .pure-u-xl-15-24 {
+    width: 62.5000%;
+    *width: 62.4690%; }
+  /* line 805, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-2-3,
+  .pure-u-xl-16-24 {
+    width: 66.6667%;
+    *width: 66.6357%; }
+  /* line 811, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-17-24 {
+    width: 70.8333%;
+    *width: 70.8023%; }
+  /* line 816, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-3-4,
+  .pure-u-xl-18-24 {
+    width: 75%;
+    *width: 74.9690%; }
+  /* line 822, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-19-24 {
+    width: 79.1667%;
+    *width: 79.1357%; }
+  /* line 827, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-4-5 {
+    width: 80%;
+    *width: 79.9690%; }
+  /* line 832, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-5-6,
+  .pure-u-xl-20-24 {
+    width: 83.3333%;
+    *width: 83.3023%; }
+  /* line 838, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-7-8,
+  .pure-u-xl-21-24 {
+    width: 87.5000%;
+    *width: 87.4690%; }
+  /* line 844, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-11-12,
+  .pure-u-xl-22-24 {
+    width: 91.6667%;
+    *width: 91.6357%; }
+  /* line 850, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-23-24 {
+    width: 95.8333%;
+    *width: 95.8023%; }
+  /* line 855, example/themes/default/assets/styles/pure/grids/_grids-responsive.scss */
+  .pure-u-xl-1,
+  .pure-u-xl-1-1,
+  .pure-u-xl-5-5,
+  .pure-u-xl-24-24 {
+    width: 100%; } }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*csslint adjoining-classes: false, box-model:false*/
+/* line 8, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 14, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu-fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3; }
+
+/* line 21, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu-list,
+.pure-menu-item {
+  position: relative; }
+
+/* line 26, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+/* line 32, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu-item {
+  padding: 0;
+  margin: 0;
+  height: 100%; }
+
+/* line 38, example/themes/default/assets/styles/pure/menus/_menus-core.scss */
+.pure-menu-link,
+.pure-menu-heading {
+  display: block;
+  text-decoration: none;
+  white-space: nowrap; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* Submenus should still be display: block; */
+/* line 8, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-item .pure-menu-item {
+  display: block; }
+
+/* line 12, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-children {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 3; }
+
+/* line 22, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-horizontal .pure-menu-children {
+  left: 0;
+  top: auto;
+  width: inherit; }
+
+/* line 28, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-allow-hover:hover > .pure-menu-children,
+.pure-menu-active > .pure-menu-children {
+  display: block;
+  position: absolute; }
+
+/* Vertical Menus - show the dropdown arrow */
+/* line 35, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-has-children > .pure-menu-link:after {
+  padding-left: 0.5em;
+  content: "\25B8";
+  font-size: small; }
+
+/* Horizontal Menus - show the dropdown arrow */
+/* line 42, example/themes/default/assets/styles/pure/menus/_menus-dropdown.scss */
+.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+  content: "\25BE"; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* HORIZONTAL MENU */
+/* line 8, example/themes/default/assets/styles/pure/menus/_menus-horizontal.scss */
+.pure-menu-horizontal {
+  width: 100%;
+  white-space: nowrap; }
+
+/* line 13, example/themes/default/assets/styles/pure/menus/_menus-horizontal.scss */
+.pure-menu-horizontal .pure-menu-list {
+  display: inline-block; }
+
+/* Initial menus should be inline-block so that they are horizontal */
+/* line 18, example/themes/default/assets/styles/pure/menus/_menus-horizontal.scss */
+.pure-menu-horizontal .pure-menu-item,
+.pure-menu-horizontal .pure-menu-heading,
+.pure-menu-horizontal .pure-menu-separator {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: middle; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* scrollable menus */
+/* line 8, example/themes/default/assets/styles/pure/menus/_menus-scrollable.scss */
+.pure-menu-scrollable {
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+/* line 13, example/themes/default/assets/styles/pure/menus/_menus-scrollable.scss */
+.pure-menu-scrollable .pure-menu-list {
+  display: block; }
+
+/* line 17, example/themes/default/assets/styles/pure/menus/_menus-scrollable.scss */
+.pure-menu-horizontal.pure-menu-scrollable .pure-menu-list {
+  display: inline-block; }
+
+/* line 21, example/themes/default/assets/styles/pure/menus/_menus-scrollable.scss */
+.pure-menu-horizontal.pure-menu-scrollable {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  /* a little extra padding for this style to allow for scrollbars */
+  padding: .5em 0; }
+
+/* line 31, example/themes/default/assets/styles/pure/menus/_menus-scrollable.scss */
+.pure-menu-horizontal.pure-menu-scrollable::-webkit-scrollbar {
+  display: none; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/*csslint adjoining-classes: false, box-model:false*/
+/* line 8, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 14, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3; }
+
+/* line 21, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-list,
+.pure-menu-item {
+  position: relative; }
+
+/* line 26, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+/* line 32, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-item {
+  padding: 0;
+  margin: 0;
+  height: 100%; }
+
+/* line 38, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-link,
+.pure-menu-heading {
+  display: block;
+  text-decoration: none;
+  white-space: nowrap; }
+
+/* HORIZONTAL MENU */
+/* line 46, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal {
+  width: 100%;
+  white-space: nowrap; }
+
+/* line 51, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal .pure-menu-list {
+  display: inline-block; }
+
+/* Initial menus should be inline-block so that they are horizontal */
+/* line 56, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal .pure-menu-item,
+.pure-menu-horizontal .pure-menu-heading,
+.pure-menu-horizontal .pure-menu-separator {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  vertical-align: middle; }
+
+/* Submenus should still be display: block; */
+/* line 66, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-item .pure-menu-item {
+  display: block; }
+
+/* line 70, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-children {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 3; }
+
+/* line 80, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal .pure-menu-children {
+  left: 0;
+  top: auto;
+  width: inherit; }
+
+/* line 86, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-allow-hover:hover > .pure-menu-children,
+.pure-menu-active > .pure-menu-children {
+  display: block;
+  position: absolute; }
+
+/* Vertical Menus - show the dropdown arrow */
+/* line 93, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-has-children > .pure-menu-link:after {
+  padding-left: 0.5em;
+  content: "\25B8";
+  font-size: small; }
+
+/* Horizontal Menus - show the dropdown arrow */
+/* line 100, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+  content: "\25BE"; }
+
+/* scrollable menus */
+/* line 105, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-scrollable {
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+/* line 110, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-scrollable .pure-menu-list {
+  display: block; }
+
+/* line 114, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal.pure-menu-scrollable .pure-menu-list {
+  display: inline-block; }
+
+/* line 118, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal.pure-menu-scrollable {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  /* a little extra padding for this style to allow for scrollbars */
+  padding: .5em 0; }
+
+/* line 128, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal.pure-menu-scrollable::-webkit-scrollbar {
+  display: none; }
+
+/* misc default styling */
+/* line 134, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-separator {
+  background-color: #ccc;
+  height: 1px;
+  margin: .3em 0; }
+
+/* line 140, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-horizontal .pure-menu-separator {
+  width: 1px;
+  height: 1.3em;
+  margin: 0 .3em; }
+
+/* line 146, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-heading {
+  text-transform: uppercase;
+  color: #565d64; }
+
+/* line 151, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-link {
+  color: #777; }
+
+/* line 155, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-children {
+  background-color: #fff; }
+
+/* line 159, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-link,
+.pure-menu-disabled,
+.pure-menu-heading {
+  padding: .5em 1em; }
+
+/* line 165, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-disabled {
+  opacity: .5; }
+
+/* line 169, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-disabled .pure-menu-link:hover {
+  background-color: transparent; }
+
+/* line 173, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-active > .pure-menu-link,
+.pure-menu-link:hover,
+.pure-menu-link:focus {
+  background-color: #eee; }
+
+/* line 179, example/themes/default/assets/styles/pure/menus/_menus.scss */
+.pure-menu-selected .pure-menu-link,
+.pure-menu-selected .pure-menu-link:visited {
+  color: #000; }
+
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+/* line 7, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table {
+  /* Remove spacing between table cells (from Normalize.css) */
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #cbcbcb; }
+
+/* line 15, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table caption {
+  color: #000;
+  font: italic 85%/1 arial, sans-serif;
+  padding: 1em 0;
+  text-align: center; }
+
+/* line 22, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table td,
+.pure-table th {
+  border-left: 1px solid #cbcbcb;
+  /*  inner column border */
+  border-width: 0 0 0 1px;
+  font-size: inherit;
+  margin: 0;
+  overflow: visible;
+  /*to make ths where the title is really long work*/
+  padding: 0.5em 1em;
+  /* cell padding */ }
+
+/* Consider removing this next declaration block, as it causes problems when
+there's a rowspan on the first cell. Case added to the tests. issue#432 */
+/* line 34, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table td:first-child,
+.pure-table th:first-child {
+  border-left-width: 0; }
+
+/* line 39, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table thead {
+  background-color: #e0e0e0;
+  color: #000;
+  text-align: left;
+  vertical-align: bottom; }
+
+/*
+striping:
+   even - #fff (white)
+   odd  - #f2f2f2 (light gray)
+*/
+/* line 51, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table td {
+  background-color: transparent; }
+
+/* line 54, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-odd td {
+  background-color: #f2f2f2; }
+
+/* nth-child selector for modern browsers */
+/* line 59, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-striped tr:nth-child(2n-1) td {
+  background-color: #f2f2f2; }
+
+/* BORDERED TABLES */
+/* line 64, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-bordered td {
+  border-bottom: 1px solid #cbcbcb; }
+
+/* line 67, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-bordered tbody > tr:last-child > td {
+  border-bottom-width: 0; }
+
+/* HORIZONTAL BORDERED TABLES */
+/* line 74, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-horizontal td,
+.pure-table-horizontal th {
+  border-width: 0 0 1px 0;
+  border-bottom: 1px solid #cbcbcb; }
+
+/* line 79, example/themes/default/assets/styles/pure/tables/_tables.scss */
+.pure-table-horizontal tbody > tr:last-child > td {
+  border-bottom-width: 0; }
+
+/* line 6, example/themes/default/assets/styles/_banner.scss */
+.banner {
+  transition: .15s background-color;
+  background-color: #484;
+  color: #fff;
+  text-align: center;
+  min-height: 35px; }
+  /* line 13, example/themes/default/assets/styles/_banner.scss */
+  .banner .content {
+    padding-top: 5px; }
+  /* line 17, example/themes/default/assets/styles/_banner.scss */
+  .banner:hover, .banner:focus {
+    background-color: #52a352; }
+  /* line 20, example/themes/default/assets/styles/_banner.scss */
+  .banner:active {
+    background-color: #366d36; }
+  /* line 24, example/themes/default/assets/styles/_banner.scss */
+  .banner .pure-button {
+    font-size: 70%;
+    padding: 4px 8px;
+    margin: 9px 10px 8px 10px; }
+    /* line 29, example/themes/default/assets/styles/_banner.scss */
+    .banner .pure-button, .banner .pure-button:hover, .banner .pure-button:focus {
+      background-color: #fee860; }
+
+/* line 36, example/themes/default/assets/styles/_banner.scss */
+.banner-link, .banner-link:hover, .banner-link:focus {
+  vertical-align: middle;
+  display: inline-block;
+  text-decoration: none;
+  color: #fff; }
+
+/* line 44, example/themes/default/assets/styles/_banner.scss */
+.banner-grey {
+  color: rgba(255, 255, 255, 0.7); }
+
+@media (max-width: 1370px) {
+  /* line 49, example/themes/default/assets/styles/_banner.scss */
+  .banner {
+    font-size: 80%; }
+    /* line 52, example/themes/default/assets/styles/_banner.scss */
+    .banner .content {
+      padding-top: 7.5px; } }
+
+/* line 6, example/themes/default/assets/styles/main.scss */
+:target:before {
+  content: "";
+  display: block;
+  height: 51px;
+  margin: -51px 0 0; }
+
+/* line 13, example/themes/default/assets/styles/main.scss */
+body {
+  background-color: #fdfdfd;
+  color: #111;
+  font-size: 18px; }
+
+/* line 21, example/themes/default/assets/styles/main.scss */
+.menu-fade {
+  display: none; }
+
+/* line 25, example/themes/default/assets/styles/main.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal; }
+
+/* line 36, example/themes/default/assets/styles/main.scss */
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class*="pure-u"] {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* line 45, example/themes/default/assets/styles/main.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Titillium Web"; }
+
+/* line 54, example/themes/default/assets/styles/main.scss */
+h1 {
+  margin-top: 50px;
+  font-size: 225%; }
+
+/* line 59, example/themes/default/assets/styles/main.scss */
+h2 {
+  margin: 48px 0 16px 0; }
+
+/* line 63, example/themes/default/assets/styles/main.scss */
+a {
+  text-decoration: none;
+  color: #9a8700; }
+  /* line 66, example/themes/default/assets/styles/main.scss */
+  a:hover, a:focus {
+    text-decoration: underline;
+    color: #cdb300; }
+  /* line 71, example/themes/default/assets/styles/main.scss */
+  a:active {
+    text-decoration: none;
+    color: #675a00; }
+
+/* line 77, example/themes/default/assets/styles/main.scss */
+figure.highlight {
+  /*background-color: #dfdfdf;*/
+  background-color: #f8f8f8;
+  border-radius: 2px;
+  margin: 0;
+  margin-bottom: 12pt;
+  font-size: 110%;
+  max-width: 100%; }
+  /* line 78, example/themes/default/assets/styles/main.scss */
+  figure.highlight pre {
+    padding: 8px; }
+
+/* line 91, example/themes/default/assets/styles/main.scss */
+pre {
+  margin: 0; }
+  /* line 93, example/themes/default/assets/styles/main.scss */
+  pre code {
+    font-family: "Inconsolata", monospace;
+    font-size: 0.9em; }
+
+/* line 99, example/themes/default/assets/styles/main.scss */
+ul {
+  padding-inline-start: 20px; }
+
+/* line 103, example/themes/default/assets/styles/main.scss */
+.page-subtitle {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 10%; }
+
+/* line 109, example/themes/default/assets/styles/main.scss */
+hr {
+  border: 1px solid #cfcfcf;
+  margin: 25px 0; }
+
+/* line 114, example/themes/default/assets/styles/main.scss */
+.text-large {
+  font-size: 135%; }
+
+/* line 118, example/themes/default/assets/styles/main.scss */
+footer {
+  padding: 5px 0 5px 0;
+  margin-top: 75px;
+  font-size: 70%;
+  color: #888;
+  border-top: 2px solid #7d87a5;
+  background-color: #232733; }
+  /* line 125, example/themes/default/assets/styles/main.scss */
+  footer a {
+    color: #ccc; }
+    /* line 127, example/themes/default/assets/styles/main.scss */
+    footer a:hover, footer a:focus {
+      color: #e6e6e6; }
+    /* line 131, example/themes/default/assets/styles/main.scss */
+    footer a:active {
+      color: #b3b3b3; }
+  /* line 136, example/themes/default/assets/styles/main.scss */
+  footer img {
+    height: 35px; }
+  /* line 140, example/themes/default/assets/styles/main.scss */
+  footer .right-center {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; }
+
+/* line 147, example/themes/default/assets/styles/main.scss */
+.background-faded {
+  background-color: #e9e9e9; }
+
+/* line 151, example/themes/default/assets/styles/main.scss */
+.copyright {
+  vertical-align: bottom;
+  color: #567; }
+
+/* line 157, example/themes/default/assets/styles/main.scss */
+.pure-menu.pure-menu-horizontal {
+  padding: 0;
+  z-index: 100;
+  line-height: 1;
+  position: fixed;
+  background-color: #171921; }
+  /* line 164, example/themes/default/assets/styles/main.scss */
+  .pure-menu.pure-menu-horizontal a {
+    color: #fff; }
+  /* line 169, example/themes/default/assets/styles/main.scss */
+  .pure-menu.pure-menu-horizontal ul {
+    font-size: 0; }
+  /* line 173, example/themes/default/assets/styles/main.scss */
+  .pure-menu.pure-menu-horizontal li {
+    font-size: 18px; }
+
+/* line 178, example/themes/default/assets/styles/main.scss */
+.site-logo-container {
+  margin: 0 0 -2px 0 !important; }
+
+/* line 182, example/themes/default/assets/styles/main.scss */
+.pure-menu-heading {
+  text-transform: none;
+  font-weight: bold; }
+
+/* line 187, example/themes/default/assets/styles/main.scss */
+.menu-separator {
+  height: 30px;
+  margin: 0 10px -12px 10px;
+  display: inline-block;
+  width: 0;
+  border-left: 1px solid #888; }
+
+/* line 195, example/themes/default/assets/styles/main.scss */
+.news-item {
+  padding: 15pt 25pt;
+  text-align: justify;
+  margin-bottom: 25pt; }
+  /* line 200, example/themes/default/assets/styles/main.scss */
+  .news-item p {
+    margin: 0; }
+
+/* line 205, example/themes/default/assets/styles/main.scss */
+.content,
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0pt 10pt; }
+
+/* line 212, example/themes/default/assets/styles/main.scss */
+.slim {
+  max-width: 1000px; }
+
+/* line 216, example/themes/default/assets/styles/main.scss */
+.site-content > .content {
+  margin-bottom: 50px; }
+
+/* line 222, example/themes/default/assets/styles/main.scss */
+body.site {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+/* line 228, example/themes/default/assets/styles/main.scss */
+html {
+  height: 100%; }
+
+/* line 232, example/themes/default/assets/styles/main.scss */
+.site-content {
+  flex: 1; }
+
+/* line 236, example/themes/default/assets/styles/main.scss */
+.text-centered {
+  text-align: center; }
+
+/* line 240, example/themes/default/assets/styles/main.scss */
+a.pure-menu-link {
+  text-decoration: none;
+  padding: 17px 15px; }
+  /* line 244, example/themes/default/assets/styles/main.scss */
+  a.pure-menu-link:hover, a.pure-menu-link:focus, a.pure-menu-link.current {
+    background-color: rgba(255, 255, 255, 0.15); }
+  /* line 249, example/themes/default/assets/styles/main.scss */
+  a.pure-menu-link:active {
+    background-color: rgba(0, 0, 0, 0.15); }
+
+/* line 254, example/themes/default/assets/styles/main.scss */
+a.pure-menu-link.pure-menu-heading {
+  padding: 10px;
+  padding-left: 0; }
+
+/* line 259, example/themes/default/assets/styles/main.scss */
+.header-main {
+  margin: 0; }
+
+/* line 264, example/themes/default/assets/styles/main.scss */
+.main.jumbotron {
+  background-color: #1e202a; }
+
+/* line 268, example/themes/default/assets/styles/main.scss */
+.jumbotron {
+  padding: 20pt 0;
+  background-color: #232733;
+  color: #fff; }
+  /* line 273, example/themes/default/assets/styles/main.scss */
+  .jumbotron h1 {
+    font-size: 225%;
+    margin: 0;
+    color: #ffe953; }
+  /* line 279, example/themes/default/assets/styles/main.scss */
+  .jumbotron h2 {
+    font-size: 150%;
+    margin-top: 0.7em; }
+  /* line 284, example/themes/default/assets/styles/main.scss */
+  .jumbotron h3 {
+    font-size: 133%;
+    margin-top: 1.5em; }
+  /* line 289, example/themes/default/assets/styles/main.scss */
+  .jumbotron li {
+    list-style-type: none;
+    line-height: 1.5;
+    margin-bottom: 0.6em; }
+    /* line 294, example/themes/default/assets/styles/main.scss */
+    .jumbotron li::before {
+      content: "» ";
+      font-weight: bold;
+      margin-right: 8px;
+      color: #ffe953; }
+  /* line 302, example/themes/default/assets/styles/main.scss */
+  .jumbotron a {
+    color: #ffe953; }
+    /* line 304, example/themes/default/assets/styles/main.scss */
+    .jumbotron a:hover, .jumbotron a:focus {
+      color: #fff086; }
+    /* line 308, example/themes/default/assets/styles/main.scss */
+    .jumbotron a:active {
+      color: #ffe220; }
+  /* line 313, example/themes/default/assets/styles/main.scss */
+  .jumbotron figure.highlight {
+    padding: 5px;
+    margin: 1em 0em;
+    font-size: 1em;
+    background-color: #2b2e3b; }
+
+/* line 321, example/themes/default/assets/styles/main.scss */
+.pure-g > div {
+  box-sizing: border-box; }
+
+/* line 326, example/themes/default/assets/styles/main.scss */
+.center-banner > .section-heading i.fa,
+.center-banner > .section-heading i.fab,
+.center-banner > .section-heading i.far,
+.center-banner > .section-heading img {
+  width: 100%; }
+
+/* line 334, example/themes/default/assets/styles/main.scss */
+.center-banner {
+  text-align: center; }
+
+/* line 338, example/themes/default/assets/styles/main.scss */
+.version-button {
+  font-size: 80%;
+  background-color: #2b2e3b;
+  padding: 5pt 10pt;
+  border-radius: 5px; }
+  /* line 344, example/themes/default/assets/styles/main.scss */
+  .version-button:hover, .version-button:focus, .version-button:active {
+    text-decoration: none;
+    color: inherit; }
+
+/* line 353, example/themes/default/assets/styles/main.scss */
+.main-block {
+  padding-right: 25pt; }
+
+/* line 357, example/themes/default/assets/styles/main.scss */
+.hljs {
+  padding-left: 20px; }
+
+/* line 362, example/themes/default/assets/styles/main.scss */
+.width-reduced {
+  max-width: 800px;
+  margin: 60pt auto; }
+
+/* line 368, example/themes/default/assets/styles/main.scss */
+.post-meta {
+  margin: 5pt 0;
+  color: #888; }
+  /* line 372, example/themes/default/assets/styles/main.scss */
+  .post-meta span {
+    display: block; }
+
+/* line 377, example/themes/default/assets/styles/main.scss */
+h1.post-title {
+  margin-bottom: 0; }
+
+/* line 381, example/themes/default/assets/styles/main.scss */
+.post-page .post-meta {
+  margin-top: 0;
+  margin-bottom: 20pt; }
+  /* line 385, example/themes/default/assets/styles/main.scss */
+  .post-page .post-meta span {
+    display: inline;
+    margin-right: 10pt; }
+
+/* line 391, example/themes/default/assets/styles/main.scss */
+.news-item h2 {
+  font-size: 140%;
+  margin: 0; }
+
+/* line 396, example/themes/default/assets/styles/main.scss */
+.main-heading, .section-heading {
+  text-align: center;
+  font-size: 225%;
+  margin-top: 0; }
+
+/* line 402, example/themes/default/assets/styles/main.scss */
+.section-heading {
+  margin-top: 50px; }
+
+/* line 407, example/themes/default/assets/styles/main.scss */
+.section-subheading {
+  text-align: center;
+  line-height: 0;
+  margin: 52px 0 48px 0; }
+  /* line 414, example/themes/default/assets/styles/main.scss */
+  .section-subheading span {
+    display: inline-block;
+    position: relative; }
+  /* line 419, example/themes/default/assets/styles/main.scss */
+  .section-subheading span:before,
+  .section-subheading span:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    top: 0;
+    width: 23em; }
+  /* line 430, example/themes/default/assets/styles/main.scss */
+  .section-subheading span:before {
+    right: 100%;
+    margin-right: 15px; }
+  /* line 435, example/themes/default/assets/styles/main.scss */
+  .section-subheading span:after {
+    left: 100%;
+    margin-left: 15px; }
+
+/* AsciiDoc styles */
+/* line 443, example/themes/default/assets/styles/main.scss */
+.content img {
+  max-width: 100%; }
+
+/* line 447, example/themes/default/assets/styles/main.scss */
+.listingblock {
+  margin-bottom: 5pt; }
+
+/* line 451, example/themes/default/assets/styles/main.scss */
+.listingblock .title {
+  padding: 2.8pt 10pt;
+  background-color: #73a3c4;
+  color: white; }
+
+/* line 457, example/themes/default/assets/styles/main.scss */
+.admonitionblock {
+  border-top: 2px solid #e9e9e9;
+  border-bottom: 2px solid #e9e9e9;
+  padding: 10pt 0; }
+
+/* line 463, example/themes/default/assets/styles/main.scss */
+.imageblock {
+  margin-top: 15pt; }
+
+/* line 467, example/themes/default/assets/styles/main.scss */
+.imageblock .title,
+.tableblock .title {
+  font-weight: bold;
+  padding-left: 10pt;
+  color: #656565; }
+
+/* line 474, example/themes/default/assets/styles/main.scss */
+.sidebarblock {
+  background-color: #f8f7ea;
+  padding: 10pt 0; }
+  /* line 478, example/themes/default/assets/styles/main.scss */
+  .sidebarblock .title {
+    font-weight: bold; }
+
+/* line 483, example/themes/default/assets/styles/main.scss */
+i.conum {
+  margin-left: 10pt;
+  margin-right: 10pt; }
+
+/* line 489, example/themes/default/assets/styles/main.scss */
+.conum[data-value] {
+  display: inline-block;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 0.75em;
+  width: 1.67em;
+  height: 1.67em;
+  line-height: 1.67em;
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold; }
+
+/* line 504, example/themes/default/assets/styles/main.scss */
+.conum[data-value] * {
+  color: #fff !important; }
+
+/* line 507, example/themes/default/assets/styles/main.scss */
+.conum[data-value] + b {
+  display: none; }
+
+/* line 510, example/themes/default/assets/styles/main.scss */
+.conum[data-value]:after {
+  content: attr(data-value); }
+
+/* line 514, example/themes/default/assets/styles/main.scss */
+span.icon > .fa {
+  cursor: default; }
+
+/* line 517, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon {
+  text-align: center;
+  width: 80px; }
+
+/* line 521, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon [class^="fa icon-"] {
+  font-size: 2.5em;
+  cursor: default; }
+
+/* line 525, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon .icon-note:before {
+  content: "\f05a";
+  color: #19407c; }
+
+/* line 529, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon .icon-tip:before {
+  content: "\f0eb";
+  color: #111; }
+
+/* line 534, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon .icon-warning:before {
+  content: "\f071";
+  color: #bf6900; }
+
+/* line 538, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon .icon-caution:before {
+  content: "\f06d";
+  color: #bf3400; }
+
+/* line 542, example/themes/default/assets/styles/main.scss */
+.admonitionblock td.icon .icon-important:before {
+  content: "\f06a";
+  color: #bf0000; }
+
+/* Community section */
+/* line 549, example/themes/default/assets/styles/main.scss */
+.fa-irc {
+  font-family: Courier, monospace, Arial;
+  color: black;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased; }
+
+/* line 558, example/themes/default/assets/styles/main.scss */
+.fa-gitter.black {
+  color: black; }
+
+/* line 563, example/themes/default/assets/styles/main.scss */
+#community .fa,
+#community .fc,
+#community .fab {
+  margin-right: 5pt;
+  font-size: 175%;
+  vertical-align: middle; }
+
+/* line 571, example/themes/default/assets/styles/main.scss */
+#community .fa-gitter {
+  font-size: 150%;
+  margin-bottom: 5pt; }
+
+/* line 576, example/themes/default/assets/styles/main.scss */
+#community .fa-irc {
+  color: inherit; }
+
+/* line 580, example/themes/default/assets/styles/main.scss */
+#community h1 {
+  text-align: center; }
+
+/* line 584, example/themes/default/assets/styles/main.scss */
+#community ul {
+  padding: 0; }
+
+/* line 588, example/themes/default/assets/styles/main.scss */
+#community .pure-u-1 {
+  padding: 0 20pt; }
+
+/* line 593, example/themes/default/assets/styles/main.scss */
+.page-title {
+  padding-top: 70pt; }
+
+/* line 597, example/themes/default/assets/styles/main.scss */
+.post-date {
+  margin-top: -40px;
+  margin-bottom: 40px; }
+
+/* line 602, example/themes/default/assets/styles/main.scss */
+.feed-rss {
+  text-align: center; }
+
+/* line 606, example/themes/default/assets/styles/main.scss */
+.pure-button {
+  padding: 12px 24px; }
+
+/* line 610, example/themes/default/assets/styles/main.scss */
+.pure-menu-heading {
+  float: left; }
+
+/* line 613, example/themes/default/assets/styles/main.scss */
+.fl {
+  float: left; }
+
+/* line 616, example/themes/default/assets/styles/main.scss */
+.fr {
+  float: right; }
+
+/* line 623, example/themes/default/assets/styles/main.scss */
+a.pure-button {
+  background-color: #ccc;
+  margin: 15px 10px;
+  color: #111;
+  text-decoration: none; }
+  /* line 629, example/themes/default/assets/styles/main.scss */
+  a.pure-button:hover, a.pure-button:focus, a.pure-button:active {
+    box-shadow: none;
+    background-image: none; }
+  /* line 635, example/themes/default/assets/styles/main.scss */
+  a.pure-button:hover, a.pure-button:focus {
+    background-color: #b3b3b3;
+    color: #111; }
+  /* line 640, example/themes/default/assets/styles/main.scss */
+  a.pure-button:active {
+    background-color: #b3b3b3;
+    color: #111; }
+
+/* line 646, example/themes/default/assets/styles/main.scss */
+a.pure-button.pure-button-primary {
+  background-color: #ffe953;
+  color: #111; }
+  /* line 649, example/themes/default/assets/styles/main.scss */
+  a.pure-button.pure-button-primary:hover, a.pure-button.pure-button-primary:focus {
+    background-color: #ffe220;
+    color: #111; }
+  /* line 654, example/themes/default/assets/styles/main.scss */
+  a.pure-button.pure-button-primary:active {
+    background-color: #ffe220;
+    color: #111; }
+
+/* line 660, example/themes/default/assets/styles/main.scss */
+section#book img {
+  border: 1px solid #272935;
+  max-width: 80%;
+  height: auto;
+  display: block; }
+
+/* line 667, example/themes/default/assets/styles/main.scss */
+span.disclaimer {
+  color: #ffe953; }
+
+/* line 671, example/themes/default/assets/styles/main.scss */
+p.disclaimer {
+  font-size: 60%;
+  color: #cfcfcf; }
+
+/* line 678, example/themes/default/assets/styles/main.scss */
+section#donations .main-block h1 {
+  margin: 0; }
+
+/* line 682, example/themes/default/assets/styles/main.scss */
+section#donations .fa-heart {
+  color: #ea4c2a;
+  font-size: 70%;
+  padding-right: 6pt; }
+
+/* line 688, example/themes/default/assets/styles/main.scss */
+section#donations .pure-u-md-2-5 {
+  background: radial-gradient(50% 56%, #cceaff, #fff); }
+
+/* line 692, example/themes/default/assets/styles/main.scss */
+section#donations #sponsors-list {
+  margin-bottom: 48px; }
+
+/* line 696, example/themes/default/assets/styles/main.scss */
+section#donations #sponsors-list a {
+  margin-right: 20pt;
+  text-align: center; }
+
+/* line 701, example/themes/default/assets/styles/main.scss */
+section#donations #sponsors-list img {
+  height: 100px;
+  display: block;
+  margin-bottom: 10pt; }
+
+/* line 708, example/themes/default/assets/styles/main.scss */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/* Style for the featured projects section */
+/* line 717, example/themes/default/assets/styles/main.scss */
+.feature-projects .pure-u-1-3,
+.feature-projects .pure-u-md-1-3 {
+  align-self: flex-start; }
+
+/* line 723, example/themes/default/assets/styles/main.scss */
+.project-container {
+  padding: 15pt 25pt; }
+  /* line 724, example/themes/default/assets/styles/main.scss */
+  .project-container h2 {
+    margin: 0; }
+  /* line 728, example/themes/default/assets/styles/main.scss */
+  .project-container .tag {
+    font-size: 52%;
+    background-color: #2b2e3b;
+    color: white;
+    border-radius: 2px;
+    padding: 2pt 5pt;
+    white-space: nowrap; }
+
+/* line 738, example/themes/default/assets/styles/main.scss */
+.project-container,
+.sponsor-container {
+  display: inline-block;
+  text-align: justify; }
+  /* line 746, example/themes/default/assets/styles/main.scss */
+  .project-container a:hover .title, .project-container a:focus .title,
+  .sponsor-container a:hover .title,
+  .sponsor-container a:focus .title {
+    text-decoration: underline;
+    color: #111; }
+  /* line 752, example/themes/default/assets/styles/main.scss */
+  .project-container a:active .title,
+  .sponsor-container a:active .title {
+    text-decoration: none;
+    color: #111; }
+
+/* line 760, example/themes/default/assets/styles/main.scss */
+.project-box {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* line 770, example/themes/default/assets/styles/main.scss */
+.project-box > h1 {
+  background-color: #3d3d3d;
+  width: 50px;
+  height: 50px;
+  color: white;
+  line-height: 1.3; }
+
+/* line 778, example/themes/default/assets/styles/main.scss */
+#karax {
+  background-image: url("https://www.gravatar.com/avatar/6275fdd9f48ec9184c5d6511d525c563?s=100&d=identicon"); }
+
+/* line 782, example/themes/default/assets/styles/main.scss */
+#nimbus {
+  background-image: url("https://www.gravatar.com/avatar/6275fdd8f48eew184c5c6511d525c563?s=100&d=identicon"); }
+
+/* line 786, example/themes/default/assets/styles/main.scss */
+#reelvalley {
+  background-image: url("{{ site.baseurl }}/assets/img/reelvalley.jpg"); }
+
+/* line 792, example/themes/default/assets/styles/main.scss */
+.sponsor-container {
+  width: 160pt;
+  font-size: 90%;
+  text-align: center; }
+  /* line 797, example/themes/default/assets/styles/main.scss */
+  .sponsor-container img {
+    width: 150px; }
+
+/* line 804, example/themes/default/assets/styles/main.scss */
+div.image {
+  margin-top: 80px; }
+  /* line 807, example/themes/default/assets/styles/main.scss */
+  div.image img {
+    height: auto;
+    max-width: 90%;
+    display: block; }
+  /* line 813, example/themes/default/assets/styles/main.scss */
+  div.image p {
+    font-size: 9pt; }
+
+/* line 818, example/themes/default/assets/styles/main.scss */
+div.image.right {
+  text-align: right; }
+  /* line 821, example/themes/default/assets/styles/main.scss */
+  div.image.right img {
+    margin-left: auto; }
+
+/* line 826, example/themes/default/assets/styles/main.scss */
+div.code-align {
+  padding-right: 15pt; }
+  /* line 828, example/themes/default/assets/styles/main.scss */
+  div.code-align h1:first-child,
+  div.code-align h2:first-child,
+  div.code-align h3:first-child {
+    margin-top: 0; }
+
+/* line 835, example/themes/default/assets/styles/main.scss */
+.pure-u-1.center > img {
+  margin-bottom: 50px; }
+
+/* line 840, example/themes/default/assets/styles/main.scss */
+.features .fa-windows,
+.features .fa-linux,
+.features .fa-apple {
+  margin-right: 20pt; }
+
+/* line 847, example/themes/default/assets/styles/main.scss */
+.call-to-action {
+  padding: 20px 0 60px 0; }
+
+/* line 852, example/themes/default/assets/styles/main.scss */
+.content.ffi figure.highlight {
+  margin: 20pt 0; }
+
+/* line 860, example/themes/default/assets/styles/main.scss */
+.os-box i {
+  float: left; }
+
+/* line 863, example/themes/default/assets/styles/main.scss */
+.os-box .links {
+  display: inline; }
+  /* line 866, example/themes/default/assets/styles/main.scss */
+  .os-box .links span {
+    display: block; }
+
+/* line 872, example/themes/default/assets/styles/main.scss */
+.os-pickers {
+  text-align: center; }
+  /* line 875, example/themes/default/assets/styles/main.scss */
+  .os-pickers h2 {
+    margin-top: 20pt; }
+  /* line 879, example/themes/default/assets/styles/main.scss */
+  .os-pickers a {
+    text-decoration: none;
+    color: #111; }
+    /* line 884, example/themes/default/assets/styles/main.scss */
+    .os-pickers a:hover h2, .os-pickers a:focus h2 {
+      text-decoration: underline;
+      color: #111; }
+    /* line 890, example/themes/default/assets/styles/main.scss */
+    .os-pickers a:active h2 {
+      text-decoration: none;
+      color: #111; }
+  @media (max-width: 850px) {
+    /* line 898, example/themes/default/assets/styles/main.scss */
+    .os-pickers div {
+      margin-right: 5pt; } }
+/* line 904, example/themes/default/assets/styles/main.scss */
+.os-picker-box {
+  background-color: #2b2e3b;
+  color: white;
+  padding: 40pt;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100pt;
+  width: 100pt; }
+  /* line 915, example/themes/default/assets/styles/main.scss */
+  .os-picker-box i {
+    font-size: 500%; }
+  /* line 919, example/themes/default/assets/styles/main.scss */
+  .os-picker-box i.fa-windows {
+    font-size: 800%; }
+  /* line 923, example/themes/default/assets/styles/main.scss */
+  .os-picker-box i.fa-apple {
+    margin-right: 15pt; }
+
+/* line 928, example/themes/default/assets/styles/main.scss */
+.download-button {
+  width: 200pt; }
+
+/* line 936, example/themes/default/assets/styles/main.scss */
+.community .fa,
+.community .fab,
+.community .fc,
+.donate .fa,
+.donate .fab,
+.donate .fc {
+  font-size: 160%;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 5pt; }
+
+/* line 946, example/themes/default/assets/styles/main.scss */
+.fa.li,
+.fab.li,
+.fc.li {
+  margin-left: 15pt; }
+
+/* line 956, example/themes/default/assets/styles/main.scss */
+.sponsors .call-to-action,
+.donate .call-to-action {
+  margin-top: 0; }
+
+/* line 960, example/themes/default/assets/styles/main.scss */
+.sponsors span.tag,
+.donate span.tag {
+  font-size: 60%;
+  width: 200px; }
+
+/* line 965, example/themes/default/assets/styles/main.scss */
+.sponsors table,
+.donate table {
+  font-size: 140%;
+  width: 100%; }
+
+/* line 971, example/themes/default/assets/styles/main.scss */
+tr > th,
+tr > td {
+  padding-right: 15pt; }
+
+/* line 976, example/themes/default/assets/styles/main.scss */
+table.tableblock,
+div.content > table {
+  font-size: 90%; }
+  /* line 979, example/themes/default/assets/styles/main.scss */
+  table.tableblock thead > tr,
+  div.content > table thead > tr {
+    background-color: #e9e9e9;
+    border-bottom: 4px solid #9c9c9c; }
+  /* line 984, example/themes/default/assets/styles/main.scss */
+  table.tableblock th,
+  div.content > table th {
+    padding: 10pt;
+    text-align: left; }
+  /* line 989, example/themes/default/assets/styles/main.scss */
+  table.tableblock td,
+  div.content > table td {
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+    padding-left: 10pt;
+    padding-right: 10pt;
+    border-bottom: 2px solid #e9e9e9;
+    height: 50px; }
+  /* line 999, example/themes/default/assets/styles/main.scss */
+  table.tableblock td.name,
+  table.tableblock th.name,
+  div.content > table td.name,
+  div.content > table th.name {
+    width: 250px; }
+  /* line 1004, example/themes/default/assets/styles/main.scss */
+  table.tableblock td img,
+  div.content > table td img {
+    height: 50px; }
+
+/* line 1012, example/themes/default/assets/styles/main.scss */
+.documentation div.pure-u-1 {
+  padding-right: 10pt; }
+
+/* line 1019, example/themes/default/assets/styles/main.scss */
+blockquote {
+  background-color: #efefef;
+  padding: 1pt 6pt;
+  border-left: 2px solid #7d7d7d; }
+
+@media (max-width: 1200px) {
+  /* line 1027, example/themes/default/assets/styles/main.scss */
+  body {
+    font-size: 16px; }
+  /* line 1033, example/themes/default/assets/styles/main.scss */
+  .pure-menu.pure-menu-horizontal li {
+    font-size: 16px; }
+  /* line 1042, example/themes/default/assets/styles/main.scss */
+  .site-logo {
+    height: 25px;
+    padding-left: 4px; }
+  /* line 1047, example/themes/default/assets/styles/main.scss */
+  .menu-separator {
+    margin: 0 5px -12px 5px; } }
+
+@media (max-width: 1000px) {
+  /* line 1054, example/themes/default/assets/styles/main.scss */
+  .post-meta {
+    margin-bottom: -5px; }
+  /* line 1058, example/themes/default/assets/styles/main.scss */
+  a.pure-menu-link {
+    padding: 17px 10px; }
+  /* line 1062, example/themes/default/assets/styles/main.scss */
+  .pure-menu.pure-menu-horizontal {
+    position: fixed; }
+    /* line 1064, example/themes/default/assets/styles/main.scss */
+    .pure-menu.pure-menu-horizontal li {
+      font-size: 14px; } }
+
+@media (max-width: 767px) {
+  /* line 1072, example/themes/default/assets/styles/main.scss */
+  .content {
+    margin: 0 2.5%; }
+  /* line 1076, example/themes/default/assets/styles/main.scss */
+  footer img {
+    height: 25px; }
+  /* line 1080, example/themes/default/assets/styles/main.scss */
+  .pure-menu-list {
+    float: none;
+    padding-right: 0px; }
+  /* line 1085, example/themes/default/assets/styles/main.scss */
+  section#book img {
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto; }
+  /* line 1091, example/themes/default/assets/styles/main.scss */
+  .menu-fade {
+    display: block;
+    height: 47.3px;
+    width: 80px;
+    position: fixed;
+    pointer-events: none;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to right, transparent, #171921); }
+  /* line 1102, example/themes/default/assets/styles/main.scss */
+  .page-title {
+    padding-top: 70px; }
+  /* line 1109, example/themes/default/assets/styles/main.scss */
+  .hackytable tr > td:first-child {
+    display: none; }
+  /* line 1113, example/themes/default/assets/styles/main.scss */
+  .ribbon {
+    display: none; } }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* line 1121, example/themes/default/assets/styles/main.scss */
+  body {
+    height: 100%;
+    display: block;
+    min-height: auto; }
+  /* line 1127, example/themes/default/assets/styles/main.scss */
+  .site-content {
+    height: 100%; } }
+
+/* line 1132, example/themes/default/assets/styles/main.scss */
+body {
+  color: snow; }
+
+/* line 1136, example/themes/default/assets/styles/main.scss */
+.site-header {
+  height: 48px; }
+
+/* line 1140, example/themes/default/assets/styles/main.scss */
+.nav-content {
+  /* overflow:auto; cause safari hide overlay element even it is fixed */
+  display: flow-root;
+  text-align: center;
+  overflow-y: visible; }
+
+/* line 1146, example/themes/default/assets/styles/main.scss */
+.pure-menu .pure-input,
+.pure-menu .pure-input-rounded {
+  vertical-align: top;
+  /* transform: translateY(50%); */
+  transition: padding 0.3s cubic-bezier(0.4, 0, 1, 1);
+  padding: 0.2em;
+  background-color: #3c4053;
+  border-color: transparent;
+  color: snow; }
+
+@media (min-width: 1200px) {
+  /* line 1166, example/themes/default/assets/styles/main.scss */
+  .pure-menu input {
+    -webkit-font-smoothing: antialiased;
+    text-align: center; }
+  /* line 1171, example/themes/default/assets/styles/main.scss */
+  .pure-menu .pure-input-rounded:focus,
+  .pure-menu .pure-input:focus {
+    border-width: 0.2px !important;
+    padding: 0.2em 5em; } }
+
+/* line 1177, example/themes/default/assets/styles/main.scss */
+.pure-menu input {
+  vertical-align: text-top; }
+
+/* line 1180, example/themes/default/assets/styles/main.scss */
+.pure-menu input:focus,
+.pure-menu textarea:focus,
+.pure-menu keygen:focus,
+.pure-menu select:focus {
+  border-color: #ffe220;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+  outline: none;
+  /* text-align: left; */ }
+
+/* line 1192, example/themes/default/assets/styles/main.scss */
+.video-card {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: all 0.25s ease-in-out; }
+
+/* line 1197, example/themes/default/assets/styles/main.scss */
+.video-card:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1); }
+
+/* line 1203, example/themes/default/assets/styles/main.scss */
+video {
+  width: 100%; }
+
+/* line 1207, example/themes/default/assets/styles/main.scss */
+.stretch {
+  display: flex;
+  align-items: stretch; }
+  /* line 1210, example/themes/default/assets/styles/main.scss */
+  .stretch [class^="pure-u-"] {
+    overflow: hidden; }
+
+/* line 1216, example/themes/default/assets/styles/main.scss */
+.half img {
+  height: 50%; }
+
+/* line 1224, example/themes/default/assets/styles/main.scss */
+.video-card {
+  overflow: hidden;
+  font-size: 0;
+  position: relative; }
+  /* line 1227, example/themes/default/assets/styles/main.scss */
+  .video-card a {
+    color: snow;
+    display: inline-block; }
+  /* line 1233, example/themes/default/assets/styles/main.scss */
+  .video-card:hover .video-card-info {
+    bottom: 0; }
+  /* line 1237, example/themes/default/assets/styles/main.scss */
+  .video-card-info {
+    pointer-events: none;
+    width: 100%;
+    font-size: initial;
+    position: absolute;
+    background-color: rgba(42, 42, 42, 0.75);
+    height: 180px;
+    bottom: -180px;
+    left: 0;
+    padding-left: 1em; }
+
+/* line 1249, example/themes/default/assets/styles/main.scss */
+.pure-menu-link {
+  color: #fff; }
+
+/* line 1253, example/themes/default/assets/styles/main.scss */
+.pure-menu-horizontal .pure-menu-children {
+  right: 0; }
+
+/* line 1257, example/themes/default/assets/styles/main.scss */
+.pure-menu-children {
+  background: #171921; }
+  /* line 1259, example/themes/default/assets/styles/main.scss */
+  .pure-menu-children .pure-menu-link {
+    margin-top: 0;
+    display: inline-block;
+    width: 100%; }
+
+/* line 1265, example/themes/default/assets/styles/main.scss */
+.pure-menu-item .pure-menu-item {
+  display: none; }
+
+/* line 1269, example/themes/default/assets/styles/main.scss */
+.pure-menu-allow-hover:hover > .pure-menu-allow-hover {
+  display: block; }
+
+/* line 1273, example/themes/default/assets/styles/main.scss */
+.pure-menu-allow-hover:hover .pure-menu-children,
+.pure-menu-active .pure-menu-children {
+  display: block;
+  position: absolute; }
+
+/* line 1278, example/themes/default/assets/styles/main.scss */
+.pure-menu-allow-hover:hover .pure-menu-item {
+  display: block; }
+
+/* line 1282, example/themes/default/assets/styles/main.scss */
+.pure-menu-children {
+  position: static !important; }
+
+/* line 1286, example/themes/default/assets/styles/main.scss */
+.pure-menu.pure-menu-horizontal a {
+  box-sizing: border-box; }
+
+/* line 1290, example/themes/default/assets/styles/main.scss */
+.pure-menu.pure-menu-horizontal li {
+  min-width: 128px; }
+
+/* line 1294, example/themes/default/assets/styles/main.scss */
+.item-level-2 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 100% !important; }
+
+/* line 1299, example/themes/default/assets/styles/main.scss */
+.pure-menu-has-children-level-1 > .pure-menu-link:after {
+  content: "" !important; }
+
+/* line 1303, example/themes/default/assets/styles/main.scss */
+#ROOT {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh; }
+
+/* line 1308, example/themes/default/assets/styles/main.scss */
+#ROOT > .content {
+  flex: 1; }
+
+/* The emerging W3C standard
+   that is currently Firefox-only */
+/* line 1314, example/themes/default/assets/styles/main.scss */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(121, 121, 121, 0.214) #0e0e0e; }
+
+/* Works on Chrome/Edge/Safari */
+/* line 1320, example/themes/default/assets/styles/main.scss */
+*::-webkit-scrollbar {
+  width: 12px; }
+
+/* line 1323, example/themes/default/assets/styles/main.scss */
+*::-webkit-scrollbar-track {
+  background: #0e0e0e; }
+
+/* line 1326, example/themes/default/assets/styles/main.scss */
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(152, 152, 152, 0.214);
+  border-radius: 6px; }
+
+/* line 1331, example/themes/default/assets/styles/main.scss */
+body {
+  scrollbar-gutter: force; }
+
+/* line 1334, example/themes/default/assets/styles/main.scss */
+.stretch {
+  max-height: 565px;
+  overflow: hidden; }
+
+/* line 1338, example/themes/default/assets/styles/main.scss */
+.layout {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  /* line 1354, example/themes/default/assets/styles/main.scss */
+  .layout > .main {
+    flex: 1; }
+
+/* line 1361, example/themes/default/assets/styles/main.scss */
+body {
+  min-height: 100%;
+  min-height: 100vh; }
+
+/* line 1366, example/themes/default/assets/styles/main.scss */
+#banner-start {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 0; }
+  /* line 1370, example/themes/default/assets/styles/main.scss */
+  #banner-start > * {
+    font-size: initial; }
+
+/* line 1374, example/themes/default/assets/styles/main.scss */
+#banner-start-command {
+  background: #283542;
+  font-family: "Source Code Pro", Monaco, Menlo, Consolas, monospace;
+  display: inline-block;
+  padding: 15px 20px; }
+
+/* line 1381, example/themes/default/assets/styles/main.scss */
+#banner-title {
+  padding-top: 20px;
+  text-align: center; }
+
+/* line 1385, example/themes/default/assets/styles/main.scss */
+#banner-title,
+.theme-intro-title {
+  line-height: 1.15;
+  font-weight: 300;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 40px; }
+
+/* line 1393, example/themes/default/assets/styles/main.scss */
+#banner-start-link {
+  width: 57px;
+  height: 57px;
+  padding: 15px;
+  margin: 0;
+  text-decoration: none;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  transition: 0.2s;
+  vertical-align: top; }

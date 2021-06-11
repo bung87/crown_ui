@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Under development | Bungos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="is under development. code highligh test below">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Under development">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="Bungos">
+  <meta property="og:description" content="is under development. code highligh test below">
+  <meta property="og:locale" content="">
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+<!-- <link rel="stylesheet" href="/styles/variables.css"> -->
+<link rel="stylesheet" href="/styles/skeletal.css">
+<link rel="stylesheet" href="/styles/doccode.css">
+<link rel="stylesheet" href="/styles/dracula.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+    <meta property="article:author" content="">
+  <meta name="generator" content="crown_ui">
+  <link rel="alternate" href="/atom.xml" title="Bungos" type="application/atom+xml">
+  <link rel="icon" href="/favicon.png">
+</head><body><div class="layout">
+  <header class="site-header"><nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+      <div class="nav-content">
+        <a class="pure-menu-heading pure-menu-link site-logo-container" href="/"><img class="site-logo" src="/images/logo.svg" height="28" alt="Nim" /></a>
+        <ul class="pure-menu-list fl">
+          <li class="pure-menu-item"><a class="pure-menu-link" href="/docs">Docs</a></li>
+          <li class="pure-menu-item"><a class="pure-menu-link" href="/api">API</a></li>
+          <li class="pure-menu-item"><a class="pure-menu-link" href="/news">News</a></li>
+          <li class="pure-menu-item"><a class="pure-menu-link" href="/themes">Themes</a></li>
+          <li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li>
+        </ul>
+      </div>
+      <div class="menu-fade"></div>
+    </nav></header>
+  <div data-theme="dark">
+    <h4><a href="2021/06/11/Under development/">Under development</a></h4>
+    <div class="post-meta"><span><span class="far fa-calendar-alt" aria-hidden="true"></span>2021-06-11 15:04:29</span></div>
+    <p><code>crown_ui</code> is under development.</p>
+<p>code highligh test below</p>
+<pre class="highlight"><code class="language-nim"><span class="Keyword">import</span> <span class="Identifier">strformat</span>
+<span class="Keyword">type</span>
+  <span class="Identifier">Person</span> <span class="Operator">=</span> <span class="Keyword">object</span>
+    <span class="Identifier">name</span><span class="Operator">*:</span> <span class="Identifier">string</span> <span class="Comment"># Field is exported using `*`.</span>
+    <span class="Identifier">age</span><span class="Punctuation">:</span> <span class="Identifier">Natural</span>  <span class="Comment"># Natural type ensures the age is positive.</span>
+
+<span class="Keyword">var</span> <span class="Identifier">people</span> <span class="Operator">=</span> <span class="Punctuation">[</span>
+  <span class="Identifier">Person</span><span class="Punctuation">(</span><span class="Identifier">name</span><span class="Punctuation">:</span> <span class="StringLit">&quot;John&quot;</span><span class="Punctuation">,</span> <span class="Identifier">age</span><span class="Punctuation">:</span> <span class="DecNumber">45</span><span class="Punctuation">)</span><span class="Punctuation">,</span>
+  <span class="Identifier">Person</span><span class="Punctuation">(</span><span class="Identifier">name</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Kate&quot;</span><span class="Punctuation">,</span> <span class="Identifier">age</span><span class="Punctuation">:</span> <span class="DecNumber">30</span><span class="Punctuation">)</span>
+<span class="Punctuation">]</span>
+
+<span class="Keyword">for</span> <span class="Identifier">person</span> <span class="Keyword">in</span> <span class="Identifier">people</span><span class="Punctuation">:</span>
+  <span class="Comment"># Type-safe string interpolation.</span>
+  <span class="Identifier">echo</span><span class="Punctuation">(</span><span class="RawData">fmt&quot;{person.name} is {person.age} years old&quot;</span><span class="Punctuation">)</span>
+
+</code></pre>
+
+  </div>
+  <footer><section class="content"><div class="pure-g"><div class="copyright pure-u-2-3"><p>This website proudly writing in <a href="https://nim-lang.org/">Nim</a> (Nim is a statically typed compiled systems programming language.)  and source code is available on <a href="">Github</a> and contributions are welcome.</p></div></div></section></footer>
+</div></body></html>
