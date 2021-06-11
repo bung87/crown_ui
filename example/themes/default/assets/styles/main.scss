@@ -1270,3 +1270,30 @@ video{
   max-height: 565px;
   overflow: hidden;
  }
+ .layout{
+    min-height: 100%;
+    min-height:100vh;
+    position:relative;
+    // display: flex;
+    // flex-direction: column;
+    // > header{
+    //   flex-shrink: 0;
+    // }
+    // > .content{
+    //   flex-grow: 1;
+    // }
+    // > footer{
+    //   flex-shrink: 0;
+    // }
+    > footer{
+      position: absolute;
+      bottom: 0;
+      left:0;
+      right:0;
+    }
+ }
+ body{
+    min-height:100%;
+    min-height:100vh;
+ }
+
