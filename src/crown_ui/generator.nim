@@ -167,7 +167,7 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   let index_generator = config.index_generator
   let rootUrl = parseUri(config.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
-
+  let outDir = privDest / index_generator.pagination_dir
   var posts = newSeq[PostData]()
   for f in walkFiles(sources):
     posts.add getPostData(f, cwd / sourceDir)
@@ -189,9 +189,9 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
       let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
       posts.add renderPostPartial(config, data, verbatim(textContent))
     let index = renderIndex(config, posts)
-    if not dirExists(privDest / index_generator.pagination_dir / name):
-      createDir(privDest / index_generator.pagination_dir / name)
-    let outfile = privDest / index_generator.pagination_dir / name / "index.html"
+    if not dirExists(outDir / name):
+      createDir(outDir / name)
+    let outfile = outDir / name / "index.html"
     info "Generate page", page = i + 1, to = outfile.relativePath(cwd)
     let description = xmltree.escape(config.description)
     let content = renderHtml($index, pageTitle = config.title, title = config.title, url = $(prefix / name),
