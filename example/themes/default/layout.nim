@@ -15,13 +15,13 @@ proc renderLayout*(conf: Config; n: VNode = nil): VNode =
   doAssert conf != nil
   let header = PureHeader(conf)
   let footer = PureFooter(conf)
-  result = buildHtml(tdiv):
+  result = buildHtml(tdiv(class = "layout")):
     header
-    tdiv(class = "content"):
-      tdiv(class = "pure-g"):
-        tdiv(class = "pure-u-18-24"):
-          if n != nil: n else: discard
-        tdiv(class = "pure-u-6-24")
+    # tdiv(class = "content"):
+      # tdiv(class = "pure-g"):
+        # tdiv(class = "pure-u-18-24"):
+    if n != nil: n else: discard
+      # tdiv(class = "pure-u-6-24")
     footer
   # Gc_unref(config)
 

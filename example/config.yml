@@ -76,12 +76,17 @@ time_format: HH:mm:ss
 ## Themes: https://hexo.io/themes/
 theme: default
 menu:
-  Archives: /archives
-  Categories: /categories
+  Docs: /docs
+  API: /api
+  News: /news
+  Themes: /themes
   About: /about
+  # Archives: /archives
+  # Categories: /categories
+  # About: /about
   # resume: /resume
-  Projects: /projects
-  Works: /works
+  # Projects: /projects
+  # Works: /works
 
 search:
     type: insight
