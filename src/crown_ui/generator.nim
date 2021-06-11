@@ -132,7 +132,8 @@ proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "s
   writeFile(privDest / title & ".md", content)
 
 
-proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
+proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build";
+    cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -151,10 +152,11 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
     let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     let description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
-        siteName = config.title, description = description)
+        siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
 
-proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build") =
+proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); dest = getCurrentDir() / "build";
+    cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -195,7 +197,7 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
     info "Generate page", page = i + 1, to = outfile.relativePath(cwd)
     let description = xmltree.escape(config.description)
     let content = renderHtml($index, pageTitle = config.title, title = config.title, url = $(prefix / name),
-        siteName = config.title, description = description)
+        siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
     inc i
 
@@ -235,8 +237,11 @@ proc build(cwd = getCurrentDir()): int =
     compileTheme(cwd, themeFile)
   let libTheme = loadLib(themePath)
   doAssert libTheme != nil
-  generatePosts(config, libTheme, cwd)
-  generateIndex(config, libTheme, cwd)
+  var cssHtml = ""
+  if fileExists(themeDir / "css.html"):
+    cssHtml = readFile(themeDir / "css.html")
+  generatePosts(config, libTheme, cwd = cwd, cssHtml = cssHtml)
+  generateIndex(config, libTheme, cwd = cwd, cssHtml = cssHtml)
   unloadLib(libTheme)
   result = 0
 

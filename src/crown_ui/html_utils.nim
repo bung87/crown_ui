@@ -5,7 +5,7 @@ import fusion / [htmlparser, htmlparser/xmltree]
 import unicode
 
 proc renderHtml*(body: string, pageTitle: string, title: string, url: string, siteName: string, description: string,
-    image: string = "", pubTime: string = "", modTime: string = "", author: string = "", locale: string = ""): string =
+    image = "", pubTime = "", modTime = "", author = "", locale = "", cssHtml = ""): string =
   let general = fmt"""
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,7 @@ proc renderHtml*(body: string, pageTitle: string, title: string, url: string, si
   <meta property="og:site_name" content="{siteName}">
   <meta property="og:description" content="{description}">
   <meta property="og:locale" content="{locale}">
+  {cssHtml}
   """
   let metaImage = (if image.len > 0: fmt"""<meta property="og:image" content="{image}">""" else: "")
   let pubTime = (if pubTime.len > 0: fmt"""<meta property="article:published_time" content="{pubTime}">""" else: "")

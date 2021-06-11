@@ -19,6 +19,7 @@ requires "dotenv >= 1.1.0"
 requires "cligen"
 requires "npeg"
 requires "chronicles"
+requires "scorper"
 
 import strformat,sequtils
 task watch,"watch":
@@ -27,3 +28,6 @@ task watch,"watch":
 task preprocess,"preprocess":
   rmFile "manifest.json"
   exec "web_preprocessor -s example/themes/default/assets -d build/assets"
+
+task buildStatic,"build static":
+  exec "web_preprocessor -s example/themes/default/assets -d example/build"
