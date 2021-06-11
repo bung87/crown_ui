@@ -58,7 +58,7 @@ proc innerText*(n: XmlNode, skip: seq[string] = @[]): string =
 proc innerText*(n: Vnode; limit: int, skip: seq[string] = @[]): string =
   ## limit: limit runes length
   ## skip: skip html tags
-  var textContent = innerText(parseHtml($n), skip)
+  var textContent = innerText(htmlparser.parseHtml($n), skip)
   var runes = textContent.toRunes()
   let runeLen = runes.len
   let b = min(limit, runeLen)

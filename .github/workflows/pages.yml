@@ -15,8 +15,31 @@ env:
 jobs:
   deploy-pages:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - nim-version: 'devel --latest'
+            cache-key: 'devel-latest'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - name: Get Date
+        id: get-date
+        run: echo "::set-output name=date::$(date "+%Y-%m-%d")"
+        shell: bash
+
+      - name: Cache choosenim
+        id: cache-choosenim
+        uses: actions/cache@v1
+        with:
+          path: ~/.choosenim
+          key: ${{ runner.os }}-choosenim-${{ matrix.cache-key }}-${{ steps.get-date.outputs.date }}
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v1
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
         with:
