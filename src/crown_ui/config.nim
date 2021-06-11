@@ -87,14 +87,16 @@ func getFields(child: NimNode): seq[NimNode] =
 macro assign*(child: ref object, parent: ref object): untyped =
   let fields = getFields(parent)
   result = newStmtList()
+  result.add quote do:
+    if `child`.isNil:
+      new `child`
   for field in fields:
     let field = field.baseName
     result.add quote do:
       `child`.`field` = `parent`.`field`
 
-
 proc parseConfig*(configPath: string): Config =
-  result = Config()
+  # result = Config()
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
   # copyMem(cast[pointer](result),cast[pointer](baseConfig),sizeof(baseConfig))
@@ -108,6 +110,7 @@ proc parseConfig*(configPath: string): Config =
 
 proc dateTimeFormat*(config: Config): string =
   result = toNimFormat(config.date_format & " " & config.time_format)
+
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
 

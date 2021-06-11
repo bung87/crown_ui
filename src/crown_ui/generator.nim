@@ -26,7 +26,7 @@ const MaxDescriptionLen = 200
 type
   RenderPost = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
   RenderPostPartial = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
-  RenderPostIndex = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
+  RenderIndex = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
 
   SplitMdResult = tuple
     meta: string
@@ -141,10 +141,8 @@ proc generatePosts(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
   let renderPost = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert renderPost != nil
   for f in walkFiles(sources):
-    echo f
     let data = getPostData(f, cwd / sourceDir)
     let name = getPermalinkOf(data, config)
-    echo name
     let post = renderPost(config, data, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)
@@ -162,12 +160,11 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
     privDest = cwd / "build"
   let sourceDir = (if config.source_dir.len > 0: config.source_dir else: "source") / "posts"
   let sources = cwd / sourceDir / "*.md"
-  let renderIndex = cast[RenderPostIndex](libTheme.symAddr("renderIndex"))
+  let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
   doAssert renderIndex != nil
   let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
   doAssert renderPostPartial != nil
   let index_generator = config.index_generator
-  echo config.index_generator
   let rootUrl = parseUri(config.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
 
@@ -177,7 +174,6 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
 
   proc cmpPostDate(x, y: PostData): int =
     cmp(x.datetime(config).toTime.toUnix, y.datetime(config).toTime.toUnix)
-  echo "sort"
   sort(posts, cmpPostDate, SortOrder.Descending)
   let perPage = index_generator.per_page
   let postsLen = posts.len
@@ -188,12 +184,10 @@ proc generateIndex(config: Config; libTheme: LibHandle; cwd = getCurrentDir(); d
     let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
     # let postLink = getPermalinkOf(data, config)
     let name = $(i + 1)
-    echo name
     var posts = newSeq[VNode]()
     for data in pagePosts:
       let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
       posts.add renderPostPartial(config, data, verbatim(textContent))
-    echo posts
     let index = renderIndex(config, posts)
     if not dirExists(privDest / index_generator.pagination_dir / name):
       createDir(privDest / index_generator.pagination_dir / name)
@@ -215,7 +209,6 @@ proc build(cwd = getCurrentDir()): int =
   ## generate static site
   result = 1
   let config = parseConfig(cwd / "config.yml")
-  GC_ref(config.menuLinks)
   let metaPath = cwd / "crown_ui.json"
   let theme = if config.theme.len > 0: config.theme else: "default"
   # compile theme
@@ -243,8 +236,8 @@ proc build(cwd = getCurrentDir()): int =
   let libTheme = loadLib(themePath)
   doAssert libTheme != nil
   generatePosts(config, libTheme, cwd)
+  generateIndex(config, libTheme, cwd)
   unloadLib(libTheme)
-  GC_unref(config.menuLinks)
   result = 0
 
 when isMainModule:
