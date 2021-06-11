@@ -9,9 +9,6 @@ on:
     #   - 'src/**/*'
     #   - 'example/**/*'
 
-env:
-  NIM_VERSION: 'devel --latest'
-
 jobs:
   deploy-pages:
     runs-on: ubuntu-latest
@@ -42,6 +39,8 @@ jobs:
 
       - name: Install Nim
         uses: jiro4989/setup-nim-action@v1
+        with:
+           nim-version: ${{ matrix.nim_version }}
       - name: Install dependencies
         run: nimble install -d -Y
       - name: Build
