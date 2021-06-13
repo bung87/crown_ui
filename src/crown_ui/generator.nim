@@ -119,8 +119,9 @@ proc generatePriv(tpl: string; title: string; cwd: string = getCurrentDir()): st
   let config = parseYamlConfig(cwd / "config.yml")
   result = generatePriv(config, tpl, title, cwd)
 
-proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
+proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
   ## generate new post or page
+  let config = parseConfig(cwd / "config.yml")
   doAssert tpl.len > 0
   doAssert tpl[0] in ["post", "page"]
   let theTpl = tpl[0]
@@ -133,7 +134,7 @@ proc generate(config: Config; cwd = getCurrentDir(); dest = getCurrentDir() / "s
 
 
 proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build";cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -155,7 +156,7 @@ proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
     writeFile(outfile, content)
 
 proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build";cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -195,7 +196,7 @@ proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
     inc i
 
 proc generateArchive(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build";cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -251,7 +252,7 @@ proc compileTheme(cwd, themeFile: string; themePath: string) =
     quit(1)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
 
-proc build(cwd = getCurrentDir()): int =
+proc build*(cwd = getCurrentDir()): int =
   ## generate static site
   result = 1
   let config = parseConfig(cwd / "config.yml")
@@ -302,24 +303,4 @@ proc build(cwd = getCurrentDir()): int =
   generateArchive(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   unloadLib(libTheme)
   result = 0
-
-when isMainModule:
-  when defined(release):
-    import cligen
-    dispatchMulti([
-      build,
-      help = {"cwd": "current working directory"}
-      ],
-      [
-      generate,
-      cmdName = "new",
-      help = {"tpl": "template"}
-      ]
-      )
-  else:
-
-    const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
-    # discard generate(cwd = exampleDir, tpl = @["post", "tt"])
-    discard build(exampleDir)
-
 

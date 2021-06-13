@@ -6,7 +6,7 @@ description   = "ui system and static site generator"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-namedBin = {"crown_ui/generator": "crown_ui"}.toTable()
+namedBin = {"crown_ui": "crown_ui"}.toTable()
 
 # Dependencies
 
@@ -16,7 +16,7 @@ requires "yaml"
 requires "https://github.com/bung87/web_preprocessor"
 requires "nmark >= 0.1.9"
 requires "dotenv >= 1.1.0"
-requires "cligen"
+requires "cligen > 1.3.2"
 requires "npeg"
 requires "chronicles"
 requires "fusion"
