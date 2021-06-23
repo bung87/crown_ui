@@ -104,4 +104,4 @@ proc getPermalinkOf*(post: PostData; config: Config): string =
   candi.join("")
 
 when isMainModule:
-  echo parse("2021-06-11 15:04:29", "YYYY-MM-dd HH:mm:ss")
+  echo parse("2021-06-11 15:04:29", "YYYY-MM-dd' 'HH:mm:ss")

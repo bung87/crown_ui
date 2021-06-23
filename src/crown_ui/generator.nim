@@ -112,7 +112,7 @@ proc generatePriv(config: JsonNode; tpl: string; title: string; cwd: string = ge
   let dateFormat = config{"date_format"}.getStr("YYYY-MM-DD")
   let scaffoldsDir = cwd / "scaffolds"
   if isMomentFormat(dateFormat):
-    let date = now().format(toNimFormat(dateFormat))
+    let date = now().format(config.getDateTimeFormat())
     let postPath = scaffoldsDir / tpl & ".md"
     let data = TplData(title: title, date: date)
     result = scaffold2source(postPath, data)

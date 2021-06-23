@@ -108,8 +108,8 @@ proc parseConfig*(configPath: string): Config =
   echo result.dateTimeFormat
   return result
 
-# proc dateTimeFormat*(config: Config): string =
-#   result = toNimFormat(config.date_format & " " & config.time_format)
+proc getDateTimeFormat*(config: JsonNode): string =
+  result = toNimFormat(config{"date_format"}.getStr("YYYY-MM-DD") & " " & config{"time_format"}.getStr("HH:mm:ss"))
 
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
