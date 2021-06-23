@@ -96,6 +96,9 @@ macro assign*(child: ref object, parent: ref object): untyped =
     result.add quote do:
       `child`.`field` = `parent`.`field`
 
+proc getDateTimeFormat*(config: JsonNode): string =
+  result = toNimFormat(config{"date_format"}.getStr("YYYY-MM-DD") & " " & config{"time_format"}.getStr("HH:mm:ss"))
+
 proc parseConfig*(configPath: string): Config =
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
@@ -104,17 +107,18 @@ proc parseConfig*(configPath: string): Config =
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
     result.menuLinks.add Link(href: v.getStr(), title: k)
-  result.dateTimeFormat = toNimFormat(baseConfig.date_format & " " & baseConfig.time_format)
-  echo result.dateTimeFormat
+  result.dateTimeFormat = configJson.getDateTimeFormat
   return result
 
-proc getDateTimeFormat*(config: JsonNode): string =
-  result = toNimFormat(config{"date_format"}.getStr("YYYY-MM-DD") & " " & config{"time_format"}.getStr("HH:mm:ss"))
 
 when isMainModule:
+  import times
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
 
   const configPath = exampleDir / "config.yml"
   echo configPath
-  let config = parseConfig(configPath)
-  echo repr config
+  let config = parseYamlConfig(configPath)
+  echo config.getDateTimeFormat
+
+  echo parse("2021-06-11 15:04:29", config.getDateTimeFormat)
+
