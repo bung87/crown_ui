@@ -75,6 +75,7 @@ type
   Config* = ref ConfigObj
   ConfigObj = object of BaseConfigObj
     menuLinks*: seq[Link]
+    dateTimeFormat*: string
     # footer_links*: seq[Link]
 
 func getFields(child: NimNode): seq[NimNode] =
@@ -96,20 +97,19 @@ macro assign*(child: ref object, parent: ref object): untyped =
       `child`.`field` = `parent`.`field`
 
 proc parseConfig*(configPath: string): Config =
-  # result = Config()
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
-  # copyMem(cast[pointer](result),cast[pointer](baseConfig),sizeof(baseConfig))
-  # result = cast[Config](baseConfig)
   assign(result, baseConfig)
   result.menuLinks = newSeq[Link]()
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
     result.menuLinks.add Link(href: v.getStr(), title: k)
+  result.dateTimeFormat = toNimFormat(baseConfig.date_format & " " & baseConfig.time_format)
+  echo result.dateTimeFormat
   return result
 
-proc dateTimeFormat*(config: Config): string =
-  result = toNimFormat(config.date_format & " " & config.time_format)
+# proc dateTimeFormat*(config: Config): string =
+#   result = toNimFormat(config.date_format & " " & config.time_format)
 
 when isMainModule:
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"

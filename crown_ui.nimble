@@ -44,3 +44,9 @@ task preprocess,"preprocess":
 
 task buildStatic,"build static":
   exec "web_preprocessor -s example/themes/default/assets -d example/build"
+
+task serve,"serve":
+  exec "nim c -r src/crown_ui.nim serve --cwd ./example/"
+
+task buildSite,"build" :
+  exec "nim c -r src/crown_ui.nim build --cwd ./example/"

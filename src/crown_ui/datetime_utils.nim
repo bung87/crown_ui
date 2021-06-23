@@ -8,8 +8,8 @@ import npeg/lib/utf8
 type Data = seq[string]
 
 const parser = peg("line", d: Data):
-  line <- *(ident | char)
-  ident <- (YYYY | M | D | h | m | s | w | W | YY | MM | DD | hh | mm | ss | MMM)
+  line <- *(ident | noQuote | char)
+  ident <- (YYYY | M | D | h | m | s | w | W | YY | MM | DD | HH|hh | mm | ss | MMM)
   YYYY <- "YYYY": # Y 代表年(完整显示)
     d.add "YYYY"
   M <- 'M':       # M 代表月(1-12)
@@ -34,15 +34,18 @@ const parser = peg("line", d: Data):
     d.add "dd"
   hh <- "hh":     # hh 代表时(00-23)
     d.add "HH"
+  HH <- "HH":
+    d.add "HH"
   mm <- "mm":     # mm 代表分(00-59)
     d.add "mm"
   ss <- "ss":     # ss 代表秒(00-59)
     d.add "ss"
   MMM <- "MMM":   # MMM 代表月的英文缩写(支持翻译)
     d.add "MMM"
-
+  noQuote <- {':', '-', '(', ')', '/', '[', ']', ','}:
+    d.add $0
   char <- > utf8.any:
-    d.add $1
+    d.add "'" & $1 & "'"
 
 proc isMomentFormat*(format: string): bool =
   var words: seq[string]
@@ -51,5 +54,7 @@ proc isMomentFormat*(format: string): bool =
 
 proc toNimFormat*(format: string): string =
   var words: seq[string]
-  discard parser.match(format, words)
+  let r = parser.match(format, words)
+  if not r.ok:
+    raise newException(ValueError, "can't parse input format: " & format)
   result = words.join("")

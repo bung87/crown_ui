@@ -13,6 +13,7 @@ import ./format_utils
 import ./types
 import ./io_utils
 import uri
+import segfaults
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -47,6 +48,7 @@ proc splitmd*(content: string): SplitMdResult =
 proc getPostData*(filepath: string; sourceDir: string): PostData =
   ## filepath: post md file path
   ## sourceDir: sourceDir absolute path
+  echo sourceDir
   doAssert isAbsolute(sourceDir)
   let content = readFile(filepath)
   let splited = splitmd(content)
@@ -160,12 +162,15 @@ proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
+  let index_generator = config.index_generator
+  if index_generator.path.len > 0:
+    privDest = privDest / index_generator.path
 
   let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
   doAssert renderIndex != nil
   let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
   doAssert renderPostPartial != nil
-  let index_generator = config.index_generator
+
   let rootUrl = parseUri(config.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
   let outDir = privDest / index_generator.pagination_dir
@@ -292,7 +297,7 @@ proc build*(cwd = getCurrentDir()): int =
   let sources = cwd / sourceDir / "*.md"
   var posts = newSeq[PostData]()
   for f in walkFiles(sources):
-    posts.add getPostData(f, cwd / sourceDir)
+    posts.add getPostData(f, absolutePath cwd / sourceDir)
 
   proc cmpPostDate(x, y: PostData): int =
     cmp(x.datetime(config).toTime.toUnix, y.datetime(config).toTime.toUnix)
