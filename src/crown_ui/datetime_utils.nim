@@ -42,7 +42,7 @@ const parser = peg("line", d: Data):
     d.add "ss"
   MMM <- "MMM":   # MMM 代表月的英文缩写(支持翻译)
     d.add "MMM"
-  noQuote <- {':', '-', '(', ')', '/', '[', ']', ','}:
+  noQuote <- {':', '-', '(', ')', '/', '[', ']', ',', ' '}:
     d.add $0
   char <- > utf8.any:
     d.add "'" & $1 & "'"

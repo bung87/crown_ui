@@ -21,6 +21,7 @@ requires "npeg"
 requires "chronicles"
 requires "fusion"
 requires "scorper >= 1.0.15"
+requires "https://github.com/beef331/oopsie"
 
 task ghpage,"gh page":
   withDir "example/build": 

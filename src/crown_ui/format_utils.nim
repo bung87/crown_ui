@@ -62,8 +62,6 @@ proc getPermalinkOf*(post: PostData; config: Config): string =
   var candi = newSeq[string]()
   let localNow = now().local()
   let dtf = config.dateTimeFormat
-  echo post.date
-  echo repr dtf
   let date = if post.date.len > 0: parse(post.date, dtf) else: localNow
   for c in comps:
     case c.kind
@@ -105,3 +103,6 @@ proc getPermalinkOf*(post: PostData; config: Config): string =
 
 when isMainModule:
   echo parse("2021-06-11 15:04:29", "YYYY-MM-dd' 'HH:mm:ss")
+  let d = "2021-06-11 15:04:29"
+  let f = "YYYY-MM-dd' 'HH:mm:ss"
+  echo parse(d, f)

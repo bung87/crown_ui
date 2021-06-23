@@ -48,7 +48,6 @@ proc splitmd*(content: string): SplitMdResult =
 proc getPostData*(filepath: string; sourceDir: string): PostData =
   ## filepath: post md file path
   ## sourceDir: sourceDir absolute path
-  echo sourceDir
   doAssert isAbsolute(sourceDir)
   let content = readFile(filepath)
   let splited = splitmd(content)
