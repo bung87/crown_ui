@@ -28,6 +28,7 @@ type
   RenderPost = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
   RenderPostPartial = proc(config: Config; data: PostData; child: VNode = nil): VNode {.gcsafe, stdcall.}
   RenderIndex = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
+  RenderPosts = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
   RenderArchive = proc(config: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, stdcall.}
   SplitMdResult = tuple
     meta: string
@@ -158,14 +159,18 @@ proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
 
 proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
+  ## generate posts index page
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
+  let homePageDir = privDest
   let index_generator = config.index_generator
   if index_generator.path.len > 0:
     privDest = privDest / index_generator.path
-
+  # let postsIsNotIndex = index_generator.path.len > 0
+  let renderPosts = cast[RenderPosts](libTheme.symAddr("renderPosts"))
   let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
+  let renderPostsProc = if renderPosts == nil: renderIndex else: renderPosts
   doAssert renderIndex != nil
   let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
   doAssert renderPostPartial != nil
@@ -188,16 +193,28 @@ proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
     for data in pagePosts:
       let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
       posts.add renderPostPartial(config, data, verbatim(textContent))
-    let index = renderIndex(config, posts)
+    if renderPosts != nil and i == 0:
+      # render homepage
+      let homePageNode = renderIndex(config, posts)
+      let outfile = homePageDir / "index.html"
+      info "Generate homepage", to = outfile.relativePath(cwd)
+      let description = xmltree.escape(config.description)
+      let content = renderHtml($homePageNode, pageTitle = config.title, title = config.title, url = config.url,
+          siteName = config.title, description = description, cssHtml = cssHtml)
+      writeFile(outfile, content)
+
+    let indexNode = renderPostsProc(config, posts)
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
     let outfile = privOutDir / name / "index.html"
-    info "Generate page", page = i + 1, to = outfile.relativePath(cwd)
+    info "Generate posts page", page = i + 1, to = outfile.relativePath(cwd)
     let description = xmltree.escape(config.description)
-    let content = renderHtml($index, pageTitle = config.title, title = config.title, url = $(prefix / name),
+    let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
         siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
     inc i
+    # if postsIsNotIndex:
+    #   break
 
 proc generateArchive(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
@@ -278,10 +295,10 @@ proc build*(cwd = getCurrentDir()): int =
         needCompileTheme = true
   else:
     needCompileTheme = true
-  echo themePath
+
   if not fileExists(themePath):
     needCompileTheme = true
-  info "Theme", status = "version", need_compile = needCompileTheme
+  info "Theme", status = "version", need_compile = needCompileTheme, ver = dirver
   if needCompileTheme:
     if dirver.len == 0:
       dirver = computeDirVersion(themeDir & "/*.nim")
