@@ -7,3 +7,5 @@ import ./archive
 export archive
 import ./posts
 export posts
+import ./category
+export category

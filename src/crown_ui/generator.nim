@@ -14,6 +14,7 @@ import ./types
 import ./io_utils
 import uri
 import segfaults
+import sugar
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -30,6 +31,7 @@ type
   RenderIndex = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
   RenderPosts = proc(config: Config; posts: seq[VNode]): VNode {.gcsafe, stdcall.}
   RenderArchive = proc(config: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, stdcall.}
+  RenderCategories = proc(config: Config; posts: seq[VNode]): VNode{.gcsafe, stdcall.}
   SplitMdResult = tuple
     meta: string
     content: string
@@ -137,6 +139,7 @@ proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "draft
 
 proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
+  ## generate all posts
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -263,6 +266,64 @@ proc generateArchive(config: Config; libTheme: LibHandle; posts: seq[PostData]; 
     writeFile(outfile, content)
     inc i
 
+proc generateCategory(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
+    dest = getCurrentDir() / "build"; cssHtml = "") =
+  ## generate categories
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "build"
+
+  let renderCategories = cast[RenderCategories](libTheme.symAddr("renderCategories"))
+  doAssert renderCategories != nil
+  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
+  doAssert renderPostPartial != nil
+  let index_generator = config.index_generator
+  let rootUrl = parseUri(config.url)
+
+  var catedPosts: Table[string, seq[PostData]]
+  let defaultCate = config.default_category
+  for p in posts:
+    if p.cates.len == 0:
+      if catedPosts.hasKey(defaultCate):
+        catedPosts[defaultCate].add p
+      else:
+        catedPosts[defaultCate] = @[p]
+    else:
+      for c in p.cates:
+        if catedPosts.hasKey(c):
+          catedPosts[c].add p
+        else:
+          catedPosts[c] = @[p]
+  for cate, posts in catedPosts:
+    let prefix = rootUrl / config.category_dir / cate / index_generator.pagination_dir
+    let outDir = privDest / config.category_dir / cate / index_generator.pagination_dir
+    let perPage = index_generator.per_page
+    let postsLen = posts.len
+    var m = postsLen mod perPage
+    let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
+    var i = 0
+
+    while i < pages:
+      let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
+      let name = if i == 0: "" else: $(i + 1)
+      let privOutDir = if i == 0: privDest / config.category_dir / cate else: outDir
+      var postNodes = newSeq[VNode]()
+      for data in pagePosts:
+        let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+        let node = renderPostPartial(config, data, verbatim(textContent))
+        postNodes.add(node)
+
+      let indexNode = renderCategories(config, postNodes)
+      if not dirExists(privOutDir / name):
+        createDir(privOutDir / name)
+      let outfile = privOutDir / name / "index.html"
+      info "Generate category", page = i + 1, to = outfile.relativePath(cwd)
+      let description = xmltree.escape(config.description)
+      let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
+          siteName = config.title, description = description, cssHtml = cssHtml)
+      writeFile(outfile, content)
+      inc i
+
 proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let cmd = "nim c " & (when defined(release): "-d:release" else: "") & " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
@@ -318,10 +379,14 @@ proc build*(cwd = getCurrentDir()): int =
   proc cmpPostDate(x, y: PostData): int =
     cmp(x.datetime(config).toTime.toUnix, y.datetime(config).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
-
   generatePosts(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateIndex(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateArchive(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generateCategory(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   unloadLib(libTheme)
   result = 0
 
+when isMainModule:
+  const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
+  echo exampleDir
+  discard build(exampleDir)
