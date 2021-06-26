@@ -9,3 +9,5 @@ import ./posts
 export posts
 import ./category
 export category
+import ./tag
+export tag
