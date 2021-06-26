@@ -450,6 +450,7 @@ proc build*(cwd = getCurrentDir()): int =
   generateIndex(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateArchive(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generateTag(config, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   unloadLib(libTheme)
   result = 0
 
