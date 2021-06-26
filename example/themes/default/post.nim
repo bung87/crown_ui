@@ -4,6 +4,8 @@ import crown_ui/config
 import crown_ui/types
 import crown_ui/format_utils
 
+
+
 proc renderPostPartial*(conf: Config; data: PostData;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   doAssert conf != nil
@@ -29,6 +31,6 @@ when isMainModule:
   let conf = parseConfig(exampleDir / "config.yml")
   const sourceDir = exampleDir / "source"
   const postDir = sourceDir / "posts"
-  const filePath = postDir / "test_post1.md"
+  const filePath = postDir / "Under development.md"
   let data = getPostData(filePath, postDir)
   setRenderer proc(): VNode = renderPost(conf, data, data.child)

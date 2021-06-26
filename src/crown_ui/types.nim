@@ -12,7 +12,7 @@ type PostData* = tuple
   filepath: string
   relpath: string
 
-proc datetime*(self:PostData;config:Config):DateTime = 
+proc datetime*(self: PostData; config: Config): DateTime =
   result = parse(self.date, config.dateTimeFormat)
 
 type ThemeMeta* = object
@@ -20,3 +20,8 @@ type ThemeMeta* = object
   hash*: string
 type CrownMeta* = object
   theme*: ThemeMeta
+
+type Pagination* = object
+  pageSize*: int
+  totalPages*: int
+  currentPage*: int

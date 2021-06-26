@@ -1402,3 +1402,9 @@ body {
   transition: 0.2s;
   vertical-align: top;
 }
+
+.pagination{
+  li{
+    display:inline-block;
+  }
+}
