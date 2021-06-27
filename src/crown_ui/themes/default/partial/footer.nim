@@ -5,7 +5,7 @@ import crown_ui/config
 
 proc PureFooter*(conf: Config): VNode =
   doAssert conf != nil
-  result = buildHtml(footer()):
+  result = buildHtml(footer):
     section(class = "content"):
       tdiv(class = "pure-g"):
         tdiv(class = "copyright pure-u-2-3"):

@@ -203,31 +203,33 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostData]; cwd 
     description: string
     content: string
     outfile: string
-    pagePosts: seq[PostData]
     pagination: Pagination
-    postsNodes: seq[PostData]
     indexNode: VNode
     privOutDir: string
+    pagePosts: seq[PostData]
+  var postsNodes = newSeq[VNode]()
   while i < pages:
     pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
-    # postLink = getPermalinkOf(data, conf)
     name = if i == 0: "" else: $(i + 1)
     pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
     privOutDir = if i == 0: privDest else: outDir
-    var postsNodes = newSeq[VNode]()
+    postsNodes.setLen(0)
     for data in pagePosts:
       textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
-      postsNodes.add renderPostPartial(conf, data, verbatim(textContent))
+      let p = renderPostPartial(conf, data, verbatim(textContent))
+      postsNodes.add p
+
     if renderPosts != nil and i == 0:
       # render homepage
       indexNode = renderIndex(conf, postsNodes, pagination)
+      echo postsNodes.len
       outfile = homePageDir / "index.html"
       info "Generate homepage", to = outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = conf.url,
           siteName = conf.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
-
+    echo anyIt(postsNodes, it == nil)
     indexNode = renderPostsProc(conf, postsNodes, pagination)
 
     if not dirExists(privOutDir / name):
@@ -276,7 +278,7 @@ proc generateArchive(conf: Config; libTheme: LibHandle; posts: seq[PostData]; cw
         archives[year] = @[node]
 
     let index = renderArchive(conf, archives)
-    archives.clear
+
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
     let outfile = privOutDir / name / "index.html"
@@ -285,6 +287,7 @@ proc generateArchive(conf: Config; libTheme: LibHandle; posts: seq[PostData]; cw
     let content = renderHtml($index, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
         siteName = conf.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
+    archives.clear
     inc i
 
 proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = getCurrentDir();
@@ -328,6 +331,7 @@ proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostData]; c
     indexNode: VNode
     postPartialNode: VNode
     privOutDir: string
+
   for cate, posts in catedPosts:
     let prefix = rootUrl / conf.category_dir / cate / index_generator.pagination_dir
     let outDir = privDest / conf.category_dir / cate / index_generator.pagination_dir
@@ -341,7 +345,7 @@ proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostData]; c
       pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
       name = if i == 0: "" else: $(i + 1)
       privOutDir = if i == 0: privDest / conf.category_dir / cate else: outDir
-      postNodes = newSeq[VNode]()
+      postNodes.setLen(0)
       for data in pagePosts:
         textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
         postPartialNode = renderPostPartial(conf, data, verbatim(textContent))
@@ -426,7 +430,7 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostData]; cwd = 
         pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
         privOutDir = if i == 0: privDest / conf.category_dir / tag else: outDir
 
-        var postNodes = newSeq[VNode]()
+        postNodes.setLen(0)
         for data in pagePosts:
           textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
           postPartialNode = renderPostPartial(conf, data, verbatim(textContent))
@@ -500,12 +504,13 @@ proc build*(cwd = getCurrentDir()): int =
   var posts = newSeq[PostData]()
   for f in walkFiles(sources):
     posts.add getPostData(f, absolutePath cwd / sourceDir)
-
+  echo posts.len
   proc cmpPostDate(x, y: PostData): int =
     cmp(x.datetime(conf).toTime.toUnix, y.datetime(conf).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
   # generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  echo posts.len
   generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateTag(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
@@ -513,7 +518,7 @@ proc build*(cwd = getCurrentDir()): int =
   result = 0
 
 when isMainModule:
-  const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
+  # const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
   # echo exampleDir
-  # let exampleDir = "/Users/bung/mine-blog"
+  let exampleDir = "/Users/bung/mine-blog"
   discard build(exampleDir)
