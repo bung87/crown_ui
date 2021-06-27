@@ -4,8 +4,6 @@ import crown_ui/config
 import crown_ui/types
 import crown_ui/format_utils
 
-
-
 proc renderPostPartial*(conf: Config; data: PostData;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   doAssert conf != nil
@@ -19,10 +17,10 @@ proc renderPostPartial*(conf: Config; data: PostData;
         text data.date
     child
 
-proc renderPost*(config: Config; data: PostData;
+proc renderPost*(conf: Config; data: PostData;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
-  let post = renderPostPartial(config, data, child)
-  result = renderLayout(config, post)
+  let post = renderPostPartial(conf, data, child)
+  result = renderLayout(conf, post)
 
 when isMainModule:
   import os

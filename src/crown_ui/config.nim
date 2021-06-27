@@ -83,9 +83,11 @@ proc getDateTimeFormat*(config: JsonNode): string =
   result = toNimFormat(config{"date_format"}.getStr("YYYY-MM-DD") & " " & config{"time_format"}.getStr("HH:mm:ss"))
 
 proc parseConfig*(configPath: string): Config =
+  # result = new Config
   let configJson = parseYamlConfig(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
   copy(result, baseConfig)
+  echo result.permalink
   result.menuLinks = newSeq[Link]()
   let menuNode = configJson["menu"].getFields
   for k, v in menuNode.pairs:
