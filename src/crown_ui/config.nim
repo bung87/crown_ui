@@ -30,8 +30,8 @@ type
     title*: string
     subtitle*: string
     description*: string
-    keywords*: seq[string]
-    logo*: string
+    keywords*: JsonNode
+    logo*: JsonNode
     author*: string
     language*: string
     timezone*: string

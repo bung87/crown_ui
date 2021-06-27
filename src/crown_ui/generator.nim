@@ -42,12 +42,12 @@ type
 
 proc splitmd*(content: string): SplitMdResult =
   var m: RegexMatch
-  let ret = content.find(re"(?ms:-{3,}(.*)-{3,})", m)
-  if not ret:
-    result.content = content
-    return result
+  let ret1 = content.find(re"-{3,}", m)
+  let metaBegin = m.boundaries.b
+  let ret2 = content.find(re"-{3,}", m, metaBegin)
+  let metaEnd = m.boundaries.a
+  result.meta = content[metaBegin + 1 ..< metaEnd]
   result.content = content[m.boundaries.b + 1 .. ^1]
-  result.meta = m.group(0, content)[0]
 
 proc getPostData*(filepath: string; sourceDir: string): PostData =
   ## filepath: post md file path
@@ -68,6 +68,7 @@ proc getPostData*(filepath: string; sourceDir: string): PostData =
   var tags = newSeq[string]()
   for e in meta{"tags"}.getElems:
     tags.add e.getStr("")
+
   let child = verbatim(markdown2html(splited.content))
   result = (title: title, id: id, date: date, cates: cates, tags: tags, child: child, filepath: filepath,
       relpath: filepath.relativePath(sourceDir))
@@ -411,7 +412,13 @@ proc build*(cwd = getCurrentDir()): int =
   let metaPath = cwd / "crown_ui.json"
   let theme = if config.theme.len > 0: config.theme else: "default"
   # compile theme
-  let themeDir = cwd / "themes" / theme
+  let themesDir = cwd / "themes"
+  if not dirExists(themesDir):
+    createDir(themesDir)
+  let themeDir = themesDir / theme
+  const builtinThemesDir = currentSourcePath.parentDir / "themes"
+  if dirExists(builtinThemesDir / theme):
+    copyDir(builtinThemesDir / theme, themesDir / theme)
   let themeFile = themeDir / "theme.nim"
   let themePath = themeDir / libThemeName
   var needCompileTheme = false
@@ -458,6 +465,7 @@ proc build*(cwd = getCurrentDir()): int =
   result = 0
 
 when isMainModule:
-  const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
-  echo exampleDir
+  # const exampleDir = currentSourcePath.parentDir.parentDir.parentDir / "example"
+  # echo exampleDir
+  let exampleDir = "/Users/bung/mine-blog"
   discard build(exampleDir)

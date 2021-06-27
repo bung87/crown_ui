@@ -31,6 +31,9 @@ proc dispA(target: OutputTarget; dest: var string;
 
 proc renderCodeLang*(result: var string; lang: SourceLanguage; code: string;
                      target: OutputTarget) =
+  if lang == SourceLanguage.langNone:
+    result = code
+    return
   var g: GeneralTokenizer
   initGeneralTokenizer(g, code)
   while true:
@@ -62,29 +65,30 @@ proc markdown2html*(lines: string): string =
   for ast in seqAst:
     case ast.kind
       of fencedCode:
+        let lang = getSourceLanguage(ast.codeAttr.insertInline(linkSeq))
         if ast.codeText == "":
           if ast.codeAttr != "":
             var code: string
-            renderCodeLang(code, getSourceLanguage(ast.codeAttr.insertInline(linkSeq)), ast.codeText,
+            renderCodeLang(code, lang, ast.codeText,
                 OutputTarget.outHtml)
             var t = pre(class = "highlight", code(code)) & "\p"
             result.add t.replace("<code>", "<code class=\"language-" & ast.codeAttr.insertInline(linkSeq) & "\">")
           else:
             var code: string
-            renderCodeLang(code, getSourceLanguage(ast.codeAttr.insertInline(linkSeq)), ast.codeText,
+            renderCodeLang(code, lang, ast.codeText,
                 OutputTarget.outHtml)
             result.add pre(class = "highlight", code(code)) & "\p"
 
         else:
           if ast.codeAttr != "":
             var code: string
-            renderCodeLang(code, getSourceLanguage(ast.codeAttr.insertInline(linkSeq)), ast.codeText,
+            renderCodeLang(code, lang, ast.codeText,
                 OutputTarget.outHtml)
             var t = pre(class = "highlight", code(code & "\p")) & "\p"
             result.add t.replace("<code>", "<code class=\"language-" & ast.codeAttr.insertInline(linkSeq) & "\">")
           else:
             var code: string
-            renderCodeLang(code, getSourceLanguage(ast.codeAttr.insertInline(linkSeq)), ast.codeText,
+            renderCodeLang(code, lang, ast.codeText,
                 OutputTarget.outHtml)
             result.add pre(class = "highlight", code(code & "\p")) & "\p"
       else:
