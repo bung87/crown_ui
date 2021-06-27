@@ -3,7 +3,7 @@ import json
 import crown_ui / [utils, config]
 
 proc PureHeader*(conf: Config): VNode =
-  buildHtml(header(class = "site-header")):
+  result = buildHtml(header(class = "site-header")):
     nav(class = "pure-menu pure-menu-horizontal pure-menu-scrollable"):
       tdiv(class = "nav-content"):
         a(href = "/", class = "pure-menu-heading pure-menu-link site-logo-container"):
