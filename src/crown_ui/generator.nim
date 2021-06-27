@@ -148,17 +148,24 @@ proc generatePosts(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
 
   let renderPost = cast[RenderPost](libTheme.symAddr("renderPost"))
   doAssert renderPost != nil
+  var
+    name: string
+    postNode: VNode
+    textContent: string
+    description: string
+    content: string
+    outfile: string
   for data in posts:
     # let data = getPostData(f, cwd / sourceDir)
-    let name = getPermalinkOf(data, config)
-    let post = renderPost(config, data, data.child)
+    name = getPermalinkOf(data, config)
+    postNode = renderPost(config, data, data.child)
     if not dirExists(privDest / name):
       createDir(privDest / name)
-    let outfile = privDest / name / "index.html"
+    outfile = privDest / name / "index.html"
     info "Generate post", file = data.relpath, to = outfile.relativePath(cwd)
-    let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
-    let description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
-    let content = renderHtml($post, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
+    textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
+    description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
+    content = renderHtml($postNode, pageTitle = data.title & " | " & config.title, title = data.title, url = "",
         siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
 
@@ -188,33 +195,45 @@ proc generateIndex(config: Config; libTheme: LibHandle; posts: seq[PostData]; cw
   var m = postsLen mod perPage
   let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
   var i = 0
+  var
+    name: string
+    postNode: VNode
+    textContent: string
+    description: string
+    content: string
+    outfile: string
+    pagePosts: seq[PostData]
+    pagination: Pagination
+    postsNodes: seq[PostData]
+    indexNode: VNode
+    privOutDir: string
   while i < pages:
-    let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
-    # let postLink = getPermalinkOf(data, config)
-    let name = if i == 0: "" else: $(i + 1)
-    let pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
-    let privOutDir = if i == 0: privDest else: outDir
-    var posts = newSeq[VNode]()
+    pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
+    # postLink = getPermalinkOf(data, config)
+    name = if i == 0: "" else: $(i + 1)
+    pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
+    privOutDir = if i == 0: privDest else: outDir
+    var postsNodes = newSeq[VNode]()
     for data in pagePosts:
-      let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
-      posts.add renderPostPartial(config, data, verbatim(textContent))
+      textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+      postsNodes.add renderPostPartial(config, data, verbatim(textContent))
     if renderPosts != nil and i == 0:
       # render homepage
-      let homePageNode = renderIndex(config, posts, pagination)
-      let outfile = homePageDir / "index.html"
+      indexNode = renderIndex(config, postsNodes, pagination)
+      outfile = homePageDir / "index.html"
       info "Generate homepage", to = outfile.relativePath(cwd)
-      let description = xmltree.escape(config.description)
-      let content = renderHtml($homePageNode, pageTitle = config.title, title = config.title, url = config.url,
+      description = xmltree.escape(config.description)
+      content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = config.url,
           siteName = config.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
 
-    let indexNode = renderPostsProc(config, posts, pagination)
+    indexNode = renderPostsProc(config, postsNodes, pagination)
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
-    let outfile = privOutDir / name / "index.html"
+    outfile = privOutDir / name / "index.html"
     info "Generate posts page", page = i + 1, to = outfile.relativePath(cwd)
-    let description = xmltree.escape(config.description)
-    let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
+    description = xmltree.escape(config.description)
+    content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
         siteName = config.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
     inc i
@@ -294,6 +313,19 @@ proc generateCategory(config: Config; libTheme: LibHandle; posts: seq[PostData];
           catedPosts[c].add p
         else:
           catedPosts[c] = @[p]
+  var
+    name: string
+    postNode: VNode
+    textContent: string
+    description: string
+    content: string
+    outfile: string
+    pagePosts: seq[PostData]
+    pagination: Pagination
+    postNodes: seq[VNode]
+    indexNode: VNode
+    postPartialNode: VNode
+    privOutDir: string
   for cate, posts in catedPosts:
     let prefix = rootUrl / config.category_dir / cate / index_generator.pagination_dir
     let outDir = privDest / config.category_dir / cate / index_generator.pagination_dir
@@ -304,22 +336,22 @@ proc generateCategory(config: Config; libTheme: LibHandle; posts: seq[PostData];
     var i = 0
 
     while i < pages:
-      let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
-      let name = if i == 0: "" else: $(i + 1)
-      let privOutDir = if i == 0: privDest / config.category_dir / cate else: outDir
-      var postNodes = newSeq[VNode]()
+      pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
+      name = if i == 0: "" else: $(i + 1)
+      privOutDir = if i == 0: privDest / config.category_dir / cate else: outDir
+      postNodes = newSeq[VNode]()
       for data in pagePosts:
-        let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
-        let node = renderPostPartial(config, data, verbatim(textContent))
-        postNodes.add(node)
+        textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+        postPartialNode = renderPostPartial(config, data, verbatim(textContent))
+        postNodes.add(postPartialNode)
 
-      let indexNode = renderCategories(config, postNodes)
+      indexNode = renderCategories(config, postNodes)
       if not dirExists(privOutDir / name):
         createDir(privOutDir / name)
-      let outfile = privOutDir / name / "index.html"
+      outfile = privOutDir / name / "index.html"
       info "Generate category", page = i + 1, to = outfile.relativePath(cwd)
-      let description = xmltree.escape(config.description)
-      let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
+      description = xmltree.escape(config.description)
+      content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
           siteName = config.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
       inc i
@@ -363,37 +395,51 @@ proc generateTag(config: Config; libTheme: LibHandle; posts: seq[PostData]; cwd 
   let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $prefix,
       siteName = config.title, description = description, cssHtml = cssHtml)
   writeFile(outfile, content)
-  for tag, posts in tagedPosts:
-    let prefix = rootUrl / config.tag_dir / tag / index_generator.pagination_dir
-    let outDir = privDest / config.tag_dir / tag / index_generator.pagination_dir
-    let perPage = index_generator.per_page
-    let postsLen = posts.len
-    var m = postsLen mod perPage
-    let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
-    var i = 0
+  block generateTagedPosts:
+    var
+      name: string
+      postNode: VNode
+      textContent: string
+      description: string
+      content: string
+      outfile: string
+      pagePosts: seq[PostData]
+      pagination: Pagination
+      postNodes: seq[VNode]
+      indexNode: VNode
+      postPartialNode: VNode
+      privOutDir: string
+    for tag, posts in tagedPosts:
+      let prefix = rootUrl / config.tag_dir / tag / index_generator.pagination_dir
+      let outDir = privDest / config.tag_dir / tag / index_generator.pagination_dir
+      let perPage = index_generator.per_page
+      let postsLen = posts.len
+      var m = postsLen mod perPage
+      let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
+      var i = 0
 
-    while i < pages:
-      let pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
-      let name = if i == 0: "" else: $(i + 1)
-      let pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
-      let privOutDir = if i == 0: privDest / config.category_dir / tag else: outDir
+      while i < pages:
+        pagePosts = posts[i * perPage ..< min(postsLen, (i + 1) * perPage)]
+        name = if i == 0: "" else: $(i + 1)
+        pagination = Pagination(pageSize: perPage, totalPages: pages, currentPage: i+1)
+        privOutDir = if i == 0: privDest / config.category_dir / tag else: outDir
 
-      var postNodes = newSeq[VNode]()
-      for data in pagePosts:
-        let textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
-        let node = renderPostPartial(config, data, verbatim(textContent))
-        postNodes.add(node)
+        var postNodes = newSeq[VNode]()
+        for data in pagePosts:
+          textContent = innerText(data.child, MaxDescriptionLen, @["pre", "code"])
+          postPartialNode = renderPostPartial(config, data, verbatim(textContent))
+          postNodes.add(postPartialNode)
 
-      let indexNode = renderPostsProc(config, postNodes, pagination)
-      if not dirExists(privOutDir / name):
-        createDir(privOutDir / name)
-      let outfile = privOutDir / name / "index.html"
-      info "Generate tag", tage = tag, page = i + 1, to = outfile.relativePath(cwd)
-      let description = xmltree.escape(config.description)
-      let content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
-          siteName = config.title, description = description, cssHtml = cssHtml)
-      writeFile(outfile, content)
-      inc i
+        indexNode = renderPostsProc(config, postNodes, pagination)
+        if not dirExists(privOutDir / name):
+          createDir(privOutDir / name)
+        outfile = privOutDir / name / "index.html"
+        info "Generate tag", tage = tag, page = i + 1, to = outfile.relativePath(cwd)
+        description = xmltree.escape(config.description)
+        content = renderHtml($indexNode, pageTitle = config.title, title = config.title, url = $(prefix / name),
+            siteName = config.title, description = description, cssHtml = cssHtml)
+        writeFile(outfile, content)
+        inc i
 
 proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
