@@ -56,7 +56,7 @@ proc parseColonLeadFormat*(perm: string): seq[PermalinkComp] =
     except:
       result.add PermalinkComp(kind: raw, value: c)
 
-proc getPermalinkOf*(post: PostData; conf: Config): string =
+proc getPermalinkOf*(post: PostMeta; conf: Config): string =
   let format = conf.permalink
   let comps = parseColonLeadFormat(format)
   var candi = newSeq[string]()

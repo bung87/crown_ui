@@ -4,7 +4,7 @@ import crown_ui/config
 import crown_ui/types
 import crown_ui/format_utils
 
-proc renderPostPartial*(conf: Config; data: PostData;
+proc renderPostPartial*(conf: Config; data: PostMeta;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   doAssert conf != nil
   result = buildHtml(tdiv(data-theme = "dark")):
@@ -17,7 +17,7 @@ proc renderPostPartial*(conf: Config; data: PostData;
         text data.date
     child
 
-proc renderPost*(conf: Config; data: PostData;
+proc renderPost*(conf: Config; data: PostMeta;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   let post = renderPostPartial(conf, data, child)
   result = renderLayout(conf, post)
