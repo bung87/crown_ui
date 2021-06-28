@@ -10,10 +10,8 @@ import karax / [karaxdsl, vdom]
 import crown_ui / [config, utils]
 
 import partial / [header, footer]
-
 proc renderLayout*(conf: Config; n: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
   doAssert conf != nil
-
   result = buildHtml(tdiv(class = "layout")):
     PureHeader(conf)
     # tdiv(class = "content"):

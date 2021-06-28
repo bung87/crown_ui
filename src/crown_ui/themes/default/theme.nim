@@ -1,4 +1,4 @@
-import segfaults
+# import segfaults
 import ./post
 export post
 import ./index

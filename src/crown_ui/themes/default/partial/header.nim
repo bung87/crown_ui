@@ -1,7 +1,6 @@
 import karax / [karaxdsl, vdom]
 import json
 import crown_ui / [utils, config]
-
 proc PureHeader*(conf: Config): VNode {.cdecl, exportc, dynlib.} =
   result = buildHtml(header(class = "site-header")):
     nav(class = "pure-menu pure-menu-horizontal pure-menu-scrollable"):
