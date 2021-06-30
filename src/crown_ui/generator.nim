@@ -26,13 +26,13 @@ const libThemeName = when defined(windows):
 const MaxDescriptionLen = 200
 
 type
-  RenderPost = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, stdcall.}
-  RenderPostPartial = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, stdcall.}
-  RenderIndex = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, stdcall.}
-  RenderPosts = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, stdcall.}
-  RenderArchive = proc(conf: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, stdcall.}
-  RenderCategories = proc(conf: Config; posts: seq[VNode]): VNode{.gcsafe, stdcall.}
-  RenderTag = proc(conf: Config; tagCount: Table[string, int]): VNode {.gcsafe, stdcall.}
+  RenderPost = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, cdecl.}
+  RenderPostPartial = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, cdecl.}
+  RenderIndex = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, cdecl.}
+  RenderPosts = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, cdecl.}
+  RenderArchive = proc(conf: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, cdecl.}
+  RenderCategories = proc(conf: Config; posts: seq[VNode]): VNode{.gcsafe, cdecl.}
+  RenderTag = proc(conf: Config; tagCount: Table[string, int]): VNode {.gcsafe, cdecl.}
   SplitMdResult = tuple
     meta: string
     content: string
@@ -466,7 +466,8 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
 
 proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  let cmd = "nim c " & (when defined(release): "-d:release" else: "") & " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
+  let cmd = "nim c -d:useNimRtl " & (when defined(release): "-d:release" else: "") &
+      " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
   let r = execCmdEx(cmd)
   if r.exitCode != 0:
     info "Theme", status = "Compile Error", msg = r.output, file = themeFile.relativePath(cwd)
