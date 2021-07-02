@@ -227,14 +227,13 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
     if renderPosts != nil and i == 0:
       # render homepage
       indexNode = renderIndex(conf, postsNodes, pagination)
-      echo postsNodes.len
       outfile = homePageDir / "index.html"
       info "Generate homepage", to = outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = conf.url,
           siteName = conf.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
-    echo anyIt(postsNodes, it == nil)
+
     indexNode = renderPostsProc(conf, postsNodes, pagination)
 
     if not dirExists(privOutDir / name):
@@ -466,7 +465,7 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
 
 proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  let cmd = "nim c -d:useNimRtl " & (when defined(release): "-d:release" else: "") &
+  let cmd = "nim c --gc:boehm -d:createNimRtl " & (when defined(release): "-d:release" else: "") &
       " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
   let r = execCmdEx(cmd)
   if r.exitCode != 0:
