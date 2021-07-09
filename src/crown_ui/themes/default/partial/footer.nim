@@ -1,7 +1,7 @@
 import karax / [karaxdsl, vdom]
 import json, tables, sequtils
 import crown_ui/config
-
+import crown_ui/gen_macros
 
 proc PureFooter*(conf: Config): VNode =
   doAssert conf != nil

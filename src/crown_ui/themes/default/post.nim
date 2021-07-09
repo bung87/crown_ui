@@ -3,6 +3,7 @@ import ./layout
 import crown_ui/config
 import crown_ui/types
 import crown_ui/format_utils
+import crown_ui/gen_macros
 
 proc renderPostPartial*(conf: Config; data: PostMeta;
     child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
@@ -18,7 +19,7 @@ proc renderPostPartial*(conf: Config; data: PostMeta;
     child
 
 proc renderPost*(conf: Config; data: PostMeta;
-    child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
+    child: VNode = nil): VNode {.exportTheme, cdecl, exportc, dynlib.} =
   let post = renderPostPartial(conf, data, child)
   result = renderLayout(conf, post)
 

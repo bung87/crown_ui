@@ -465,7 +465,7 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
 
 proc compileTheme(cwd, themeFile: string; themePath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  let cmd = "nim c --gc:boehm -d:createNimRtl " & (when defined(release): "-d:release" else: "") &
+  let cmd = "nim c -d:createNimRtl " & (when defined(release): "-d:release" else: "") &
       " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
   let r = execCmdEx(cmd)
   if r.exitCode != 0:

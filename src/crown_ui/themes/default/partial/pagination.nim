@@ -2,6 +2,7 @@ import karax / [karaxdsl, vdom]
 import crown_ui/config
 import crown_ui/types
 import crown_ui/format_utils
+import crown_ui/gen_macros
 
 proc renderPagination*(conf: Config; pagination: Pagination): VNode {.cdecl, exportc, dynlib.} =
   doAssert conf != nil
