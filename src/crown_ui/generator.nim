@@ -462,14 +462,14 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
         writeFile(outfile, content)
         inc i
 
-proc compileTheme(cwd, themeFile: string; themePath: string) =
+proc compileTheme(cwd, themeFile: string; themeOutPath: string) =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let cmd = "nim c -d:createNimRtl " & (when defined(release): "-d:release" else: "") &
       " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
   let r = execCmdEx(cmd)
   if r.exitCode != 0:
     info "Theme", status = "Compile Error", msg = r.output, file = themeFile.relativePath(cwd)
-    removeFile(themePath)
+    removeFile(themeOutPath)
     quit(1)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
 
@@ -488,7 +488,7 @@ proc build*(cwd = getCurrentDir()): int =
   if dirExists(builtinThemesDir / theme):
     copyDir(builtinThemesDir / theme, themesDir / theme)
   let themeFile = themeDir / "theme.nim"
-  let themePath = themeDir / libThemeName
+  let themeOutPath = themeDir / libThemeName
   var needCompileTheme = false
   var dirver: string
   if fileExists(metaPath):
@@ -502,15 +502,15 @@ proc build*(cwd = getCurrentDir()): int =
   else:
     needCompileTheme = true
 
-  if not fileExists(themePath):
+  if not fileExists(themeOutPath):
     needCompileTheme = true
   info "Theme", status = "version", need_compile = needCompileTheme, ver = dirver
   if needCompileTheme:
     if dirver.len == 0:
       dirver = computeDirVersion(themeDir & "/*.nim")
     writeFile(metaPath, $ %* CrownMeta(theme: ThemeMeta(name: theme, hash: dirver)))
-    compileTheme(cwd, themeFile, themePath)
-  let libTheme = loadLib(themePath)
+    compileTheme(cwd, themeFile, themeOutPath)
+  let libTheme = loadLib(themeOutPath)
   doAssert libTheme != nil
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
