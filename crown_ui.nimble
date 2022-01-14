@@ -20,8 +20,9 @@ requires "cligen > 1.3.2"
 requires "npeg"
 requires "chronicles"
 requires "fusion"
-requires "scorper >= 1.0.15"
+requires "scorper >= 1.0.25"
 requires "https://github.com/beef331/oopsie"
+# requires "urlly >= 0.2.0 & < 0.3.0"
 
 task ghpage,"gh page":
   withDir "example/build": 
