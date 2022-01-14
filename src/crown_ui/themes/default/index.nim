@@ -2,10 +2,8 @@ import karax / [karaxdsl, vdom]
 import ./layout
 import crown_ui/config
 import crown_ui/types
-import crown_ui/gen_macros
 
-proc renderIndex*(conf: Config; posts: seq[VNode]; pagination = default(Pagination)): Vnode{.exportTheme, cdecl,
-    exportc, dynlib.} =
+proc renderIndex*(conf: Config; posts: seq[VNode]; pagination = default(Pagination)): Vnode =
   doAssert conf != nil
   let c = buildHtml(tdiv(class = "main")):
     section(class = "jumbotron"):

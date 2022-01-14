@@ -15,6 +15,7 @@ import ./io_utils
 import uri
 import segfaults
 import sugar
+import nimscripter
 
 const libThemeName = when defined(windows):
     "theme.dll"
@@ -26,13 +27,6 @@ const libThemeName = when defined(windows):
 const MaxDescriptionLen = 200
 
 type
-  RenderPost = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, cdecl.}
-  RenderPostPartial = proc(conf: Config; data: PostMeta; child: VNode = nil): VNode {.gcsafe, cdecl.}
-  RenderIndex = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, cdecl.}
-  RenderPosts = proc(conf: Config; posts: seq[VNode]; pagination: Pagination): VNode {.gcsafe, cdecl.}
-  RenderArchive = proc(conf: Config; archives: Table[int, seq[VNode]]): VNode{.gcsafe, cdecl.}
-  RenderCategories = proc(conf: Config; posts: seq[VNode]): VNode{.gcsafe, cdecl.}
-  RenderTag = proc(conf: Config; tagCount: Table[string, int]): VNode {.gcsafe, cdecl.}
   SplitMdResult = tuple
     meta: string
     content: string
@@ -143,15 +137,13 @@ proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "draft
   writeFile(privDest / title & ".md", content)
 
 
-proc generatePosts(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = getCurrentDir();
+proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
   ## generate all posts
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
 
-  let renderPost = cast[RenderPost](libTheme.symAddr("renderPost"))
-  doAssert renderPost != nil
   var
     name: string
     postNode: VNode
@@ -163,7 +155,7 @@ proc generatePosts(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
   for data in posts:
     contentNode = getContentNode(data)
     name = getPermalinkOf(data, conf)
-    postNode = renderPost(conf, data, contentNode)
+    postNode = libTheme.invoke(renderPost,conf, data, contentNode)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
@@ -174,7 +166,7 @@ proc generatePosts(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
         siteName = conf.title, description = description, cssHtml = cssHtml)
     writeFile(outfile, content)
 
-proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = getCurrentDir();
+proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
   ## generate posts index page
   var privDest = dest
@@ -184,13 +176,6 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
   let index_generator = conf.index_generator
   if index_generator.path.len > 0:
     privDest = privDest / index_generator.path
-  let renderPosts = cast[RenderPosts](libTheme.symAddr("renderPosts"))
-  let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
-  let renderPostsProc = if renderPosts == nil: renderIndex else: renderPosts
-  doAssert renderPostsProc != nil
-  doAssert renderIndex != nil
-  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
-  doAssert renderPostPartial != nil
 
   let rootUrl = parseUri(conf.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
@@ -221,11 +206,11 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
     postsNodes.setLen(0)
     for data in pagePosts:
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-      let p = renderPostPartial(conf, data, verbatim(textContent))
+      let p = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
       postsNodes.add p
     if renderPosts != nil and i == 0:
       # render homepage
-      indexNode = renderIndex(conf, postsNodes, pagination)
+      indexNode = libTheme.invoke(renderIndex, conf, postsNodes, pagination)
       outfile = homePageDir / "index.html"
       info "Generate homepage", to = outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
@@ -233,7 +218,7 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
           siteName = conf.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
 
-    indexNode = renderPostsProc(conf, postsNodes, pagination)
+    indexNode = libTheme.invoke(renderPostsProc,conf, postsNodes, pagination)
 
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
@@ -245,16 +230,12 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
     writeFile(outfile, content)
     inc i
 
-proc generateArchive(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = getCurrentDir();
+proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
 
-  let renderArchive = cast[RenderArchive](libTheme.symAddr("renderArchive"))
-  doAssert renderArchive != nil
-  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
-  doAssert renderPostPartial != nil
   let index_generator = conf.index_generator
   let rootUrl = parseUri(conf.url)
   let prefix = rootUrl / index_generator.path / index_generator.pagination_dir
@@ -286,13 +267,13 @@ proc generateArchive(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cw
     for data in pagePosts:
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
       let year = data.datetime(conf).year
-      postNode = renderPostPartial(conf, data, verbatim(textContent))
+      postNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
       if archives.hasKey(year):
         archives[year].add postNode
       else:
         archives[year] = @[postNode]
 
-    indexNode = renderArchive(conf, archives)
+    indexNode = libTheme.invoke(renderArchive,conf, archives)
 
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
@@ -305,17 +286,13 @@ proc generateArchive(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cw
     archives.clear
     inc i
 
-proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = getCurrentDir();
+proc generateCategory(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
   ## generate categories
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
 
-  let renderCategories = cast[RenderCategories](libTheme.symAddr("renderCategories"))
-  doAssert renderCategories != nil
-  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
-  doAssert renderPostPartial != nil
   let index_generator = conf.index_generator
   let rootUrl = parseUri(conf.url)
 
@@ -363,10 +340,10 @@ proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; c
       postNodes.setLen(0)
       for data in pagePosts:
         textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-        postPartialNode = renderPostPartial(conf, data, verbatim(textContent))
+        postPartialNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
         postNodes.add(postPartialNode)
 
-      indexNode = renderCategories(conf, postNodes)
+      indexNode = libTheme.invoke(renderCategories,conf, postNodes)
       if not dirExists(privOutDir / name):
         createDir(privOutDir / name)
       outfile = privOutDir / name / "index.html"
@@ -377,22 +354,17 @@ proc generateCategory(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; c
       writeFile(outfile, content)
       inc i
 
-proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = getCurrentDir();
+proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
     dest = getCurrentDir() / "build"; cssHtml = "") =
   ## generate tag page
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
 
-  let renderPostPartial = cast[RenderPostPartial](libTheme.symAddr("renderPostPartial"))
-  doAssert renderPostPartial != nil
   let index_generator = conf.index_generator
   let rootUrl = parseUri(conf.url)
 
   var tagedPosts: Table[string, seq[PostMeta]]
-  let renderPosts = cast[RenderPosts](libTheme.symAddr("renderPosts"))
-  let renderIndex = cast[RenderIndex](libTheme.symAddr("renderIndex"))
-  let renderPostsProc = if renderPosts == nil: renderIndex else: renderPosts
   var tagCount: Table[string, int]
 
   for p in posts:
@@ -404,10 +376,9 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
         tagCount[c] = 1
         tagedPosts[c] = @[p]
   # generate tag index
-  let renderTag = cast[RenderTag](libTheme.symAddr("renderTag"))
   let prefix = rootUrl / conf.tag_dir
   let outDir = privDest / conf.tag_dir
-  let indexNode = renderTag(conf, tagCount)
+  let indexNode = libTheme.invoke(renderTag,conf, tagCount)
   if not dirExists(outDir):
     createDir(outDir)
   let outfile = outDir / "index.html"
@@ -448,10 +419,10 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
         postNodes.setLen(0)
         for data in pagePosts:
           textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-          postPartialNode = renderPostPartial(conf, data, verbatim(textContent))
+          postPartialNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
           postNodes.add(postPartialNode)
 
-        indexNode = renderPostsProc(conf, postNodes, pagination)
+        indexNode = libTheme.invoke(renderPosts,conf, postNodes, pagination)
         if not dirExists(privOutDir / name):
           createDir(privOutDir / name)
         outfile = privOutDir / name / "index.html"
@@ -462,16 +433,12 @@ proc generateTag(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd = 
         writeFile(outfile, content)
         inc i
 
-proc compileTheme(cwd, themeFile: string; themeOutPath: string) =
+proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpreter] =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
-  let cmd = "nim c -d:createNimRtl " & (when defined(release): "-d:release" else: "") &
-      " --app:lib --verbosity:0 --hints:off -w:off " & themeFile
-  let r = execCmdEx(cmd)
-  if r.exitCode != 0:
-    info "Theme", status = "Compile Error", msg = r.output, file = themeFile.relativePath(cwd)
-    removeFile(themeOutPath)
-    quit(1)
+  let script = NimScriptPath themeFile
+  let intr = loadScript(script)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
+  return intr
 
 proc build*(cwd = getCurrentDir()): int =
   ## generate static site
@@ -489,29 +456,9 @@ proc build*(cwd = getCurrentDir()): int =
     copyDir(builtinThemesDir / theme, themesDir / theme)
   let themeFile = themeDir / "theme.nim"
   let themeOutPath = themeDir / libThemeName
-  var needCompileTheme = false
   var dirver: string
-  if fileExists(metaPath):
-    let meta = json.parseFile(metaPath).to(CrownMeta)
-    if meta.theme.name != theme:
-      needCompileTheme = true
-    else:
-      dirver = computeDirVersion(themeDir & "/*.nim")
-      if dirver != meta.theme.hash:
-        needCompileTheme = true
-  else:
-    needCompileTheme = true
-
-  if not fileExists(themeOutPath):
-    needCompileTheme = true
-  info "Theme", status = "version", need_compile = needCompileTheme, ver = dirver
-  if needCompileTheme:
-    if dirver.len == 0:
-      dirver = computeDirVersion(themeDir & "/*.nim")
-    writeFile(metaPath, $ %* CrownMeta(theme: ThemeMeta(name: theme, hash: dirver)))
-    compileTheme(cwd, themeFile, themeOutPath)
-  let libTheme = loadLib(themeOutPath)
-  doAssert libTheme != nil
+  let libTheme = compileTheme(cwd, themeFile, themeOutPath)
+  echo libTheme.isSome()
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
@@ -530,7 +477,6 @@ proc build*(cwd = getCurrentDir()): int =
   generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateTag(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  unloadLib(libTheme)
   result = 0
 
 when isMainModule:

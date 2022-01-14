@@ -1,7 +1,6 @@
 import karax / [karaxdsl, vdom]
 import json
 import crown_ui / [utils, config]
-import crown_ui/gen_macros
 
 proc PureHeader*(conf: Config): VNode =
   result = buildHtml(header(class = "site-header")):
@@ -14,9 +13,7 @@ proc PureHeader*(conf: Config): VNode =
         #     a(href = "/blog.html", class = "pure-menu-link"):
         #       text conf.title
         ul(class = "pure-menu-list fl"):
-          echo conf.menuLinks.len
           for m in conf.menuLinks:
-            echo m
             li(class = "pure-menu-item"):
               a(href = m.href, class = "pure-menu-link"):
                 text m.title

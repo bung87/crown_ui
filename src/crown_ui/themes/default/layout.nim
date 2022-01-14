@@ -8,7 +8,6 @@
 import karax / [karaxdsl, vdom]
 
 import crown_ui / [config, utils]
-import crown_ui/gen_macros
 import partial / [header, footer]
 
 proc renderLayout*(conf: Config; n: VNode = nil): VNode =
