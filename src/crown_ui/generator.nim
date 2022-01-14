@@ -223,7 +223,6 @@ proc generateIndex(conf: Config; libTheme: LibHandle; posts: seq[PostMeta]; cwd 
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
       let p = renderPostPartial(conf, data, verbatim(textContent))
       postsNodes.add p
-
     if renderPosts != nil and i == 0:
       # render homepage
       indexNode = renderIndex(conf, postsNodes, pagination)
