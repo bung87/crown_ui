@@ -155,7 +155,7 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
   for data in posts:
     contentNode = getContentNode(data)
     name = getPermalinkOf(data, conf)
-    postNode = libTheme.invoke(renderPost,conf, data, contentNode)
+    postNode = libTheme.invoke(renderPost,conf, data, contentNode, returnType = string)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
@@ -218,7 +218,7 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
           siteName = conf.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
 
-    indexNode = libTheme.invoke(renderPostsProc,conf, postsNodes, pagination)
+    indexNode = libTheme.invoke(renderPosts,conf, postsNodes, pagination)
 
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
