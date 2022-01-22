@@ -155,7 +155,7 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
   for data in posts:
     contentNode = getContentNode(data)
     name = getPermalinkOf(data, conf)
-    postNode = libTheme.invoke(renderPost,conf, data, contentNode, returnType = string)
+    postNode = libTheme.invoke(renderPost,conf, data, contentNode, returnType = VNode)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
