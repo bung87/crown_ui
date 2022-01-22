@@ -19,7 +19,7 @@ proc renderPostPartial*(conf: Config; data: PostMeta;
     child
 
 proc renderPost*(conf: Config; data: PostMeta;
-    child: VNode = nil): VNode {.exportTheme.} =
+    child: VNode = nil): VNode  =
   let post = renderPostPartial(conf, data, child)
   result = renderLayout(conf, post)
 
