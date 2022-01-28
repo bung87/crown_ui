@@ -155,7 +155,7 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
   for data in posts:
     contentNode = getContentNode(data)
     name = getPermalinkOf(data, conf)
-    postNode = libTheme.invoke(renderPost,conf, data, contentNode, returnType = VNode)
+    postNode = libTheme.invoke(renderPost, conf, data, contentNode, returnType = VNode)
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
@@ -188,7 +188,6 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
   var i = 0
   var
     name: string
-    postNode: VNode
     textContent: string
     description: string
     content: string
@@ -206,11 +205,11 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     postsNodes.setLen(0)
     for data in pagePosts:
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-      let p = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
+      let p = libTheme.invoke(renderPostPartial, conf, data, verbatim(textContent), returnType = VNode)
       postsNodes.add p
-    if renderPosts != nil and i == 0:
+    if i == 0:
       # render homepage
-      indexNode = libTheme.invoke(renderIndex, conf, postsNodes, pagination)
+      indexNode = libTheme.invoke(renderIndex, conf, postsNodes, pagination, returnType = VNode)
       outfile = homePageDir / "index.html"
       info "Generate homepage", to = outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
@@ -218,7 +217,7 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
           siteName = conf.title, description = description, cssHtml = cssHtml)
       writeFile(outfile, content)
 
-    indexNode = libTheme.invoke(renderPosts,conf, postsNodes, pagination)
+    indexNode = libTheme.invoke(renderPosts, conf, postsNodes, pagination, returnType = VNode)
 
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
@@ -267,13 +266,13 @@ proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[Pos
     for data in pagePosts:
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
       let year = data.datetime(conf).year
-      postNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
+      postNode = libTheme.invoke(renderPostPartial, conf, data, verbatim(textContent), returnType = VNode)
       if archives.hasKey(year):
         archives[year].add postNode
       else:
         archives[year] = @[postNode]
 
-    indexNode = libTheme.invoke(renderArchive,conf, archives)
+    indexNode = libTheme.invoke(renderArchive, conf, archives, returnType = VNode)
 
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
@@ -340,10 +339,10 @@ proc generateCategory(conf: Config; libTheme: Option[Interpreter]; posts: seq[Po
       postNodes.setLen(0)
       for data in pagePosts:
         textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-        postPartialNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
+        postPartialNode = libTheme.invoke(renderPostPartial, conf, data, verbatim(textContent), returnType = VNode)
         postNodes.add(postPartialNode)
 
-      indexNode = libTheme.invoke(renderCategories,conf, postNodes)
+      indexNode = libTheme.invoke(renderCategories, conf, postNodes, returnType = VNode)
       if not dirExists(privOutDir / name):
         createDir(privOutDir / name)
       outfile = privOutDir / name / "index.html"
@@ -378,7 +377,7 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
   # generate tag index
   let prefix = rootUrl / conf.tag_dir
   let outDir = privDest / conf.tag_dir
-  let indexNode = libTheme.invoke(renderTag,conf, tagCount)
+  let indexNode = libTheme.invoke(renderTag, conf, tagCount, returnType = VNode)
   if not dirExists(outDir):
     createDir(outDir)
   let outfile = outDir / "index.html"
@@ -419,10 +418,10 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
         postNodes.setLen(0)
         for data in pagePosts:
           textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-          postPartialNode = libTheme.invoke(renderPostPartial,conf, data, verbatim(textContent))
+          postPartialNode = libTheme.invoke(renderPostPartial, conf, data, verbatim(textContent), returnType = VNode)
           postNodes.add(postPartialNode)
 
-        indexNode = libTheme.invoke(renderPosts,conf, postNodes, pagination)
+        indexNode = libTheme.invoke(renderPosts, conf, postNodes, pagination, returnType = VNode)
         if not dirExists(privOutDir / name):
           createDir(privOutDir / name)
         outfile = privOutDir / name / "index.html"
@@ -433,10 +432,17 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
         writeFile(outfile, content)
         inc i
 
+proc getSearchPath(path: string): seq[string] =
+  result.add path
+  for dir in walkDirRec(path, {pcDir}):
+    result.add dir
+
 proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpreter] =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
-  let intr = loadScript(script)
+  let nimblePath = getHomeDir() / ".nimble" / "pkgs"
+  let searchPaths = getSearchPath(nimblePath)
+  let intr = loadScript(script, VMAddins(), stdPath = findNimStdlibCompileTime(), searchPaths = searchPaths)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
   return intr
 
