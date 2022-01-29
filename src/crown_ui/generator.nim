@@ -15,6 +15,7 @@ import ./io_utils
 import uri
 import segfaults
 import sugar
+import strformat
 import nimscripter
 
 const libThemeName = when defined(windows):
@@ -441,7 +442,9 @@ proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpre
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
   let nimblePath = getHomeDir() / ".nimble" / "pkgs"
-  let searchPaths = getSearchPath(nimblePath)
+  var searchPaths = getSearchPath(nimblePath)
+  let selfLib = currentSourcePath.parentDir.parentDir
+  searchPaths.add selfLib
   let intr = loadScript(script, VMAddins(), stdPath = findNimStdlibCompileTime(), searchPaths = searchPaths)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
   return intr
@@ -464,7 +467,7 @@ proc build*(cwd = getCurrentDir()): int =
   let themeOutPath = themeDir / libThemeName
   var dirver: string
   let libTheme = compileTheme(cwd, themeFile, themeOutPath)
-  echo libTheme.isSome()
+  doAssert libTheme.isSome(), fmt"theme {themeFile} compile fails"
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
