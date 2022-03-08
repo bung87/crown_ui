@@ -23,6 +23,7 @@ requires "fusion"
 requires "scorper >= 1.0.25"
 requires "https://github.com/beef331/oopsie"
 requires "https://github.com/beef331/nimscripter"
+requires "https://github.com/openpeep/nyml"
 # requires "urlly >= 0.2.0 & < 0.3.0"
 
 task ghpage,"gh page":

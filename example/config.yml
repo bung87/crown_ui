@@ -1,34 +1,34 @@
-title: Bungos
-subtitle:
-description:
+title: "Bungos"
+# subtitle:
+# description:
 # keywords:
-author: Bung
-language: zh-cn
-timezone:
+author: "Bung"
+language: "zh-cn"
+# timezone:
 # logo:
 #   text: Bung
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://bung87.github.io
-root: /
+url: "https://bung87.github.io"
+root: "/"
 # https://hexo.io/docs/permalinks
-permalink: :year/:month/:day/:title/
+permalink: ":year/:month/:day/:title/"
 # permalink_defaults:
 
 # Directory
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
+source_dir: "source"
+public_dir: "public"
+tag_dir: "tags"
+archive_dir: "archives"
+category_dir: "categories"
+code_dir: "downloads/code"
+i18n_dir: ":lang"
+# skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
-default_layout: post
+new_post_name: ":title.md" # File name of new posts
+default_layout: "post"
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -54,33 +54,33 @@ highlight:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: 'news'
+  path: "news"
   per_page: 10
-  order_by: -date
-  pagination_dir: page
+  order_by: "-date"
+  pagination_dir: "page"
   
 # Category & Tag
-default_category: uncategorized
-category_map:
-tag_map:
+default_category: "uncategorized"
+# category_map:
+# tag_map:
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: YYYY-MM-DD
-time_format: HH:mm:ss
+date_format: "YYYY-MM-DD"
+time_format: "HH:mm:ss"
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: default
+theme: "default"
 menu:
-  Docs: /docs
-  API: /api
-  News: /news
-  Themes: /themes
-  About: /about
+  Docs: "/docs"
+  API: "/api"
+  News: "/news"
+  Themes: "/themes"
+  About: "/about"
   # Archives: /archives
   # Categories: /categories
   # About: /about
@@ -89,12 +89,12 @@ menu:
   # Works: /works
 
 search:
-    type: insight
+    type: "insight"
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: https://github.com/bung87/bung87.github.io.git
+  type: "git"
+  repo: "https://github.com/bung87/bung87.github.io.git"
   # branch: [branch]
 theme_config:
   source_link:
