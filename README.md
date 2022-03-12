@@ -1,4 +1,4 @@
-# crown_ui  
+# crown_ui  [![GitHub Pages](https://github.com/bung87/crown_ui/actions/workflows/pages.yml/badge.svg?branch=devel)](https://github.com/bung87/crown_ui/actions/workflows/pages.yml)
 
 ## Contribution  
 
