@@ -45,7 +45,7 @@ task preprocess,"preprocess":
   rmFile "manifest.json"
   exec "web_preprocessor -s example/themes/default/assets -d build/assets"
 
-task buildStatic,"build static":
+task buildAssets,"build assets":
   exec "web_preprocessor -s example/themes/default/assets -d example/build"
 
 task serve,"serve":

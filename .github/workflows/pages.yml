@@ -29,8 +29,8 @@ jobs:
         run: nimble build
       - name: Build site
         run: |
-          ./crown_ui --cwd ./example
-          nimble buildStatic
+          ./crown_ui build --cwd ./example
+          nimble buildAssets
       - name: Deploy
         if: matrix.nim == '1.6.2'
         uses: peaceiris/actions-gh-pages@v3
