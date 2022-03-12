@@ -1,6 +1,6 @@
 import karax / [vdom]
 import ./config
-import times
+from times import DateTime, parse
 
 type PostMeta* = tuple
   title: string
@@ -11,6 +11,7 @@ type PostMeta* = tuple
   # child: VNode
   filepath: string
   relpath: string
+  permalink: string
 
 proc datetime*(self: PostMeta; config: Config): DateTime =
   result = parse(self.date, config.dateTimeFormat)

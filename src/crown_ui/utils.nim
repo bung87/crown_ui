@@ -1,4 +1,5 @@
-import yaml, streams
+# import yaml
+# import streams
 import json
 import packages/docutils/highlite
 import packages/docutils/rstgen
@@ -7,21 +8,23 @@ include nmark
 include nmark / insertMarker
 import htmlgen
 import tables
+import nyml
 
-proc parseYaml*(s: Stream): seq[JsonNode] =
-  var parser = initYamlParser(true)
-  var ys = parser.parse(s)
-  result = constructJson(ys)
+# proc parseYaml*(s: Stream): seq[JsonNode] =
+#   var parser = initYamlParser(true)
+#   var ys = parser.parse(s)
+#   result = constructJson(ys)
 
-proc parseYaml*(s: string): seq[JsonNode] =
-  var parser = initYamlParser(true)
-  var ys = parser.parse(s)
-  result = constructJson(ys)
+# proc parseYaml*(s: string): seq[JsonNode] =
+#   var parser = initYamlParser(true)
+#   var ys = parser.parse(s)
+#   result = constructJson(ys)
 
 proc parseYamlConfig*(path: string): JsonNode =
   let s = readFile path
-  let res = parseYaml(s)
-  result = if res.len > 0: res[0] else: newJObject()
+  var yml = Nyml.init(contents = s)
+  # let res = parseYaml(s)
+  result = yml.toJson().contents
 
 
 proc dispA(target: OutputTarget; dest: var string;

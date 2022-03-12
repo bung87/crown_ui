@@ -3,9 +3,8 @@ import karax / [karaxdsl, vdom]
 import ./layout
 import crown_ui/config
 import tables
-import crown_ui/gen_macros
 
-proc renderArchive*(conf: Config; archives: Table[int, seq[VNode]]): Vnode {.exportTheme, cdecl, exportc, dynlib.} =
+proc renderArchive*(conf: Config; archives: Table[string, seq[VNode]]): Vnode =
   let c = buildHtml(tdiv(class = "mt-3")):
     for year, posts in archives:
       tdiv:

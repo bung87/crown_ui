@@ -2,15 +2,13 @@ import karax / [karaxdsl, vdom]
 import ./layout
 import crown_ui/config
 import crown_ui/types
-import crown_ui/format_utils
-import crown_ui/gen_macros
 
 proc renderPostPartial*(conf: Config; data: PostMeta;
-    child: VNode = nil): VNode {.cdecl, exportc, dynlib.} =
+    child: VNode = nil): VNode =
   doAssert conf != nil
   result = buildHtml(tdiv(data-theme = "dark")):
     h4:
-      a(href = getPermalinkOf(data, conf)):
+      a(href = data.permalink):
         text data.title
     tdiv(class = "post-meta"):
       span:
@@ -19,13 +17,15 @@ proc renderPostPartial*(conf: Config; data: PostMeta;
     child
 
 proc renderPost*(conf: Config; data: PostMeta;
-    child: VNode = nil): VNode {.exportTheme, cdecl, exportc, dynlib.} =
+    child: VNode = nil): VNode  =
   let post = renderPostPartial(conf, data, child)
   result = renderLayout(conf, post)
 
 when isMainModule:
   import os
   import crown_ui / [generator]
+  
+  import crown_ui/gen_macros
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
   let conf = parseConfig(exampleDir / "config.yml")
   const sourceDir = exampleDir / "source"
