@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        nim: [ '1.4.6', 'stable', 'devel' ]
+        nim: [ '1.6.2' ]
     name: Nim ${{ matrix.nim }} sample
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +32,7 @@ jobs:
           ./crown_ui --cwd ./example
           nimble buildStatic
       - name: Deploy
-        if: matrix.nim == '1.4.6'
+        if: matrix.nim == '1.6.2'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
