@@ -436,17 +436,16 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
         inc i
 
 proc getSearchPath(path: string): seq[string] =
-  result.add path
   for dir in walkDirRec(path, {pcDir}):
     result.add dir
 
 proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpreter] =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
-  let nimblePath = getHomeDir() / ".nimble" / "pkgs"
-  var searchPaths:seq[string] = getSearchPath(nimblePath)
   let selfLib = currentSourcePath.parentDir.parentDir
-  searchPaths.add selfLib
+  var searchPaths = @[selfLib]
+  let nimblePath = getHomeDir() / ".nimble" / "pkgs"
+  searchPaths.add getSearchPath(nimblePath)
   let intr = loadScript(script, VMAddins(), stdPath = findNimStdlibCompileTime(), searchPaths = searchPaths)
   info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
   return intr

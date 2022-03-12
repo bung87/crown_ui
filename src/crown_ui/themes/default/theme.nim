@@ -1,13 +1,12 @@
-# import segfaults
-import ./post
+import crown_ui/themes/default/post
 export post
-import ./index
+import crown_ui/themes/default/index
 export index
-import ./archive
-export archive
-import ./posts
+import crown_ui/themes/default/posts
 export posts
-import ./category
+import crown_ui/themes/default/category
 export category
-import ./tag
+import crown_ui/themes/default/tag
 export tag
+import crown_ui/themes/default/archive
+export archive
