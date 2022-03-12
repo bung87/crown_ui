@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         nim: [ '1.6.2' ]
@@ -25,7 +25,8 @@ jobs:
       - name: Install dependencies
         run: |
           nimble install -d -Y
-
+      - name: Insall web_preprocessor dependencies
+        run: brew install libsass mozjpeg
       - name: Build
         run: nimble build
       - name: Build site

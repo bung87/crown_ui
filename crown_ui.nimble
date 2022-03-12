@@ -34,7 +34,7 @@ task ghpage,"gh page":
     exec "git config user.email \"crc32@qq.com\""
     exec "git commit -m \"docs(docs): update gh-pages\""
     let url = "\"https://bung87@github.com/bung87/crown_ui.git\""
-    exec "git push --force --quiet " & url & " master:ghpages"
+    exec "git push --force --quiet " & url & " ghpages:ghpages"
 
 
 import strformat,sequtils
