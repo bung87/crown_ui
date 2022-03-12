@@ -25,8 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           nimble install -d -Y
-      - name: Install libsass
-        run: sudo apt-get install -y libsass
+
       - name: Build
         run: nimble build
       - name: Build site
