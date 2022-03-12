@@ -248,7 +248,7 @@ proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[Pos
   var m = postsLen mod perPage
   let pages = if m != 0: postsLen div perPage + 1 else: postsLen div perPage
   var i = 0
-  var archives: Table[int, seq[VNode]]
+  var archives: Table[string, seq[VNode]]
   var
     name: string
     postNode: VNode
@@ -268,7 +268,7 @@ proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[Pos
     privOutDir = if i == 0: privDest / conf.archive_dir else: outDir
     for data in pagePosts:
       textContent = innerText(data.getContentNode(), MaxDescriptionLen, @["pre", "code"])
-      let year = data.datetime(conf).year
+      let year = $data.datetime(conf).year
       postNode = libTheme.invoke(renderPostPartial, conf, data, verbatim(textContent), returnType = VNode)
       if archives.hasKey(year):
         archives[year].add postNode
@@ -453,6 +453,7 @@ proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpre
 
 proc build*(cwd = getCurrentDir()): int =
   ## generate static site
+  info "Build", cwd = cwd
   result = 1
   let conf = parseConfig(cwd / "config.yml")
   let metaPath = cwd / "crown_ui.json"
@@ -482,7 +483,7 @@ proc build*(cwd = getCurrentDir()): int =
   proc cmpPostDate(x, y: PostMeta): int =
     cmp(x.datetime(conf).toTime.toUnix, y.datetime(conf).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
-  # generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)

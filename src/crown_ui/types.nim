@@ -1,6 +1,6 @@
 import karax / [vdom]
 import ./config
-import times
+from times import DateTime, parse
 
 type PostMeta* = tuple
   title: string

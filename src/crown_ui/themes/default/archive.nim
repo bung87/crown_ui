@@ -4,7 +4,7 @@ import ./layout
 import crown_ui/config
 import tables
 
-proc renderArchive*(conf: Config; archives: Table[int, seq[VNode]]): Vnode =
+proc renderArchive*(conf: Config; archives: Table[string, seq[VNode]]): Vnode =
   let c = buildHtml(tdiv(class = "mt-3")):
     for year, posts in archives:
       tdiv:

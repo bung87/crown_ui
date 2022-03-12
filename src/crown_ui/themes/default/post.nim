@@ -2,7 +2,6 @@ import karax / [karaxdsl, vdom]
 import ./layout
 import crown_ui/config
 import crown_ui/types
-import crown_ui/format_utils
 
 proc renderPostPartial*(conf: Config; data: PostMeta;
     child: VNode = nil): VNode =
