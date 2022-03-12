@@ -7,7 +7,7 @@
 
 import karax / [karaxdsl, vdom]
 
-import crown_ui / [config, utils]
+import crown_ui / [config]
 import partial / [header, footer]
 
 proc renderLayout*(conf: Config; n: VNode = nil): VNode =
@@ -23,6 +23,8 @@ proc renderLayout*(conf: Config; n: VNode = nil): VNode =
   # Gc_unref(config)
 
 when isMainModule:
+  import os
+  import crown_ui / [config_parser]
   const exampleDir = currentSourcePath.parentDir.parentDir.parentDir
   let conf = parseConfig(exampleDir / "config.yml")
   setRenderer proc(): VNode = renderLayout(conf)

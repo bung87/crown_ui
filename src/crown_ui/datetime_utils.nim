@@ -5,6 +5,8 @@
 ##
 import npeg, strutils
 import npeg/lib/utf8
+import json 
+
 type Data = seq[string]
 
 const parser = peg("line", d: Data):
@@ -58,3 +60,4 @@ proc toNimFormat*(format: string): string =
   if not r.ok:
     raise newException(ValueError, "can't parse input format: " & format)
   result = words.join("")
+

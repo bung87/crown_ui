@@ -7,6 +7,7 @@ import ./ utils
 import yaml, regex
 import ./ datetime_utils
 import ./config
+import ./config_parser
 import ./html_utils
 import chronicles
 import ./format_utils
@@ -44,7 +45,7 @@ proc splitmd*(content: string): SplitMdResult =
   result.meta = content[metaBegin + 1 ..< metaEnd]
   result.content = content[m.boundaries.b + 1 .. ^1]
 
-proc getPostData*(filepath: string; sourceDir: string): PostMeta =
+proc getPostData*(conf: Config;filepath: string; sourceDir: string): PostMeta =
   ## filepath: post md file path
   ## sourceDir: sourceDir absolute path
   doAssert isAbsolute(sourceDir)
@@ -65,7 +66,8 @@ proc getPostData*(filepath: string; sourceDir: string): PostMeta =
     tags.add e.getStr("")
 
   result = (title: title, id: id, date: date, cates: cates, tags: tags, filepath: filepath,
-      relpath: filepath.relativePath(sourceDir))
+      relpath: filepath.relativePath(sourceDir), permalink: "")
+  result.permalink = getPermalinkOf(result,conf)
 
 proc getContentNode*(pm: PostMeta): VNode =
   let content = readFile(pm.filepath)
@@ -442,7 +444,7 @@ proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpre
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
   let nimblePath = getHomeDir() / ".nimble" / "pkgs"
-  var searchPaths = getSearchPath(nimblePath)
+  var searchPaths:seq[string] = getSearchPath(nimblePath)
   let selfLib = currentSourcePath.parentDir.parentDir
   searchPaths.add selfLib
   let intr = loadScript(script, VMAddins(), stdPath = findNimStdlibCompileTime(), searchPaths = searchPaths)
@@ -475,14 +477,13 @@ proc build*(cwd = getCurrentDir()): int =
   let sources = cwd / sourceDir / "*.md"
   var posts = newSeq[PostMeta]()
   for f in walkFiles(sources):
-    posts.add getPostData(f, absolutePath cwd / sourceDir)
+    posts.add getPostData(conf, f, absolutePath cwd / sourceDir)
   echo posts.len
   proc cmpPostDate(x, y: PostMeta): int =
     cmp(x.datetime(conf).toTime.toUnix, y.datetime(conf).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
   # generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  echo posts.len
   generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateTag(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
