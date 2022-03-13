@@ -15,6 +15,7 @@ import uri
 import segfaults
 import strformat
 import nimscripter
+import slugify
 
 const MaxDescriptionLen = 200
 
@@ -153,6 +154,35 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
     info "Generate post", file = data.relpath, to = outfile.relativePath(cwd)
+    textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
+    description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
+    content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
+        siteName = conf.title, description = description, cssHtml = cssHtml)
+    writeFile(outfile, content)
+
+proc generatePages(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
+    dest = getCurrentDir() / "build"; cssHtml = "") =
+  ## generate all pages
+  var privDest = dest
+  if not dest.isRelativeTo(cwd):
+    privDest = cwd / "build"
+
+  var
+    name: string
+    postNode: VNode
+    textContent: string
+    description: string
+    content: string
+    outfile: string
+    contentNode: VNode
+  for data in posts:
+    contentNode = getContentNode(data)
+    name = slugify(data.title)
+    postNode = libTheme.invoke(renderPage, conf, data, contentNode, returnType = VNode)
+    if not dirExists(privDest / name):
+      createDir(privDest / name)
+    outfile = privDest / name / "index.html"
+    info "Generate page", file = data.relpath, to = outfile.relativePath(cwd)
     textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
@@ -455,22 +485,28 @@ proc build*(cwd = getCurrentDir()): int =
   if dirExists(builtinThemesDir / theme):
     copyDir(builtinThemesDir / theme, themesDir / theme)
   let themeFile = themeDir / "theme.nim"
-  var dirver: string
   let libTheme = compileTheme(cwd, themeFile)
   doAssert libTheme.isSome(), fmt"theme {themeFile} compile fails"
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
-  let sourceDir = (if conf.source_dir.len > 0: conf.source_dir else: "source") / "posts"
-  let sources = cwd / sourceDir / "*.md"
+  let sourceDir = (if conf.source_dir.len > 0: conf.source_dir else: "source") 
+  let postsSourceDir = sourceDir / "posts"
+  let pagesSourceDir = sourceDir / "pages"
+  let postsSourceGlob = cwd / postsSourceDir / "*.md"
+  let pagesSourceGlob = cwd / pagesSourceDir / "*.md"
   var posts = newSeq[PostMeta]()
-  for f in walkFiles(sources):
-    posts.add getPostData(conf, f, absolutePath cwd / sourceDir)
-  echo posts.len
+  var pages = newSeq[PostMeta]()
+  for f in walkFiles(postsSourceGlob):
+    posts.add getPostData(conf, f, absolutePath cwd / postsSourceDir)
+  for f in walkFiles(pagesSourceGlob):
+    pages.add getPostData(conf, f, absolutePath cwd / pagesSourceDir)
+
   proc cmpPostDate(x, y: PostMeta): int =
     cmp(x.datetime(conf).toTime.toUnix, y.datetime(conf).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
   generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generatePages(conf, libTheme, pages, cwd = cwd, cssHtml = cssHtml)
   generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
   generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
