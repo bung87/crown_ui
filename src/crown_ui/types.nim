@@ -12,8 +12,8 @@ type PostMeta* = tuple
   relpath: string
   permalink: string
 
-proc datetime*(self: PostMeta; config: Config): DateTime =
-  result = parse(self.date, config.dateTimeFormat)
+proc datetime*(self: PostMeta; conf: Config): DateTime =
+  result = parse(self.date, conf.dateTimeFormat)
 
 type ThemeMeta* = object
   name*: string
