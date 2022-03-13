@@ -57,5 +57,3 @@ proc renderIndex*(conf: Config; posts: seq[VNode]; pagination = default(Paginati
             p(class = "intro-feature-desc"):
               text "Features powerful APIs for limitless extensibility. Various plugins are available to support most template engines (EJS, Pug, Nunjucks, and many others). Easily integrate with existing NPM packages (Babel, PostCSS, Less/Sass, etc)."
   result = renderLayout(conf, c)
-
-

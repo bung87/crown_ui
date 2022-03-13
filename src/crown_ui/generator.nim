@@ -1,7 +1,6 @@
 
-import std/[os, json, algorithm, strutils, times, sequtils, osproc, dynlib, tables]
+import std/[os, json, algorithm, strutils, times, tables]
 import fusion / [htmlparser, htmlparser/xmltree]
-import unicode except strip, escape
 import karax / [vdom]
 import ./ utils
 import yaml, regex
@@ -12,19 +11,10 @@ import ./html_utils
 import chronicles
 import ./format_utils
 import ./types
-import ./io_utils
 import uri
 import segfaults
-import sugar
 import strformat
 import nimscripter
-
-const libThemeName = when defined(windows):
-    "theme.dll"
-  elif defined(macosx):
-    "libtheme.dylib"
-  else:
-    "libtheme.so"
 
 const MaxDescriptionLen = 200
 
@@ -439,7 +429,7 @@ proc getSearchPath(path: string): seq[string] =
   for dir in walkDirRec(path, {pcDir}):
     result.add dir
 
-proc compileTheme(cwd, themeFile: string; themeOutPath: string): Option[Interpreter] =
+proc compileTheme(cwd, themeFile: string): Option[Interpreter] =
   info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
   let selfLib = currentSourcePath.parentDir.parentDir
@@ -455,7 +445,6 @@ proc build*(cwd = getCurrentDir()): int =
   info "Build", cwd = cwd
   result = 1
   let conf = parseConfig(cwd / "config.yml")
-  let metaPath = cwd / "crown_ui.json"
   let theme = if conf.theme.len > 0: conf.theme else: "default"
   # compile theme
   let themesDir = cwd / "themes"
@@ -466,9 +455,8 @@ proc build*(cwd = getCurrentDir()): int =
   if dirExists(builtinThemesDir / theme):
     copyDir(builtinThemesDir / theme, themesDir / theme)
   let themeFile = themeDir / "theme.nim"
-  let themeOutPath = themeDir / libThemeName
   var dirver: string
-  let libTheme = compileTheme(cwd, themeFile, themeOutPath)
+  let libTheme = compileTheme(cwd, themeFile)
   doAssert libTheme.isSome(), fmt"theme {themeFile} compile fails"
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):

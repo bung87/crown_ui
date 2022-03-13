@@ -1,7 +1,5 @@
-import os
 import json
 import tables
-# import macros
 import jsony
 import oopsie
 import ./config

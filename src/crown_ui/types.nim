@@ -1,4 +1,3 @@
-import karax / [vdom]
 import ./config
 from times import DateTime, parse
 

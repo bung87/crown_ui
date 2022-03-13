@@ -1,5 +1,3 @@
-# import yaml
-# import streams
 import json
 import packages/docutils/highlite
 import packages/docutils/rstgen
@@ -7,18 +5,7 @@ import strutils
 include nmark
 include nmark / insertMarker
 import htmlgen
-import tables
 import nyml
-
-# proc parseYaml*(s: Stream): seq[JsonNode] =
-#   var parser = initYamlParser(true)
-#   var ys = parser.parse(s)
-#   result = constructJson(ys)
-
-# proc parseYaml*(s: string): seq[JsonNode] =
-#   var parser = initYamlParser(true)
-#   var ys = parser.parse(s)
-#   result = constructJson(ys)
 
 proc parseYamlConfig*(path: string): JsonNode =
   let s = readFile path
