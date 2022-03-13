@@ -25,15 +25,6 @@ requires "https://github.com/beef331/oopsie"
 requires "nimscripter >= 1.0.13"
 requires "https://github.com/openpeep/nyml"
 
-# import strformat,sequtils
-# task watch,"watch":
-#   let file = commandLineParams.filterIt( it in ["post","page","index","page","tag","category","archive"])[0]
-#   exec fmt"karun -r -w --css:example/themes/default/css.html example/themes/default/{file}.nim"
-
-# task preprocess,"preprocess":
-#   rmFile "manifest.json"
-#   exec "web_preprocessor -s example/themes/default/assets -d build/assets"
-
 task buildAssets,"build assets":
   rmFile "manifest.json"
   exec "web_preprocessor -s example/themes/default/assets -d example/build"
