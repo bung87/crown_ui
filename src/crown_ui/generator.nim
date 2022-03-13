@@ -113,12 +113,12 @@ proc generatePriv(conf: JsonNode; tpl: string; title: string; cwd: string = getC
     result = scaffold2source(postPath, data)
 
 proc generatePriv(tpl: string; title: string; cwd: string = getCurrentDir()): string =
-  let conf = parseYamlConfig(cwd / "conf.yml")
+  let conf = parseYamlConfig(cwd / "config.yml")
   result = generatePriv(conf, tpl, title, cwd)
 
 proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =
   ## generate new post or page
-  let conf = parseConfig(cwd / "conf.yml")
+  let conf = parseConfig(cwd / "config.yml")
   doAssert tpl.len > 0
   doAssert tpl[0] in ["post", "page"]
   let theTpl = tpl[0]

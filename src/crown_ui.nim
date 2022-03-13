@@ -23,7 +23,7 @@ when isMainModule:
   import cligen
   from std/tables import toTable
   const
-    GenerateHelp = {"tpl": "template"}.toTable()
+    GenerateHelp = {"tpl": "<post|page> <title>"}.toTable()
     BuildHelp = {"cwd": "current working directory"}.toTable()
     ServeHelp = {"cwd": "current working directory", "port": "port"}.toTable()
 
