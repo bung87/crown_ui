@@ -265,6 +265,10 @@ a.pure-menu-link.pure-menu-heading {
   background-color: $main-jumbotron-background-color;
 }
 
+.layout[data-theme="dark"] .content{
+  background-color: $main-jumbotron-background-color;
+}
+
 .jumbotron {
   padding: 20pt 0;
   background-color: $jumbotron-background-color;
@@ -377,7 +381,10 @@ a.pure-menu-link.pure-menu-heading {
 h1.post-title {
   margin-bottom: 0;
 }
-
+.post-page {
+  padding: 10pt 0;
+  margin: 10pt 0;
+}
 .post-page .post-meta {
   margin-top: 0;
   margin-bottom: 20pt;

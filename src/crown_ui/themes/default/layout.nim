@@ -5,7 +5,7 @@ import partial / [header, footer]
 
 proc renderLayout*(conf: Config; n: VNode = nil): VNode =
   doAssert conf != nil
-  result = buildHtml(tdiv(class = "layout")):
+  result = buildHtml(tdiv(class = "layout", data-theme = "dark")):
     PureHeader(conf)
     # tdiv(class = "content"):
       # tdiv(class = "pure-g"):

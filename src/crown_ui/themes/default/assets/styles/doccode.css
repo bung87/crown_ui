@@ -46,26 +46,26 @@
 
 
 /* line numbers */
-pre.code, code {
+pre.code {
     background-color: #eeeeee; }
   
-  pre.code .comment, code .comment {
+  pre.code .comment {
     color: #5c6576; }
   
   pre.code .keyword, code .keyword {
     color: #3B0D06;
     font-weight: bold; }
   
-  pre.code .literal.string, code .literal.string {
+  pre.code .literal.string {
     color: #0c5404; }
   
-  pre.code .name.builtin, code .name.builtin {
+  pre.code .name.builtin {
     color: #352b84; }
   
-  pre.code .deleted, code .deleted {
+  pre.code .deleted {
     background-color: #DEB0A1; }
   
-  pre.code .inserted, code .inserted {
+  pre.code .inserted {
     background-color: #A3D289; }
   
   span.classifier {
