@@ -3035,135 +3035,144 @@ a.pure-menu-link.pure-menu-heading {
   background-color: #1e202a; }
 
 /* line 268, example/themes/default/assets/styles/main.scss */
+.layout[data-theme="dark"] .content {
+  background-color: #1e202a; }
+
+/* line 272, example/themes/default/assets/styles/main.scss */
 .jumbotron {
   padding: 20pt 0;
   background-color: #232733;
   color: #fff; }
-  /* line 273, example/themes/default/assets/styles/main.scss */
+  /* line 277, example/themes/default/assets/styles/main.scss */
   .jumbotron h1 {
     font-size: 225%;
     margin: 0;
     color: #ffe953; }
-  /* line 279, example/themes/default/assets/styles/main.scss */
+  /* line 283, example/themes/default/assets/styles/main.scss */
   .jumbotron h2 {
     font-size: 150%;
     margin-top: 0.7em; }
-  /* line 284, example/themes/default/assets/styles/main.scss */
+  /* line 288, example/themes/default/assets/styles/main.scss */
   .jumbotron h3 {
     font-size: 133%;
     margin-top: 1.5em; }
-  /* line 289, example/themes/default/assets/styles/main.scss */
+  /* line 293, example/themes/default/assets/styles/main.scss */
   .jumbotron li {
     list-style-type: none;
     line-height: 1.5;
     margin-bottom: 0.6em; }
-    /* line 294, example/themes/default/assets/styles/main.scss */
+    /* line 298, example/themes/default/assets/styles/main.scss */
     .jumbotron li::before {
       content: "» ";
       font-weight: bold;
       margin-right: 8px;
       color: #ffe953; }
-  /* line 302, example/themes/default/assets/styles/main.scss */
+  /* line 306, example/themes/default/assets/styles/main.scss */
   .jumbotron a {
     color: #ffe953; }
-    /* line 304, example/themes/default/assets/styles/main.scss */
+    /* line 308, example/themes/default/assets/styles/main.scss */
     .jumbotron a:hover, .jumbotron a:focus {
       color: #fff086; }
-    /* line 308, example/themes/default/assets/styles/main.scss */
+    /* line 312, example/themes/default/assets/styles/main.scss */
     .jumbotron a:active {
       color: #ffe220; }
-  /* line 313, example/themes/default/assets/styles/main.scss */
+  /* line 317, example/themes/default/assets/styles/main.scss */
   .jumbotron figure.highlight {
     padding: 5px;
     margin: 1em 0em;
     font-size: 1em;
     background-color: #2b2e3b; }
 
-/* line 321, example/themes/default/assets/styles/main.scss */
+/* line 325, example/themes/default/assets/styles/main.scss */
 .pure-g > div {
   box-sizing: border-box; }
 
-/* line 326, example/themes/default/assets/styles/main.scss */
+/* line 330, example/themes/default/assets/styles/main.scss */
 .center-banner > .section-heading i.fa,
 .center-banner > .section-heading i.fab,
 .center-banner > .section-heading i.far,
 .center-banner > .section-heading img {
   width: 100%; }
 
-/* line 334, example/themes/default/assets/styles/main.scss */
+/* line 338, example/themes/default/assets/styles/main.scss */
 .center-banner {
   text-align: center; }
 
-/* line 338, example/themes/default/assets/styles/main.scss */
+/* line 342, example/themes/default/assets/styles/main.scss */
 .version-button {
   font-size: 80%;
   background-color: #2b2e3b;
   padding: 5pt 10pt;
   border-radius: 5px; }
-  /* line 344, example/themes/default/assets/styles/main.scss */
+  /* line 348, example/themes/default/assets/styles/main.scss */
   .version-button:hover, .version-button:focus, .version-button:active {
     text-decoration: none;
     color: inherit; }
 
-/* line 353, example/themes/default/assets/styles/main.scss */
+/* line 357, example/themes/default/assets/styles/main.scss */
 .main-block {
   padding-right: 25pt; }
 
-/* line 357, example/themes/default/assets/styles/main.scss */
+/* line 361, example/themes/default/assets/styles/main.scss */
 .hljs {
   padding-left: 20px; }
 
-/* line 362, example/themes/default/assets/styles/main.scss */
+/* line 366, example/themes/default/assets/styles/main.scss */
 .width-reduced {
   max-width: 800px;
   margin: 60pt auto; }
 
-/* line 368, example/themes/default/assets/styles/main.scss */
+/* line 372, example/themes/default/assets/styles/main.scss */
 .post-meta {
   margin: 5pt 0;
   color: #888; }
-  /* line 372, example/themes/default/assets/styles/main.scss */
+  /* line 376, example/themes/default/assets/styles/main.scss */
   .post-meta span {
     display: block; }
 
-/* line 377, example/themes/default/assets/styles/main.scss */
+/* line 381, example/themes/default/assets/styles/main.scss */
 h1.post-title {
   margin-bottom: 0; }
 
-/* line 381, example/themes/default/assets/styles/main.scss */
+/* line 384, example/themes/default/assets/styles/main.scss */
+.post-page {
+  padding: 10pt 0;
+  margin: 10pt 0; }
+
+/* line 388, example/themes/default/assets/styles/main.scss */
 .post-page .post-meta {
   margin-top: 0;
   margin-bottom: 20pt; }
-  /* line 385, example/themes/default/assets/styles/main.scss */
+  /* line 392, example/themes/default/assets/styles/main.scss */
   .post-page .post-meta span {
     display: inline;
     margin-right: 10pt; }
 
-/* line 391, example/themes/default/assets/styles/main.scss */
+/* line 398, example/themes/default/assets/styles/main.scss */
 .news-item h2 {
   font-size: 140%;
   margin: 0; }
 
-/* line 396, example/themes/default/assets/styles/main.scss */
+/* line 403, example/themes/default/assets/styles/main.scss */
 .main-heading, .section-heading {
   text-align: center;
   font-size: 225%;
   margin-top: 0; }
 
-/* line 402, example/themes/default/assets/styles/main.scss */
+/* line 409, example/themes/default/assets/styles/main.scss */
 .section-heading {
   margin-top: 50px; }
 
-/* line 407, example/themes/default/assets/styles/main.scss */
+/* line 414, example/themes/default/assets/styles/main.scss */
 .section-subheading {
   text-align: center;
   line-height: 0;
   margin: 52px 0 48px 0; }
-  /* line 414, example/themes/default/assets/styles/main.scss */
+  /* line 421, example/themes/default/assets/styles/main.scss */
   .section-subheading span {
     display: inline-block;
     position: relative; }
-  /* line 419, example/themes/default/assets/styles/main.scss */
+  /* line 426, example/themes/default/assets/styles/main.scss */
   .section-subheading span:before,
   .section-subheading span:after {
     content: "";
@@ -3173,61 +3182,61 @@ h1.post-title {
     border-top: 1px solid grey;
     top: 0;
     width: 23em; }
-  /* line 430, example/themes/default/assets/styles/main.scss */
+  /* line 437, example/themes/default/assets/styles/main.scss */
   .section-subheading span:before {
     right: 100%;
     margin-right: 15px; }
-  /* line 435, example/themes/default/assets/styles/main.scss */
+  /* line 442, example/themes/default/assets/styles/main.scss */
   .section-subheading span:after {
     left: 100%;
     margin-left: 15px; }
 
 /* AsciiDoc styles */
-/* line 443, example/themes/default/assets/styles/main.scss */
+/* line 450, example/themes/default/assets/styles/main.scss */
 .content img {
   max-width: 100%; }
 
-/* line 447, example/themes/default/assets/styles/main.scss */
+/* line 454, example/themes/default/assets/styles/main.scss */
 .listingblock {
   margin-bottom: 5pt; }
 
-/* line 451, example/themes/default/assets/styles/main.scss */
+/* line 458, example/themes/default/assets/styles/main.scss */
 .listingblock .title {
   padding: 2.8pt 10pt;
   background-color: #73a3c4;
   color: white; }
 
-/* line 457, example/themes/default/assets/styles/main.scss */
+/* line 464, example/themes/default/assets/styles/main.scss */
 .admonitionblock {
   border-top: 2px solid #e9e9e9;
   border-bottom: 2px solid #e9e9e9;
   padding: 10pt 0; }
 
-/* line 463, example/themes/default/assets/styles/main.scss */
+/* line 470, example/themes/default/assets/styles/main.scss */
 .imageblock {
   margin-top: 15pt; }
 
-/* line 467, example/themes/default/assets/styles/main.scss */
+/* line 474, example/themes/default/assets/styles/main.scss */
 .imageblock .title,
 .tableblock .title {
   font-weight: bold;
   padding-left: 10pt;
   color: #656565; }
 
-/* line 474, example/themes/default/assets/styles/main.scss */
+/* line 481, example/themes/default/assets/styles/main.scss */
 .sidebarblock {
   background-color: #f8f7ea;
   padding: 10pt 0; }
-  /* line 478, example/themes/default/assets/styles/main.scss */
+  /* line 485, example/themes/default/assets/styles/main.scss */
   .sidebarblock .title {
     font-weight: bold; }
 
-/* line 483, example/themes/default/assets/styles/main.scss */
+/* line 490, example/themes/default/assets/styles/main.scss */
 i.conum {
   margin-left: 10pt;
   margin-right: 10pt; }
 
-/* line 489, example/themes/default/assets/styles/main.scss */
+/* line 496, example/themes/default/assets/styles/main.scss */
 .conum[data-value] {
   display: inline-block;
   color: #fff !important;
@@ -3243,59 +3252,59 @@ i.conum {
   font-style: normal;
   font-weight: bold; }
 
-/* line 504, example/themes/default/assets/styles/main.scss */
+/* line 511, example/themes/default/assets/styles/main.scss */
 .conum[data-value] * {
   color: #fff !important; }
 
-/* line 507, example/themes/default/assets/styles/main.scss */
+/* line 514, example/themes/default/assets/styles/main.scss */
 .conum[data-value] + b {
   display: none; }
 
-/* line 510, example/themes/default/assets/styles/main.scss */
+/* line 517, example/themes/default/assets/styles/main.scss */
 .conum[data-value]:after {
   content: attr(data-value); }
 
-/* line 514, example/themes/default/assets/styles/main.scss */
+/* line 521, example/themes/default/assets/styles/main.scss */
 span.icon > .fa {
   cursor: default; }
 
-/* line 517, example/themes/default/assets/styles/main.scss */
+/* line 524, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon {
   text-align: center;
   width: 80px; }
 
-/* line 521, example/themes/default/assets/styles/main.scss */
+/* line 528, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon [class^="fa icon-"] {
   font-size: 2.5em;
   cursor: default; }
 
-/* line 525, example/themes/default/assets/styles/main.scss */
+/* line 532, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon .icon-note:before {
   content: "\f05a";
   color: #19407c; }
 
-/* line 529, example/themes/default/assets/styles/main.scss */
+/* line 536, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon .icon-tip:before {
   content: "\f0eb";
   color: #111; }
 
-/* line 534, example/themes/default/assets/styles/main.scss */
+/* line 541, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon .icon-warning:before {
   content: "\f071";
   color: #bf6900; }
 
-/* line 538, example/themes/default/assets/styles/main.scss */
+/* line 545, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon .icon-caution:before {
   content: "\f06d";
   color: #bf3400; }
 
-/* line 542, example/themes/default/assets/styles/main.scss */
+/* line 549, example/themes/default/assets/styles/main.scss */
 .admonitionblock td.icon .icon-important:before {
   content: "\f06a";
   color: #bf0000; }
 
 /* Community section */
-/* line 549, example/themes/default/assets/styles/main.scss */
+/* line 556, example/themes/default/assets/styles/main.scss */
 .fa-irc {
   font-family: Courier, monospace, Arial;
   color: black;
@@ -3303,11 +3312,11 @@ span.icon > .fa {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased; }
 
-/* line 558, example/themes/default/assets/styles/main.scss */
+/* line 565, example/themes/default/assets/styles/main.scss */
 .fa-gitter.black {
   color: black; }
 
-/* line 563, example/themes/default/assets/styles/main.scss */
+/* line 570, example/themes/default/assets/styles/main.scss */
 #community .fa,
 #community .fc,
 #community .fab {
@@ -3315,152 +3324,152 @@ span.icon > .fa {
   font-size: 175%;
   vertical-align: middle; }
 
-/* line 571, example/themes/default/assets/styles/main.scss */
+/* line 578, example/themes/default/assets/styles/main.scss */
 #community .fa-gitter {
   font-size: 150%;
   margin-bottom: 5pt; }
 
-/* line 576, example/themes/default/assets/styles/main.scss */
+/* line 583, example/themes/default/assets/styles/main.scss */
 #community .fa-irc {
   color: inherit; }
 
-/* line 580, example/themes/default/assets/styles/main.scss */
+/* line 587, example/themes/default/assets/styles/main.scss */
 #community h1 {
   text-align: center; }
 
-/* line 584, example/themes/default/assets/styles/main.scss */
+/* line 591, example/themes/default/assets/styles/main.scss */
 #community ul {
   padding: 0; }
 
-/* line 588, example/themes/default/assets/styles/main.scss */
+/* line 595, example/themes/default/assets/styles/main.scss */
 #community .pure-u-1 {
   padding: 0 20pt; }
 
-/* line 593, example/themes/default/assets/styles/main.scss */
+/* line 600, example/themes/default/assets/styles/main.scss */
 .page-title {
   padding-top: 70pt; }
 
-/* line 597, example/themes/default/assets/styles/main.scss */
+/* line 604, example/themes/default/assets/styles/main.scss */
 .post-date {
   margin-top: -40px;
   margin-bottom: 40px; }
 
-/* line 602, example/themes/default/assets/styles/main.scss */
+/* line 609, example/themes/default/assets/styles/main.scss */
 .feed-rss {
   text-align: center; }
 
-/* line 606, example/themes/default/assets/styles/main.scss */
+/* line 613, example/themes/default/assets/styles/main.scss */
 .pure-button {
   padding: 12px 24px; }
 
-/* line 610, example/themes/default/assets/styles/main.scss */
+/* line 617, example/themes/default/assets/styles/main.scss */
 .pure-menu-heading {
   float: left; }
 
-/* line 613, example/themes/default/assets/styles/main.scss */
+/* line 620, example/themes/default/assets/styles/main.scss */
 .fl {
   float: left; }
 
-/* line 616, example/themes/default/assets/styles/main.scss */
+/* line 623, example/themes/default/assets/styles/main.scss */
 .fr {
   float: right; }
 
-/* line 623, example/themes/default/assets/styles/main.scss */
+/* line 630, example/themes/default/assets/styles/main.scss */
 a.pure-button {
   background-color: #ccc;
   margin: 15px 10px;
   color: #111;
   text-decoration: none; }
-  /* line 629, example/themes/default/assets/styles/main.scss */
+  /* line 636, example/themes/default/assets/styles/main.scss */
   a.pure-button:hover, a.pure-button:focus, a.pure-button:active {
     box-shadow: none;
     background-image: none; }
-  /* line 635, example/themes/default/assets/styles/main.scss */
+  /* line 642, example/themes/default/assets/styles/main.scss */
   a.pure-button:hover, a.pure-button:focus {
     background-color: #b3b3b3;
     color: #111; }
-  /* line 640, example/themes/default/assets/styles/main.scss */
+  /* line 647, example/themes/default/assets/styles/main.scss */
   a.pure-button:active {
     background-color: #b3b3b3;
     color: #111; }
 
-/* line 646, example/themes/default/assets/styles/main.scss */
+/* line 653, example/themes/default/assets/styles/main.scss */
 a.pure-button.pure-button-primary {
   background-color: #ffe953;
   color: #111; }
-  /* line 649, example/themes/default/assets/styles/main.scss */
+  /* line 656, example/themes/default/assets/styles/main.scss */
   a.pure-button.pure-button-primary:hover, a.pure-button.pure-button-primary:focus {
     background-color: #ffe220;
     color: #111; }
-  /* line 654, example/themes/default/assets/styles/main.scss */
+  /* line 661, example/themes/default/assets/styles/main.scss */
   a.pure-button.pure-button-primary:active {
     background-color: #ffe220;
     color: #111; }
 
-/* line 660, example/themes/default/assets/styles/main.scss */
+/* line 667, example/themes/default/assets/styles/main.scss */
 section#book img {
   border: 1px solid #272935;
   max-width: 80%;
   height: auto;
   display: block; }
 
-/* line 667, example/themes/default/assets/styles/main.scss */
+/* line 674, example/themes/default/assets/styles/main.scss */
 span.disclaimer {
   color: #ffe953; }
 
-/* line 671, example/themes/default/assets/styles/main.scss */
+/* line 678, example/themes/default/assets/styles/main.scss */
 p.disclaimer {
   font-size: 60%;
   color: #cfcfcf; }
 
-/* line 678, example/themes/default/assets/styles/main.scss */
+/* line 685, example/themes/default/assets/styles/main.scss */
 section#donations .main-block h1 {
   margin: 0; }
 
-/* line 682, example/themes/default/assets/styles/main.scss */
+/* line 689, example/themes/default/assets/styles/main.scss */
 section#donations .fa-heart {
   color: #ea4c2a;
   font-size: 70%;
   padding-right: 6pt; }
 
-/* line 688, example/themes/default/assets/styles/main.scss */
+/* line 695, example/themes/default/assets/styles/main.scss */
 section#donations .pure-u-md-2-5 {
   background: radial-gradient(50% 56%, #cceaff, #fff); }
 
-/* line 692, example/themes/default/assets/styles/main.scss */
+/* line 699, example/themes/default/assets/styles/main.scss */
 section#donations #sponsors-list {
   margin-bottom: 48px; }
 
-/* line 696, example/themes/default/assets/styles/main.scss */
+/* line 703, example/themes/default/assets/styles/main.scss */
 section#donations #sponsors-list a {
   margin-right: 20pt;
   text-align: center; }
 
-/* line 701, example/themes/default/assets/styles/main.scss */
+/* line 708, example/themes/default/assets/styles/main.scss */
 section#donations #sponsors-list img {
   height: 100px;
   display: block;
   margin-bottom: 10pt; }
 
-/* line 708, example/themes/default/assets/styles/main.scss */
+/* line 715, example/themes/default/assets/styles/main.scss */
 .center {
   display: flex;
   justify-content: center;
   align-items: center; }
 
 /* Style for the featured projects section */
-/* line 717, example/themes/default/assets/styles/main.scss */
+/* line 724, example/themes/default/assets/styles/main.scss */
 .feature-projects .pure-u-1-3,
 .feature-projects .pure-u-md-1-3 {
   align-self: flex-start; }
 
-/* line 723, example/themes/default/assets/styles/main.scss */
+/* line 730, example/themes/default/assets/styles/main.scss */
 .project-container {
   padding: 15pt 25pt; }
-  /* line 724, example/themes/default/assets/styles/main.scss */
+  /* line 731, example/themes/default/assets/styles/main.scss */
   .project-container h2 {
     margin: 0; }
-  /* line 728, example/themes/default/assets/styles/main.scss */
+  /* line 735, example/themes/default/assets/styles/main.scss */
   .project-container .tag {
     font-size: 52%;
     background-color: #2b2e3b;
@@ -3469,24 +3478,24 @@ section#donations #sponsors-list img {
     padding: 2pt 5pt;
     white-space: nowrap; }
 
-/* line 738, example/themes/default/assets/styles/main.scss */
+/* line 745, example/themes/default/assets/styles/main.scss */
 .project-container,
 .sponsor-container {
   display: inline-block;
   text-align: justify; }
-  /* line 746, example/themes/default/assets/styles/main.scss */
+  /* line 753, example/themes/default/assets/styles/main.scss */
   .project-container a:hover .title, .project-container a:focus .title,
   .sponsor-container a:hover .title,
   .sponsor-container a:focus .title {
     text-decoration: underline;
     color: #111; }
-  /* line 752, example/themes/default/assets/styles/main.scss */
+  /* line 759, example/themes/default/assets/styles/main.scss */
   .project-container a:active .title,
   .sponsor-container a:active .title {
     text-decoration: none;
     color: #111; }
 
-/* line 760, example/themes/default/assets/styles/main.scss */
+/* line 767, example/themes/default/assets/styles/main.scss */
 .project-box {
   width: 100px;
   height: 100px;
@@ -3496,7 +3505,7 @@ section#donations #sponsors-list img {
   margin-left: auto;
   margin-right: auto; }
 
-/* line 770, example/themes/default/assets/styles/main.scss */
+/* line 777, example/themes/default/assets/styles/main.scss */
 .project-box > h1 {
   background-color: #3d3d3d;
   width: 50px;
@@ -3504,107 +3513,107 @@ section#donations #sponsors-list img {
   color: white;
   line-height: 1.3; }
 
-/* line 778, example/themes/default/assets/styles/main.scss */
+/* line 785, example/themes/default/assets/styles/main.scss */
 #karax {
   background-image: url("https://www.gravatar.com/avatar/6275fdd9f48ec9184c5d6511d525c563?s=100&d=identicon"); }
 
-/* line 782, example/themes/default/assets/styles/main.scss */
+/* line 789, example/themes/default/assets/styles/main.scss */
 #nimbus {
   background-image: url("https://www.gravatar.com/avatar/6275fdd8f48eew184c5c6511d525c563?s=100&d=identicon"); }
 
-/* line 786, example/themes/default/assets/styles/main.scss */
+/* line 793, example/themes/default/assets/styles/main.scss */
 #reelvalley {
   background-image: url("{{ site.baseurl }}/assets/img/reelvalley.jpg"); }
 
-/* line 792, example/themes/default/assets/styles/main.scss */
+/* line 799, example/themes/default/assets/styles/main.scss */
 .sponsor-container {
   width: 160pt;
   font-size: 90%;
   text-align: center; }
-  /* line 797, example/themes/default/assets/styles/main.scss */
+  /* line 804, example/themes/default/assets/styles/main.scss */
   .sponsor-container img {
     width: 150px; }
 
-/* line 804, example/themes/default/assets/styles/main.scss */
+/* line 811, example/themes/default/assets/styles/main.scss */
 div.image {
   margin-top: 80px; }
-  /* line 807, example/themes/default/assets/styles/main.scss */
+  /* line 814, example/themes/default/assets/styles/main.scss */
   div.image img {
     height: auto;
     max-width: 90%;
     display: block; }
-  /* line 813, example/themes/default/assets/styles/main.scss */
+  /* line 820, example/themes/default/assets/styles/main.scss */
   div.image p {
     font-size: 9pt; }
 
-/* line 818, example/themes/default/assets/styles/main.scss */
+/* line 825, example/themes/default/assets/styles/main.scss */
 div.image.right {
   text-align: right; }
-  /* line 821, example/themes/default/assets/styles/main.scss */
+  /* line 828, example/themes/default/assets/styles/main.scss */
   div.image.right img {
     margin-left: auto; }
 
-/* line 826, example/themes/default/assets/styles/main.scss */
+/* line 833, example/themes/default/assets/styles/main.scss */
 div.code-align {
   padding-right: 15pt; }
-  /* line 828, example/themes/default/assets/styles/main.scss */
+  /* line 835, example/themes/default/assets/styles/main.scss */
   div.code-align h1:first-child,
   div.code-align h2:first-child,
   div.code-align h3:first-child {
     margin-top: 0; }
 
-/* line 835, example/themes/default/assets/styles/main.scss */
+/* line 842, example/themes/default/assets/styles/main.scss */
 .pure-u-1.center > img {
   margin-bottom: 50px; }
 
-/* line 840, example/themes/default/assets/styles/main.scss */
+/* line 847, example/themes/default/assets/styles/main.scss */
 .features .fa-windows,
 .features .fa-linux,
 .features .fa-apple {
   margin-right: 20pt; }
 
-/* line 847, example/themes/default/assets/styles/main.scss */
+/* line 854, example/themes/default/assets/styles/main.scss */
 .call-to-action {
   padding: 20px 0 60px 0; }
 
-/* line 852, example/themes/default/assets/styles/main.scss */
+/* line 859, example/themes/default/assets/styles/main.scss */
 .content.ffi figure.highlight {
   margin: 20pt 0; }
 
-/* line 860, example/themes/default/assets/styles/main.scss */
+/* line 867, example/themes/default/assets/styles/main.scss */
 .os-box i {
   float: left; }
 
-/* line 863, example/themes/default/assets/styles/main.scss */
+/* line 870, example/themes/default/assets/styles/main.scss */
 .os-box .links {
   display: inline; }
-  /* line 866, example/themes/default/assets/styles/main.scss */
+  /* line 873, example/themes/default/assets/styles/main.scss */
   .os-box .links span {
     display: block; }
 
-/* line 872, example/themes/default/assets/styles/main.scss */
+/* line 879, example/themes/default/assets/styles/main.scss */
 .os-pickers {
   text-align: center; }
-  /* line 875, example/themes/default/assets/styles/main.scss */
+  /* line 882, example/themes/default/assets/styles/main.scss */
   .os-pickers h2 {
     margin-top: 20pt; }
-  /* line 879, example/themes/default/assets/styles/main.scss */
+  /* line 886, example/themes/default/assets/styles/main.scss */
   .os-pickers a {
     text-decoration: none;
     color: #111; }
-    /* line 884, example/themes/default/assets/styles/main.scss */
+    /* line 891, example/themes/default/assets/styles/main.scss */
     .os-pickers a:hover h2, .os-pickers a:focus h2 {
       text-decoration: underline;
       color: #111; }
-    /* line 890, example/themes/default/assets/styles/main.scss */
+    /* line 897, example/themes/default/assets/styles/main.scss */
     .os-pickers a:active h2 {
       text-decoration: none;
       color: #111; }
   @media (max-width: 850px) {
-    /* line 898, example/themes/default/assets/styles/main.scss */
+    /* line 905, example/themes/default/assets/styles/main.scss */
     .os-pickers div {
       margin-right: 5pt; } }
-/* line 904, example/themes/default/assets/styles/main.scss */
+/* line 911, example/themes/default/assets/styles/main.scss */
 .os-picker-box {
   background-color: #2b2e3b;
   color: white;
@@ -3613,21 +3622,21 @@ div.code-align {
   margin-right: auto;
   height: 100pt;
   width: 100pt; }
-  /* line 915, example/themes/default/assets/styles/main.scss */
+  /* line 922, example/themes/default/assets/styles/main.scss */
   .os-picker-box i {
     font-size: 500%; }
-  /* line 919, example/themes/default/assets/styles/main.scss */
+  /* line 926, example/themes/default/assets/styles/main.scss */
   .os-picker-box i.fa-windows {
     font-size: 800%; }
-  /* line 923, example/themes/default/assets/styles/main.scss */
+  /* line 930, example/themes/default/assets/styles/main.scss */
   .os-picker-box i.fa-apple {
     margin-right: 15pt; }
 
-/* line 928, example/themes/default/assets/styles/main.scss */
+/* line 935, example/themes/default/assets/styles/main.scss */
 .download-button {
   width: 200pt; }
 
-/* line 936, example/themes/default/assets/styles/main.scss */
+/* line 943, example/themes/default/assets/styles/main.scss */
 .community .fa,
 .community .fab,
 .community .fc,
@@ -3639,49 +3648,49 @@ div.code-align {
   text-align: center;
   margin-right: 5pt; }
 
-/* line 946, example/themes/default/assets/styles/main.scss */
+/* line 953, example/themes/default/assets/styles/main.scss */
 .fa.li,
 .fab.li,
 .fc.li {
   margin-left: 15pt; }
 
-/* line 956, example/themes/default/assets/styles/main.scss */
+/* line 963, example/themes/default/assets/styles/main.scss */
 .sponsors .call-to-action,
 .donate .call-to-action {
   margin-top: 0; }
 
-/* line 960, example/themes/default/assets/styles/main.scss */
+/* line 967, example/themes/default/assets/styles/main.scss */
 .sponsors span.tag,
 .donate span.tag {
   font-size: 60%;
   width: 200px; }
 
-/* line 965, example/themes/default/assets/styles/main.scss */
+/* line 972, example/themes/default/assets/styles/main.scss */
 .sponsors table,
 .donate table {
   font-size: 140%;
   width: 100%; }
 
-/* line 971, example/themes/default/assets/styles/main.scss */
+/* line 978, example/themes/default/assets/styles/main.scss */
 tr > th,
 tr > td {
   padding-right: 15pt; }
 
-/* line 976, example/themes/default/assets/styles/main.scss */
+/* line 983, example/themes/default/assets/styles/main.scss */
 table.tableblock,
 div.content > table {
   font-size: 90%; }
-  /* line 979, example/themes/default/assets/styles/main.scss */
+  /* line 986, example/themes/default/assets/styles/main.scss */
   table.tableblock thead > tr,
   div.content > table thead > tr {
     background-color: #e9e9e9;
     border-bottom: 4px solid #9c9c9c; }
-  /* line 984, example/themes/default/assets/styles/main.scss */
+  /* line 991, example/themes/default/assets/styles/main.scss */
   table.tableblock th,
   div.content > table th {
     padding: 10pt;
     text-align: left; }
-  /* line 989, example/themes/default/assets/styles/main.scss */
+  /* line 996, example/themes/default/assets/styles/main.scss */
   table.tableblock td,
   div.content > table td {
     padding-top: 5pt;
@@ -3690,73 +3699,73 @@ div.content > table {
     padding-right: 10pt;
     border-bottom: 2px solid #e9e9e9;
     height: 50px; }
-  /* line 999, example/themes/default/assets/styles/main.scss */
+  /* line 1006, example/themes/default/assets/styles/main.scss */
   table.tableblock td.name,
   table.tableblock th.name,
   div.content > table td.name,
   div.content > table th.name {
     width: 250px; }
-  /* line 1004, example/themes/default/assets/styles/main.scss */
+  /* line 1011, example/themes/default/assets/styles/main.scss */
   table.tableblock td img,
   div.content > table td img {
     height: 50px; }
 
-/* line 1012, example/themes/default/assets/styles/main.scss */
+/* line 1019, example/themes/default/assets/styles/main.scss */
 .documentation div.pure-u-1 {
   padding-right: 10pt; }
 
-/* line 1019, example/themes/default/assets/styles/main.scss */
+/* line 1026, example/themes/default/assets/styles/main.scss */
 blockquote {
   background-color: #efefef;
   padding: 1pt 6pt;
   border-left: 2px solid #7d7d7d; }
 
 @media (max-width: 1200px) {
-  /* line 1027, example/themes/default/assets/styles/main.scss */
+  /* line 1034, example/themes/default/assets/styles/main.scss */
   body {
     font-size: 16px; }
-  /* line 1033, example/themes/default/assets/styles/main.scss */
+  /* line 1040, example/themes/default/assets/styles/main.scss */
   .pure-menu.pure-menu-horizontal li {
     font-size: 16px; }
-  /* line 1042, example/themes/default/assets/styles/main.scss */
+  /* line 1049, example/themes/default/assets/styles/main.scss */
   .site-logo {
     height: 25px;
     padding-left: 4px; }
-  /* line 1047, example/themes/default/assets/styles/main.scss */
+  /* line 1054, example/themes/default/assets/styles/main.scss */
   .menu-separator {
     margin: 0 5px -12px 5px; } }
 
 @media (max-width: 1000px) {
-  /* line 1054, example/themes/default/assets/styles/main.scss */
+  /* line 1061, example/themes/default/assets/styles/main.scss */
   .post-meta {
     margin-bottom: -5px; }
-  /* line 1058, example/themes/default/assets/styles/main.scss */
+  /* line 1065, example/themes/default/assets/styles/main.scss */
   a.pure-menu-link {
     padding: 17px 10px; }
-  /* line 1062, example/themes/default/assets/styles/main.scss */
+  /* line 1069, example/themes/default/assets/styles/main.scss */
   .pure-menu.pure-menu-horizontal {
     position: fixed; }
-    /* line 1064, example/themes/default/assets/styles/main.scss */
+    /* line 1071, example/themes/default/assets/styles/main.scss */
     .pure-menu.pure-menu-horizontal li {
       font-size: 14px; } }
 
 @media (max-width: 767px) {
-  /* line 1072, example/themes/default/assets/styles/main.scss */
+  /* line 1079, example/themes/default/assets/styles/main.scss */
   .content {
     margin: 0 2.5%; }
-  /* line 1076, example/themes/default/assets/styles/main.scss */
+  /* line 1083, example/themes/default/assets/styles/main.scss */
   footer img {
     height: 25px; }
-  /* line 1080, example/themes/default/assets/styles/main.scss */
+  /* line 1087, example/themes/default/assets/styles/main.scss */
   .pure-menu-list {
     float: none;
     padding-right: 0px; }
-  /* line 1085, example/themes/default/assets/styles/main.scss */
+  /* line 1092, example/themes/default/assets/styles/main.scss */
   section#book img {
     max-width: 50%;
     margin-left: auto;
     margin-right: auto; }
-  /* line 1091, example/themes/default/assets/styles/main.scss */
+  /* line 1098, example/themes/default/assets/styles/main.scss */
   .menu-fade {
     display: block;
     height: 47.3px;
@@ -3766,42 +3775,42 @@ blockquote {
     right: 0;
     top: 0;
     background: linear-gradient(to right, transparent, #171921); }
-  /* line 1102, example/themes/default/assets/styles/main.scss */
+  /* line 1109, example/themes/default/assets/styles/main.scss */
   .page-title {
     padding-top: 70px; }
-  /* line 1109, example/themes/default/assets/styles/main.scss */
+  /* line 1116, example/themes/default/assets/styles/main.scss */
   .hackytable tr > td:first-child {
     display: none; }
-  /* line 1113, example/themes/default/assets/styles/main.scss */
+  /* line 1120, example/themes/default/assets/styles/main.scss */
   .ribbon {
     display: none; } }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* line 1121, example/themes/default/assets/styles/main.scss */
+  /* line 1128, example/themes/default/assets/styles/main.scss */
   body {
     height: 100%;
     display: block;
     min-height: auto; }
-  /* line 1127, example/themes/default/assets/styles/main.scss */
+  /* line 1134, example/themes/default/assets/styles/main.scss */
   .site-content {
     height: 100%; } }
 
-/* line 1132, example/themes/default/assets/styles/main.scss */
+/* line 1139, example/themes/default/assets/styles/main.scss */
 body {
   color: snow; }
 
-/* line 1136, example/themes/default/assets/styles/main.scss */
+/* line 1143, example/themes/default/assets/styles/main.scss */
 .site-header {
   height: 48px; }
 
-/* line 1140, example/themes/default/assets/styles/main.scss */
+/* line 1147, example/themes/default/assets/styles/main.scss */
 .nav-content {
   /* overflow:auto; cause safari hide overlay element even it is fixed */
   display: flow-root;
   text-align: center;
   overflow-y: visible; }
 
-/* line 1146, example/themes/default/assets/styles/main.scss */
+/* line 1153, example/themes/default/assets/styles/main.scss */
 .pure-menu .pure-input,
 .pure-menu .pure-input-rounded {
   vertical-align: top;
@@ -3813,21 +3822,21 @@ body {
   color: snow; }
 
 @media (min-width: 1200px) {
-  /* line 1166, example/themes/default/assets/styles/main.scss */
+  /* line 1173, example/themes/default/assets/styles/main.scss */
   .pure-menu input {
     -webkit-font-smoothing: antialiased;
     text-align: center; }
-  /* line 1171, example/themes/default/assets/styles/main.scss */
+  /* line 1178, example/themes/default/assets/styles/main.scss */
   .pure-menu .pure-input-rounded:focus,
   .pure-menu .pure-input:focus {
     border-width: 0.2px !important;
     padding: 0.2em 5em; } }
 
-/* line 1177, example/themes/default/assets/styles/main.scss */
+/* line 1184, example/themes/default/assets/styles/main.scss */
 .pure-menu input {
   vertical-align: text-top; }
 
-/* line 1180, example/themes/default/assets/styles/main.scss */
+/* line 1187, example/themes/default/assets/styles/main.scss */
 .pure-menu input:focus,
 .pure-menu textarea:focus,
 .pure-menu keygen:focus,
@@ -3839,47 +3848,47 @@ body {
   outline: none;
   /* text-align: left; */ }
 
-/* line 1192, example/themes/default/assets/styles/main.scss */
+/* line 1199, example/themes/default/assets/styles/main.scss */
 .video-card {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: all 0.25s ease-in-out; }
 
-/* line 1197, example/themes/default/assets/styles/main.scss */
+/* line 1204, example/themes/default/assets/styles/main.scss */
 .video-card:hover {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1); }
 
-/* line 1203, example/themes/default/assets/styles/main.scss */
+/* line 1210, example/themes/default/assets/styles/main.scss */
 video {
   width: 100%; }
 
-/* line 1207, example/themes/default/assets/styles/main.scss */
+/* line 1214, example/themes/default/assets/styles/main.scss */
 .stretch {
   display: flex;
   align-items: stretch; }
-  /* line 1210, example/themes/default/assets/styles/main.scss */
+  /* line 1217, example/themes/default/assets/styles/main.scss */
   .stretch [class^="pure-u-"] {
     overflow: hidden; }
 
-/* line 1216, example/themes/default/assets/styles/main.scss */
+/* line 1223, example/themes/default/assets/styles/main.scss */
 .half img {
   height: 50%; }
 
-/* line 1224, example/themes/default/assets/styles/main.scss */
+/* line 1231, example/themes/default/assets/styles/main.scss */
 .video-card {
   overflow: hidden;
   font-size: 0;
   position: relative; }
-  /* line 1227, example/themes/default/assets/styles/main.scss */
+  /* line 1234, example/themes/default/assets/styles/main.scss */
   .video-card a {
     color: snow;
     display: inline-block; }
-  /* line 1233, example/themes/default/assets/styles/main.scss */
+  /* line 1240, example/themes/default/assets/styles/main.scss */
   .video-card:hover .video-card-info {
     bottom: 0; }
-  /* line 1237, example/themes/default/assets/styles/main.scss */
+  /* line 1244, example/themes/default/assets/styles/main.scss */
   .video-card-info {
     pointer-events: none;
     width: 100%;
@@ -3891,140 +3900,140 @@ video {
     left: 0;
     padding-left: 1em; }
 
-/* line 1249, example/themes/default/assets/styles/main.scss */
+/* line 1256, example/themes/default/assets/styles/main.scss */
 .pure-menu-link {
   color: #fff; }
 
-/* line 1253, example/themes/default/assets/styles/main.scss */
+/* line 1260, example/themes/default/assets/styles/main.scss */
 .pure-menu-horizontal .pure-menu-children {
   right: 0; }
 
-/* line 1257, example/themes/default/assets/styles/main.scss */
+/* line 1264, example/themes/default/assets/styles/main.scss */
 .pure-menu-children {
   background: #171921; }
-  /* line 1259, example/themes/default/assets/styles/main.scss */
+  /* line 1266, example/themes/default/assets/styles/main.scss */
   .pure-menu-children .pure-menu-link {
     margin-top: 0;
     display: inline-block;
     width: 100%; }
 
-/* line 1265, example/themes/default/assets/styles/main.scss */
+/* line 1272, example/themes/default/assets/styles/main.scss */
 .pure-menu-item .pure-menu-item {
   display: none; }
 
-/* line 1269, example/themes/default/assets/styles/main.scss */
+/* line 1276, example/themes/default/assets/styles/main.scss */
 .pure-menu-allow-hover:hover > .pure-menu-allow-hover {
   display: block; }
 
-/* line 1273, example/themes/default/assets/styles/main.scss */
+/* line 1280, example/themes/default/assets/styles/main.scss */
 .pure-menu-allow-hover:hover .pure-menu-children,
 .pure-menu-active .pure-menu-children {
   display: block;
   position: absolute; }
 
-/* line 1278, example/themes/default/assets/styles/main.scss */
+/* line 1285, example/themes/default/assets/styles/main.scss */
 .pure-menu-allow-hover:hover .pure-menu-item {
   display: block; }
 
-/* line 1282, example/themes/default/assets/styles/main.scss */
+/* line 1289, example/themes/default/assets/styles/main.scss */
 .pure-menu-children {
   position: static !important; }
 
-/* line 1286, example/themes/default/assets/styles/main.scss */
+/* line 1293, example/themes/default/assets/styles/main.scss */
 .pure-menu.pure-menu-horizontal a {
   box-sizing: border-box; }
 
-/* line 1290, example/themes/default/assets/styles/main.scss */
+/* line 1297, example/themes/default/assets/styles/main.scss */
 .pure-menu.pure-menu-horizontal li {
   min-width: 128px; }
 
-/* line 1294, example/themes/default/assets/styles/main.scss */
+/* line 1301, example/themes/default/assets/styles/main.scss */
 .item-level-2 {
   position: absolute !important;
   top: 0 !important;
   left: 100% !important; }
 
-/* line 1299, example/themes/default/assets/styles/main.scss */
+/* line 1306, example/themes/default/assets/styles/main.scss */
 .pure-menu-has-children-level-1 > .pure-menu-link:after {
   content: "" !important; }
 
-/* line 1303, example/themes/default/assets/styles/main.scss */
+/* line 1310, example/themes/default/assets/styles/main.scss */
 #ROOT {
   display: flex;
   flex-flow: column;
   min-height: 100vh; }
 
-/* line 1308, example/themes/default/assets/styles/main.scss */
+/* line 1315, example/themes/default/assets/styles/main.scss */
 #ROOT > .content {
   flex: 1; }
 
 /* The emerging W3C standard
    that is currently Firefox-only */
-/* line 1314, example/themes/default/assets/styles/main.scss */
+/* line 1321, example/themes/default/assets/styles/main.scss */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(121, 121, 121, 0.214) #0e0e0e; }
 
 /* Works on Chrome/Edge/Safari */
-/* line 1320, example/themes/default/assets/styles/main.scss */
+/* line 1327, example/themes/default/assets/styles/main.scss */
 *::-webkit-scrollbar {
   width: 12px; }
 
-/* line 1323, example/themes/default/assets/styles/main.scss */
+/* line 1330, example/themes/default/assets/styles/main.scss */
 *::-webkit-scrollbar-track {
   background: #0e0e0e; }
 
-/* line 1326, example/themes/default/assets/styles/main.scss */
+/* line 1333, example/themes/default/assets/styles/main.scss */
 *::-webkit-scrollbar-thumb {
   background-color: rgba(152, 152, 152, 0.214);
   border-radius: 6px; }
 
-/* line 1331, example/themes/default/assets/styles/main.scss */
+/* line 1338, example/themes/default/assets/styles/main.scss */
 body {
   scrollbar-gutter: force; }
 
-/* line 1334, example/themes/default/assets/styles/main.scss */
+/* line 1341, example/themes/default/assets/styles/main.scss */
 .stretch {
   max-height: 565px;
   overflow: hidden; }
 
-/* line 1338, example/themes/default/assets/styles/main.scss */
+/* line 1345, example/themes/default/assets/styles/main.scss */
 .layout {
   min-height: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column; }
-  /* line 1354, example/themes/default/assets/styles/main.scss */
+  /* line 1361, example/themes/default/assets/styles/main.scss */
   .layout > .main {
     flex: 1; }
 
-/* line 1361, example/themes/default/assets/styles/main.scss */
+/* line 1368, example/themes/default/assets/styles/main.scss */
 body {
   min-height: 100%;
   min-height: 100vh; }
 
-/* line 1366, example/themes/default/assets/styles/main.scss */
+/* line 1373, example/themes/default/assets/styles/main.scss */
 #banner-start {
   text-align: center;
   padding: 40px 0;
   font-size: 0; }
-  /* line 1370, example/themes/default/assets/styles/main.scss */
+  /* line 1377, example/themes/default/assets/styles/main.scss */
   #banner-start > * {
     font-size: initial; }
 
-/* line 1374, example/themes/default/assets/styles/main.scss */
+/* line 1381, example/themes/default/assets/styles/main.scss */
 #banner-start-command {
   background: #283542;
   font-family: "Source Code Pro", Monaco, Menlo, Consolas, monospace;
   display: inline-block;
   padding: 15px 20px; }
 
-/* line 1381, example/themes/default/assets/styles/main.scss */
+/* line 1388, example/themes/default/assets/styles/main.scss */
 #banner-title {
   padding-top: 20px;
   text-align: center; }
 
-/* line 1385, example/themes/default/assets/styles/main.scss */
+/* line 1392, example/themes/default/assets/styles/main.scss */
 #banner-title,
 .theme-intro-title {
   line-height: 1.15;
@@ -4032,7 +4041,7 @@ body {
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 40px; }
 
-/* line 1393, example/themes/default/assets/styles/main.scss */
+/* line 1400, example/themes/default/assets/styles/main.scss */
 #banner-start-link {
   width: 57px;
   height: 57px;
@@ -4045,6 +4054,6 @@ body {
   transition: 0.2s;
   vertical-align: top; }
 
-/* line 1407, example/themes/default/assets/styles/main.scss */
+/* line 1414, example/themes/default/assets/styles/main.scss */
 .pagination li {
   display: inline-block; }
