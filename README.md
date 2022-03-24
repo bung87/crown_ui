@@ -10,3 +10,7 @@ clone this repository, run `nimble install stage` , if you already have `stage` 
 for styles,images  
 
 `nimble buildAssets`
+
+## License  
+
+MIT License
