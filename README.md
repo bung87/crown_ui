@@ -10,7 +10,7 @@
 
 generate new post or page in markdown
 
-`crown_ui new post <title>`
+`crown_ui new post <title>`  
 `crown_ui new page <title>`  
 
 generated page or post will under ./source/drafts when ready for publish, move to ./source/<pages|posts> directory  
