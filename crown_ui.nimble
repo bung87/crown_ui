@@ -12,7 +12,6 @@ namedBin = {"crown_ui": "crown_ui"}.toTable()
 
 requires "nim >= 1.6.0"
 requires "karax"
-requires "yaml"
 requires "https://github.com/bung87/web_preprocessor"
 requires "nmark >= 0.1.9"
 requires "dotenv >= 1.1.0"

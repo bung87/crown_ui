@@ -1,4 +1,4 @@
-from crown_ui/generator import generate, build
+from crown_uipkg/generator import generate, build
 import scorper except serve
 import std / [os, exitprocs]
 
