@@ -1,7 +1,7 @@
 
 import karax / [karaxdsl, vdom]
 import ./layout
-import crown_ui/config
+import crown_uipkg/config
 import tables
 
 proc renderArchive*(conf: Config; archives: Table[string, seq[VNode]]): Vnode =
