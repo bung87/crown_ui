@@ -1,6 +1,6 @@
 import karax / [karaxdsl, vdom]
 # import json
-import crown_ui / [config]
+import crown_uipkg / [config]
 
 proc PureHeader*(conf: Config): VNode =
   result = buildHtml(header(class = "site-header")):

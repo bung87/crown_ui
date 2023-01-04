@@ -1,6 +1,6 @@
 import karax / [karaxdsl, vdom]
 
-import crown_ui / [config]
+import crown_uipkg / [config]
 import partial / [header, footer]
 
 proc renderLayout*(conf: Config; n: VNode = nil): VNode =

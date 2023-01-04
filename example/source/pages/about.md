@@ -1,6 +1,6 @@
 ---
 title: about
-date: 2022-03-13 16:52:52
+date: "2022-03-13 16:52:52"
 ---
 
 `crown_ui` is a static site generator written in [Nim](https://nim-lang.org) language. 

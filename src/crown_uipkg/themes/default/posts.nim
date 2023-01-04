@@ -1,8 +1,8 @@
 
 import karax / [karaxdsl, vdom]
 import ./layout
-import crown_ui/types
-import crown_ui/config
+import crown_uipkg/types
+import crown_uipkg/config
 import ./partial/pagination
 
 proc renderPosts*(conf: Config; posts: seq[VNode]; pagination: Pagination): Vnode =

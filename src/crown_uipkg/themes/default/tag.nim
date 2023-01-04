@@ -1,7 +1,7 @@
 
 import karax / [karaxdsl, vdom]
 import ./layout
-import crown_ui/config
+import crown_uipkg/config
 import tables
 
 proc renderTag*(config: Config; tagCount: Table[string, int]): Vnode =

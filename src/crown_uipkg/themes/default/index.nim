@@ -1,7 +1,7 @@
 import karax / [karaxdsl, vdom]
 import ./layout
-import crown_ui/config
-import crown_ui/types
+import crown_uipkg/config
+import crown_uipkg/types
 
 proc renderIndex*(conf: Config; posts: seq[VNode]; pagination = default(Pagination)): Vnode =
   doAssert conf != nil

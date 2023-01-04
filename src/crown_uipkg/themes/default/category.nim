@@ -1,7 +1,7 @@
 
 import karax / [karaxdsl, vdom]
 import ./layout
-import crown_ui/config
+import crown_uipkg/config
 
 proc renderCategories*(conf: Config; posts: seq[VNode]): Vnode =
   let c = buildHtml(tdiv(class = "mt-3")):

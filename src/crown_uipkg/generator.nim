@@ -3,7 +3,7 @@ import std/[os, json, algorithm, strutils, times, tables]
 import fusion / [htmlparser, htmlparser/xmltree]
 import karax / [vdom]
 import ./ utils
-import yaml, regex
+import regex
 import ./ datetime_utils
 import ./config
 import ./config_parser
@@ -43,9 +43,10 @@ proc getPostData*(conf: Config;filepath: string; sourceDir: string): PostMeta =
   let content = readFile(filepath)
   let splited = splitmd(content)
   var meta: JsonNode = newJObject()
-  var parser = initYamlParser(true)
-  var ys = parser.parse(splited.meta)
-  meta = constructJson(ys)[0]
+  # var parser = initYamlParser(true)
+  # var ys = parser.parse(splited.meta)
+  echo splited.meta
+  meta = parseYamlConfig(splited.meta)
   let title = meta{"title"}.getStr("")
   let id = meta{"id"}.getStr("")
   var cates = newSeq[string]()

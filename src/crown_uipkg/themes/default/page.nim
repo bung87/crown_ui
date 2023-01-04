@@ -1,8 +1,8 @@
 
 import karax / [karaxdsl, vdom, vstyles]
 import ./layout
-import crown_ui/config
-import crown_ui/types
+import crown_uipkg/config
+import crown_uipkg/types
 
 proc renderPagePartial*(conf: Config; data: PostMeta;
     child: VNode = nil): VNode =
