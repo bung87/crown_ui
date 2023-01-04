@@ -20,10 +20,10 @@ requires "cligen > 1.3.2"
 requires "npeg"
 requires "chronicles"
 requires "fusion"
-requires "scorper >= 1.0.25"
+requires "scorper >= 1.1.0"
 requires "https://github.com/beef331/oopsie"
-requires "nimscripter >= 1.0.13"
-requires "https://github.com/openpeep/nyml"
+requires "https://github.com/bung87/nimscripter"
+requires "https://github.com/bung87/nyml"
 requires "slugify"
 
 task buildAssets,"build assets":

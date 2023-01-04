@@ -10,7 +10,7 @@ proc getDateTimeFormat*(config: JsonNode): string =
   result = toNimFormat(config{"date_format"}.getStr("YYYY-MM-DD") & " " & config{"time_format"}.getStr("HH:mm:ss"))
 
 proc parseConfig*(configPath: string): Config =
-  let configJson = parseYamlConfig(configPath)
+  let configJson = parseYamlConfigFile(configPath)
   let baseConfig = ($configJson).fromJson(BaseConfig)
   copy(result, baseConfig)
   result.menuLinks = newSeq[Link]()
@@ -27,7 +27,7 @@ when isMainModule:
 
   const configPath = exampleDir / "config.yml"
   echo configPath
-  let conf = parseYamlConfig(configPath)
+  let conf = parseYamlConfigFile(configPath)
   echo conf.getDateTimeFormat
 
   echo parse("2021-06-11 15:04:29", conf.getDateTimeFormat)

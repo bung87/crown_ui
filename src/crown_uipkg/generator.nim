@@ -114,7 +114,7 @@ proc generatePriv(conf: JsonNode; tpl: string; title: string; cwd: string = getC
     result = scaffold2source(postPath, data)
 
 proc generatePriv(tpl: string; title: string; cwd: string = getCurrentDir()): string =
-  let conf = parseYamlConfig(cwd / "config.yml")
+  let conf = parseYamlConfigFile(cwd / "config.yml")
   result = generatePriv(conf, tpl, title, cwd)
 
 proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "drafts"; tpl: seq[string]): int =

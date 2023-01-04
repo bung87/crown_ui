@@ -7,10 +7,13 @@ include nmark / insertMarker
 import htmlgen
 import nyml
 
-proc parseYamlConfig*(path: string): JsonNode =
+proc parseYamlConfigFile*(path: string): JsonNode =
   let s = readFile path
   var yml = Nyml.init(contents = s)
-  # let res = parseYaml(s)
+  result = yml.toJson().contents
+
+proc parseYamlConfig*(s: string): JsonNode =
+  var yml = Nyml.init(contents = s)
   result = yml.toJson().contents
 
 
