@@ -44,5 +44,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./example/build
-          cname: crown_ui.bungos.me
+          # cname: crown_ui.bungos.me
           publish_branch: ghpages # since not use Jekyll choose another branch
