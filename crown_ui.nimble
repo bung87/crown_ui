@@ -22,7 +22,7 @@ requires "fusion"
 requires "scorper >= 1.1.0"
 requires "https://github.com/beef331/oopsie"
 requires "https://github.com/bung87/nimscripter"
-requires "https://github.com/bung87/nyml"
+requires "nyml"
 requires "slugify"
 
 task buildAssets,"build assets":

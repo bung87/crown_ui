@@ -36,7 +36,7 @@ proc splitmd*(content: string): SplitMdResult =
   result.meta = content[metaBegin + 1 ..< metaEnd]
   result.content = content[m.boundaries.b + 1 .. ^1]
 
-proc getPostData*(conf: Config;filepath: string; sourceDir: string): PostMeta =
+proc getPostData*(conf: Config; filepath: string; sourceDir: string): PostMeta =
   ## filepath: post md file path
   ## sourceDir: sourceDir absolute path
   doAssert isAbsolute(sourceDir)
@@ -59,7 +59,7 @@ proc getPostData*(conf: Config;filepath: string; sourceDir: string): PostMeta =
 
   result = (title: title, id: id, date: date, cates: cates, tags: tags, filepath: filepath,
       relpath: filepath.relativePath(sourceDir), permalink: "")
-  result.permalink = getPermalinkOf(result,conf)
+  result.permalink = getPermalinkOf(result, conf)
 
 proc getContentNode*(pm: PostMeta): VNode =
   let content = readFile(pm.filepath)
@@ -491,7 +491,21 @@ proc build*(cwd = getCurrentDir()): int =
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
-  let sourceDir = (if conf.source_dir.len > 0: conf.source_dir else: "source") 
+
+  # Copy assets to build directory
+  let buildDir = cwd / "build"
+  let assetsDir = themeDir / "assets"
+  if dirExists(assetsDir):
+    let stylesDest = buildDir / "styles"
+    let imagesDest = buildDir / "images"
+    if dirExists(assetsDir / "styles"):
+      copyDir(assetsDir / "styles", stylesDest)
+      info "Copy assets", src = assetsDir / "styles", dst = stylesDest
+    if dirExists(assetsDir / "images"):
+      copyDir(assetsDir / "images", imagesDest)
+      info "Copy assets", src = assetsDir / "images", dst = imagesDest
+
+  let sourceDir = (if conf.source_dir.len > 0: conf.source_dir else: "source")
   let postsSourceDir = sourceDir / "posts"
   let pagesSourceDir = sourceDir / "pages"
   let postsSourceGlob = cwd / postsSourceDir / "*.md"
