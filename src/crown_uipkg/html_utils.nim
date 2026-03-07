@@ -5,7 +5,8 @@ import fusion / [htmlparser, htmlparser/xmltree]
 import unicode
 
 proc renderHtml*(body: string, pageTitle: string, title: string, url: string, siteName: string, description: string,
-    image = "", pubTime = "", modTime = "", author = "", locale = "", cssHtml = ""): string =
+    image = "", pubTime = "", modTime = "", author = "", locale = "", cssHtml = "", root = "/"): string =
+  let rootPrefix = if root.len > 0 and root != "/": root[0..^2] else: ""
   let general = fmt"""
 <!DOCTYPE html>
 <html>
@@ -28,8 +29,8 @@ proc renderHtml*(body: string, pageTitle: string, title: string, url: string, si
   let restHead = fmt"""
   <meta property="article:author" content="{author}">
   <meta name="generator" content="crown_ui">
-  <link rel="alternate" href="/atom.xml" title="{siteName}" type="application/atom+xml">
-  <link rel="icon" href="/favicon.png">
+  <link rel="alternate" href="{rootPrefix}/atom.xml" title="{siteName}" type="application/atom+xml">
+  <link rel="icon" href="{rootPrefix}/favicon.png">
 </head>"""
 
   result = general & metaImage & pubTime & modTime & restHead & "<body>" & body & "</body></html>"

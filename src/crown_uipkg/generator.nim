@@ -134,7 +134,7 @@ proc generate*(cwd = getCurrentDir(); dest = getCurrentDir() / "source" / "draft
 
 
 proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   ## generate all posts
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -159,11 +159,11 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
-        siteName = conf.title, description = description, cssHtml = cssHtml)
+        siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
     writeFile(outfile, content)
 
 proc generatePages(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   ## generate all pages
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -188,11 +188,11 @@ proc generatePages(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
-        siteName = conf.title, description = description, cssHtml = cssHtml)
+        siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
     writeFile(outfile, content)
 
 proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   ## generate posts index page
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -239,7 +239,7 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
       info "Generate homepage: " & outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = conf.url,
-          siteName = conf.title, description = description, cssHtml = cssHtml)
+          siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
       writeFile(outfile, content)
 
     indexNode = libTheme.invoke(renderPosts, conf, postsNodes, pagination, returnType = VNode)
@@ -250,12 +250,12 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     info "Generate posts page: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
     description = xmltree.escape(conf.description)
     content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
-        siteName = conf.title, description = description, cssHtml = cssHtml)
+        siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
     writeFile(outfile, content)
     inc i
 
 proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   var privDest = dest
   if not dest.isRelativeTo(cwd):
     privDest = cwd / "build"
@@ -305,13 +305,13 @@ proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[Pos
     info "Generate archive: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
     description = xmltree.escape(conf.description)
     content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
-        siteName = conf.title, description = description, cssHtml = cssHtml)
+        siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
     writeFile(outfile, content)
     archives.clear
     inc i
 
 proc generateCategory(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   ## generate categories
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -374,12 +374,12 @@ proc generateCategory(conf: Config; libTheme: Option[Interpreter]; posts: seq[Po
       info "Generate category: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
-          siteName = conf.title, description = description, cssHtml = cssHtml)
+          siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
       writeFile(outfile, content)
       inc i
 
 proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMeta]; cwd = getCurrentDir();
-    dest = getCurrentDir() / "build"; cssHtml = "") =
+    dest = getCurrentDir() / "build"; cssHtml = ""; root = "/") =
   ## generate tag page
   var privDest = dest
   if not dest.isRelativeTo(cwd):
@@ -409,7 +409,7 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
   info "Generate tag index: " & outfile.relativePath(cwd)
   let description = xmltree.escape(conf.description)
   let content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $prefix,
-      siteName = conf.title, description = description, cssHtml = cssHtml)
+      siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
   writeFile(outfile, content)
   block generateTagedPosts:
     var
@@ -453,7 +453,7 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
         info "Generate tag: " & tag & " page: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
         description = xmltree.escape(conf.description)
         content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
-            siteName = conf.title, description = description, cssHtml = cssHtml)
+            siteName = conf.title, description = description, cssHtml = cssHtml, root = conf.root)
         writeFile(outfile, content)
         inc i
 
@@ -497,6 +497,10 @@ proc build*(cwd = getCurrentDir()): int =
   var cssHtml = ""
   if fileExists(themeDir / "css.html"):
     cssHtml = readFile(themeDir / "css.html")
+    # Replace root path in CSS links
+    if conf.root.len > 0 and conf.root != "/":
+      let rootPrefix = conf.root[0..^2]  # Remove trailing slash
+      cssHtml = cssHtml.replace("href=\"/", "href=\"" & rootPrefix & "/")
 
   # Copy assets to build directory
   let buildDir = cwd / "build"
@@ -523,12 +527,12 @@ proc build*(cwd = getCurrentDir()): int =
   proc cmpPostDate(x, y: PostMeta): int =
     cmp(x.datetime(conf).toTime.toUnix, y.datetime(conf).toTime.toUnix)
   sort(posts, cmpPostDate, SortOrder.Descending)
-  generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  generatePages(conf, libTheme, pages, cwd = cwd, cssHtml = cssHtml)
-  generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
-  generateTag(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml)
+  generatePosts(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml, root = conf.root)
+  generatePages(conf, libTheme, pages, cwd = cwd, cssHtml = cssHtml, root = conf.root)
+  generateIndex(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml, root = conf.root)
+  generateArchive(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml, root = conf.root)
+  generateCategory(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml, root = conf.root)
+  generateTag(conf, libTheme, posts, cwd = cwd, cssHtml = cssHtml, root = conf.root)
   result = 0
 
 when isMainModule:
