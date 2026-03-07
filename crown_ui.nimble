@@ -31,7 +31,8 @@ task buildAssets,"build assets":
   var sassPath = "sass"
   if fileExists("./node_modules/.bin/sass"):
     sassPath = "./node_modules/.bin/sass"
-  exec "nim c -r src/crown_uipkg/assets_builder.nim -s:example/themes/default/assets -d:example/build --sass-path:" & sassPath
+  # Use the built-in theme assets from src/crown_uipkg/themes/default/assets
+  exec "nim c -r src/crown_uipkg/assets_builder.nim -s:src/crown_uipkg/themes/default/assets -d:example/build --sass-path:" & sassPath
 
 task serve,"serve":
   exec "nim c -r src/crown_ui.nim serve --cwd ./example/"
