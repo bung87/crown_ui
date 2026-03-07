@@ -502,11 +502,8 @@ proc build*(cwd = getCurrentDir()): int =
   let buildDir = cwd / "build"
   let assetsDir = themeDir / "assets"
   if dirExists(assetsDir):
-    let stylesDest = buildDir / "styles"
     let imagesDest = buildDir / "images"
-    if dirExists(assetsDir / "styles"):
-      copyDir(assetsDir / "styles", stylesDest)
-      info "Copy assets: " & assetsDir / "styles" & " -> " & stylesDest
+    # Only copy images, styles will be handled by buildAssets (SCSS compilation)
     if dirExists(assetsDir / "images"):
       copyDir(assetsDir / "images", imagesDest)
       info "Copy assets: " & assetsDir / "images" & " -> " & imagesDest
