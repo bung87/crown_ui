@@ -1,6 +1,6 @@
 
-import std/[os, json, algorithm, strutils, times, tables]
-import fusion / [htmlparser, htmlparser/xmltree]
+import std/[os, json, algorithm,  options, strutils, times, tables, logging]
+import fusion / [htmlparser/xmltree]
 import karax / [vdom]
 import ./ utils
 import regex
@@ -8,7 +8,6 @@ import ./ datetime_utils
 import ./config
 import ./config_parser
 import ./html_utils
-import chronicles
 import ./format_utils
 import ./types
 import uri
@@ -16,6 +15,8 @@ import segfaults
 import strformat
 import nimscripter
 import slugify
+
+addHandler(newConsoleLogger())
 
 const MaxDescriptionLen = 200
 
@@ -154,7 +155,7 @@ proc generatePosts(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
-    info "Generate post", file = data.relpath, to = outfile.relativePath(cwd)
+    info "Generate post: " & data.relpath & " -> " & outfile.relativePath(cwd)
     textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
@@ -183,7 +184,7 @@ proc generatePages(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     if not dirExists(privDest / name):
       createDir(privDest / name)
     outfile = privDest / name / "index.html"
-    info "Generate page", file = data.relpath, to = outfile.relativePath(cwd)
+    info "Generate page: " & data.relpath & " -> " & outfile.relativePath(cwd)
     textContent = innerText(contentNode, MaxDescriptionLen, @["pre", "code"]).replace('\n', ' ').strip()
     description = if textContent.len > 0: xmltree.escape(textContent) else: xmltree.escape(data.title)
     content = renderHtml($postNode, pageTitle = data.title & " | " & conf.title, title = data.title, url = "",
@@ -235,7 +236,7 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
       # render homepage
       indexNode = libTheme.invoke(renderIndex, conf, postsNodes, pagination, returnType = VNode)
       outfile = homePageDir / "index.html"
-      info "Generate homepage", to = outfile.relativePath(cwd)
+      info "Generate homepage: " & outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = conf.url,
           siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -246,7 +247,7 @@ proc generateIndex(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostM
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
     outfile = privOutDir / name / "index.html"
-    info "Generate posts page", page = i + 1, to = outfile.relativePath(cwd)
+    info "Generate posts page: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
     description = xmltree.escape(conf.description)
     content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
         siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -301,7 +302,7 @@ proc generateArchive(conf: Config; libTheme: Option[Interpreter]; posts: seq[Pos
     if not dirExists(privOutDir / name):
       createDir(privOutDir / name)
     outfile = privOutDir / name / "index.html"
-    info "Generate archive", page = i + 1, to = outfile.relativePath(cwd)
+    info "Generate archive: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
     description = xmltree.escape(conf.description)
     content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
         siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -370,7 +371,7 @@ proc generateCategory(conf: Config; libTheme: Option[Interpreter]; posts: seq[Po
       if not dirExists(privOutDir / name):
         createDir(privOutDir / name)
       outfile = privOutDir / name / "index.html"
-      info "Generate category", page = i + 1, to = outfile.relativePath(cwd)
+      info "Generate category: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
       description = xmltree.escape(conf.description)
       content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
           siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -405,7 +406,7 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
   if not dirExists(outDir):
     createDir(outDir)
   let outfile = outDir / "index.html"
-  info "Generate tag index", to = outfile.relativePath(cwd)
+  info "Generate tag index: " & outfile.relativePath(cwd)
   let description = xmltree.escape(conf.description)
   let content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $prefix,
       siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -449,7 +450,7 @@ proc generateTag(conf: Config; libTheme: Option[Interpreter]; posts: seq[PostMet
         if not dirExists(privOutDir / name):
           createDir(privOutDir / name)
         outfile = privOutDir / name / "index.html"
-        info "Generate tag", tage = tag, page = i + 1, to = outfile.relativePath(cwd)
+        info "Generate tag: " & tag & " page: " & $(i + 1) & " -> " & outfile.relativePath(cwd)
         description = xmltree.escape(conf.description)
         content = renderHtml($indexNode, pageTitle = conf.title, title = conf.title, url = $(prefix / name),
             siteName = conf.title, description = description, cssHtml = cssHtml)
@@ -461,19 +462,24 @@ proc getSearchPath(path: string): seq[string] =
     result.add dir
 
 proc compileTheme(cwd, themeFile: string): Option[Interpreter] =
-  info "Theme", status = "Compiling", file = themeFile.relativePath(cwd)
+  info "Theme: Compiling " & themeFile.relativePath(cwd)
   let script = NimScriptPath themeFile
   let selfLib = currentSourcePath.parentDir.parentDir
-  var searchPaths = @[selfLib]
-  let nimblePath = getHomeDir() / ".nimble" / "pkgs"
-  searchPaths.add getSearchPath(nimblePath)
+  let themeDir = themeFile.parentDir
+  var searchPaths = @[selfLib, themeDir]
+  # Add all subdirectories of the theme to search paths
+  for dir in walkDirRec(themeDir, {pcDir}):
+    searchPaths.add dir
+  let nimblePath = getHomeDir() / ".nimble"
+  searchPaths.add getSearchPath(nimblePath / "pkgs")
+  searchPaths.add getSearchPath(nimblePath / "pkgs2")
   let intr = loadScript(script, VMAddins(), stdPath = findNimStdlibCompileTime(), searchPaths = searchPaths)
-  info "Theme", status = "Compiled", file = themeFile.relativePath(cwd)
+  info "Theme: Compiled " & themeFile.relativePath(cwd)
   return intr
 
 proc build*(cwd = getCurrentDir()): int =
   ## generate static site
-  info "Build", cwd = cwd
+  info "Build: " & cwd
   result = 1
   let conf = parseConfig(cwd / "config.yml")
   let theme = if conf.theme.len > 0: conf.theme else: "default"
@@ -500,10 +506,10 @@ proc build*(cwd = getCurrentDir()): int =
     let imagesDest = buildDir / "images"
     if dirExists(assetsDir / "styles"):
       copyDir(assetsDir / "styles", stylesDest)
-      info "Copy assets", src = assetsDir / "styles", dst = stylesDest
+      info "Copy assets: " & assetsDir / "styles" & " -> " & stylesDest
     if dirExists(assetsDir / "images"):
       copyDir(assetsDir / "images", imagesDest)
-      info "Copy assets", src = assetsDir / "images", dst = imagesDest
+      info "Copy assets: " & assetsDir / "images" & " -> " & imagesDest
 
   let sourceDir = (if conf.source_dir.len > 0: conf.source_dir else: "source")
   let postsSourceDir = sourceDir / "posts"
