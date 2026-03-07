@@ -19,9 +19,10 @@ requires "cligen > 1.3.2"
 requires "npeg"
 requires "fusion"
 requires "https://github.com/beef331/oopsie"
-requires "https://github.com/bung87/nimscripter"
+requires "nimscripter"
 requires "nyml"
 requires "slugify"
+requires "nregex"
 
 task buildAssets,"build assets":
   rmFile "manifest.json"

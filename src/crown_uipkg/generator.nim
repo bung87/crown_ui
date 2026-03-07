@@ -3,7 +3,7 @@ import std/[os, json, algorithm,  options, strutils, times, tables, logging]
 import fusion / [htmlparser/xmltree]
 import karax / [vdom]
 import ./ utils
-import regex
+import nregex
 import ./ datetime_utils
 import ./config
 import ./config_parser
