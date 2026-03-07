@@ -10,7 +10,7 @@ namedBin = {"crown_ui": "crown_ui"}.toTable()
 
 # Dependencies
 
-requires "nim >= 1.6.0"
+requires "nim >= 2.0.16"
 requires "karax"
 requires "https://github.com/bung87/web_preprocessor"
 requires "nmark >= 0.1.9"

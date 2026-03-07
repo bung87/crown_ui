@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        nim: [ '1.6.2' ]
+        nim: [ '2.0.16' ]
     name: Nim ${{ matrix.nim }} sample
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
           ./crown_ui build --cwd ./example
           nimble buildAssets
       - name: Deploy
-        if: matrix.nim == '1.6.2'
+
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
