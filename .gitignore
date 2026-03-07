@@ -2,6 +2,9 @@
 !**/
 !*.*
 node_modules
+
+# Keep example theme assets
+!example/themes/default/**/*
 # Cache
 nimcache/
 rnimcache/

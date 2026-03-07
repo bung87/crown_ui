@@ -27,7 +27,11 @@ requires "nregex"
 task buildAssets,"build assets":
   rmFile "manifest.json"
   # Build all assets (SCSS compilation + static file copying)
-  exec "nim c -r src/crown_uipkg/assets_builder.nim -s:example/themes/default/assets -d:example/build --sass-path:./node_modules/.bin/sass"
+  # Use global sass if available, otherwise use local node_modules
+  var sassPath = "sass"
+  if fileExists("./node_modules/.bin/sass"):
+    sassPath = "./node_modules/.bin/sass"
+  exec "nim c -r src/crown_uipkg/assets_builder.nim -s:example/themes/default/assets -d:example/build --sass-path:" & sassPath
 
 task serve,"serve":
   exec "nim c -r src/crown_ui.nim serve --cwd ./example/"
